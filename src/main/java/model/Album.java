@@ -1,21 +1,31 @@
 package model;
 
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Embeddable
+@Table(name = "album")
 public class Album {
-
-	int id;
+	@Id
+	@Column(nullable = false)
+	Long id;
+	@Column(nullable = false)
 	String name;
+	@Column(nullable = false)
 	LocalDate releaseDate;
+	@ManyToOne
 	Artist artist;
+	@ManyToOne
 	Category category;
+	@ManyToOne
 	Studio studio;
 
 	public Album() {
 
 	}
 
-	public Album(int id, String name, LocalDate releaseDate, Artist artist, Category category, Studio studio) {
+	public Album(Long id, String name, LocalDate releaseDate, Artist artist, Category category, Studio studio) {
 		this.id = id;
 		this.name = name;
 		this.releaseDate = releaseDate;
@@ -24,11 +34,11 @@ public class Album {
 		this.studio = studio;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -1,20 +1,26 @@
 package model;
 
-public class Category {
+import javax.persistence.*;
 
-	int id;
+@Entity
+@Table(name = "category")
+public class Category {
+	@Id
+	@Column(nullable = false)
+	Long id;
+	@Column(nullable = false)
 	String name;
 
 	public Category() {
 
 	}
 
-	public Category(int id, String name) {
+	public Category(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -26,7 +32,7 @@ public class Category {
 		this.name = name;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 }

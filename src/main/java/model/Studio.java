@@ -1,22 +1,29 @@
 package model;
 
-public class Studio {
+import javax.persistence.*;
 
-	int id;
+@Entity
+@Table(name = "studio")
+public class Studio {
+	@Id
+	@Column(nullable = false)
+	Long id;
+	@Column(nullable = false)
 	String name;
+	@OneToOne
 	Address address;
 
 	public Studio() {
 
 	}
 
-	public Studio(int id, String name, Address address) {
+	public Studio(Long id, String name, Address address) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -28,7 +35,7 @@ public class Studio {
 		return address;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
