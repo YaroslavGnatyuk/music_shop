@@ -3,7 +3,6 @@ package model;
 import javax.persistence.*;
 
 @Embeddable
-@Table(name = "address")
 public class Address {
 	@Id
 	@GeneratedValue

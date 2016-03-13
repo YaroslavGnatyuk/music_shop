@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Embeddable
-@Table(name = "album")
 public class Album {
 	@Id
 	@GeneratedValue
