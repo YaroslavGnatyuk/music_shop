@@ -9,11 +9,12 @@ import java.util.List;
 @Table(name = "artist")
 public class Artist {
 	@Id
+	@GeneratedValue
 	@Column(nullable = false)
 	Long id;
 	@Column(nullable = false)
 	String name;
-	@OneToOne
+	@Embedded
 	Address address;
 	@Column(nullable = false)
 	LocalDate birthday;
@@ -30,8 +31,7 @@ public class Artist {
 
 	}
 
-	public Artist(Long id, String name, Address address, LocalDate birthday, List<Album> albums, String email, Category category, Studio studio) {
-		this.id = id;
+	public Artist(String name, Address address, LocalDate birthday, List<Album> albums, String email, Category category, Studio studio) {
 		this.name = name;
 		this.address = address;
 		this.birthday = birthday;

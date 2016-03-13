@@ -1,11 +1,13 @@
 package model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "category")
 public class Category {
 	@Id
+	@GeneratedValue
 	@Column(nullable = false)
 	Long id;
 	@Column(nullable = false)
@@ -15,8 +17,7 @@ public class Category {
 
 	}
 
-	public Category(Long id, String name) {
-		this.id = id;
+	public Category(String name) {
 		this.name = name;
 	}
 

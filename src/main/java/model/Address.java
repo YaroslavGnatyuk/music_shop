@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "address")
 public class Address {
 	@Id
+	@GeneratedValue
 	@Column(nullable = false)
 	Long id;
 	@Column(nullable = false)
@@ -23,8 +24,7 @@ public class Address {
 
 	}
 
-	public Address(Long id, String country, String city, String street, String house, Integer flat) {
-		this.id = id;
+	public Address(String country, String city, String street, String house, Integer flat) {
 		this.country = country;
 		this.city = city;
 		this.street = street;

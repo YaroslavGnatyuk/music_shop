@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Table(name = "album")
 public class Album {
 	@Id
+	@GeneratedValue
 	@Column(nullable = false)
 	Long id;
 	@Column(nullable = false)
@@ -25,8 +26,7 @@ public class Album {
 
 	}
 
-	public Album(Long id, String name, LocalDate releaseDate, Artist artist, Category category, Studio studio) {
-		this.id = id;
+	public Album(String name, LocalDate releaseDate, Artist artist, Category category, Studio studio) {
 		this.name = name;
 		this.releaseDate = releaseDate;
 		this.artist = artist;

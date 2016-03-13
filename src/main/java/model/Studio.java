@@ -6,19 +6,19 @@ import javax.persistence.*;
 @Table(name = "studio")
 public class Studio {
 	@Id
+	@GeneratedValue
 	@Column(nullable = false)
 	Long id;
 	@Column(nullable = false)
 	String name;
-	@OneToOne
+	@Embedded
 	Address address;
 
 	public Studio() {
 
 	}
 
-	public Studio(Long id, String name, Address address) {
-		this.id = id;
+	public Studio(String name, Address address) {
 		this.name = name;
 		this.address = address;
 	}
