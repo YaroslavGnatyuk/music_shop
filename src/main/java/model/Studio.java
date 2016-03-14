@@ -3,15 +3,17 @@ package model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Studio")
 public class Studio {
 	@Id
 	@GeneratedValue
 	@Column(nullable = false)
-	Long id;
+	private Long id;
+
 	@Column(nullable = false)
-	String name;
-	@Embedded
-	Address address;
+	private String name;
+
+	private Address address;
 
 	public Studio() {
 

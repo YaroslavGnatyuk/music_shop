@@ -4,22 +4,28 @@ package model;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Embeddable
+@Entity
+@Table(name = "Album")
 public class Album {
 	@Id
 	@GeneratedValue
 	@Column(nullable = false)
-	Long id;
+	private Long id;
+
 	@Column(nullable = false)
-	String name;
+	private String name;
+
 	@Column(nullable = false)
-	LocalDate releaseDate;
-	@ManyToOne
-	Artist artist;
-	@ManyToOne
-	Category category;
-	@ManyToOne
-	Studio studio;
+	private LocalDate releaseDate;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Artist artist;
+
+	@OneToOne
+	private Category category;
+
+	@OneToOne
+	private Studio studio;
 
 	public Album() {
 

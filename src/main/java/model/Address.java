@@ -4,20 +4,20 @@ import javax.persistence.*;
 
 @Embeddable
 public class Address {
-	@Id
-	@GeneratedValue
 	@Column(nullable = false)
-	Long id;
+	private String country;
+
 	@Column(nullable = false)
-	String country;
+	private String city;
+
 	@Column(nullable = false)
-	String city;
+	private String street;
+
 	@Column(nullable = false)
-	String street;
+	private String house;
+
 	@Column(nullable = false)
-	String house;
-	@Column(nullable = false)
-	Integer flat;
+	private Integer flat;
 
 	public Address() {
 
@@ -55,20 +55,12 @@ public class Address {
 		this.flat = flat;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
 	public String getCountry() {
 		return country;
 	}
 
 	public String getCity() {
 		return city;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public void setCountry(String country) {

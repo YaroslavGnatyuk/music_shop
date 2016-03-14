@@ -6,25 +6,33 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "Artist")
 public class Artist {
 	@Id
 	@GeneratedValue
 	@Column(nullable = false)
-	Long id;
+	private Long id;
+
 	@Column(nullable = false)
-	String name;
+	private String name;
+
 	@Embedded
-	Address address;
+	private Address address;
+
 	@Column(nullable = false)
-	LocalDate birthday;
-	@OneToMany
-	List<Album> albums;
+	private LocalDate birthday;
+
+	@OneToMany(mappedBy = "artist")
+	private List<Album> albums;
+
 	@Column(nullable = false)
-	String email;
+	private String email;
+
 	@OneToOne
-	Category category;
+	private Category category;
+
 	@OneToOne
-	Studio studio;
+	private Studio studio;
 
 	public Artist() {
 

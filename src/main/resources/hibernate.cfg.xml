@@ -8,7 +8,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.h2.Driver</property>
-        <property name="connection.url">jdbc:h2:mem:books_db;DB_CLOSE_DELAY=-1</property>
+        <property name="connection.url">jdbc:h2:mem:music_shop_db;DB_CLOSE_DELAY=-1</property>
         <!--<property name="connection.username"/>-->
         <!--<property name="connection.password"/>-->
         <property name="show_sql">true</property>

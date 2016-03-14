@@ -4,13 +4,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "Category")
 public class Category {
 	@Id
 	@GeneratedValue
 	@Column(nullable = false)
-	Long id;
+	private Long id;
+
 	@Column(nullable = false)
-	String name;
+	private String name;
 
 	public Category() {
 
