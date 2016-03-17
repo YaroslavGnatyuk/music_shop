@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "Album")
 public class Album {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(nullable = false)
 	private Long id;
 

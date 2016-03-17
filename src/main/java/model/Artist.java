@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "Artist")
 public class Artist {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(nullable = false)
 	private Long id;
 

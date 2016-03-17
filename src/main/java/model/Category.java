@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name = "Category")
 public class Category {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(nullable = false)
 	private Long id;
 
