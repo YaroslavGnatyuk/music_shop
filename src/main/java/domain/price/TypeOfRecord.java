@@ -1,4 +1,4 @@
-package model.price;
+package domain.price;
 
 /**
  * Created by root on 17.03.16.

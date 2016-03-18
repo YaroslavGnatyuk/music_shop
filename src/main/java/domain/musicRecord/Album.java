@@ -1,4 +1,4 @@
-package model;
+package domain.musicRecord;
 
 
 import javax.persistence.*;

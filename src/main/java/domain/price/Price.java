@@ -1,4 +1,4 @@
-package model.price;
+package domain.price;
 
 import java.util.List;
 

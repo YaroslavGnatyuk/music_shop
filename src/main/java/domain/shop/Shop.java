@@ -1,22 +1,12 @@
-package model.shop;
+package domain.shop;
 
-import model.Address;
-import model.price.Price;
-
-import javax.persistence.*;
+import domain.musicRecord.Address;
+import domain.price.Price;
 
 /**
  * Created by yaroslav on 17.03.16.
  */
-@Entity
-@Table(name = "shop")
 public class Shop {
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column
-    int id;
-
-    @OneToOne
     Address address;
     Price price;
 
