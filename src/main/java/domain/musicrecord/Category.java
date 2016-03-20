@@ -1,7 +1,6 @@
-package model;
+package domain.musicrecord;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "Category")

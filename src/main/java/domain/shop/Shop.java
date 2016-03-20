@@ -1,6 +1,6 @@
 package domain.shop;
 
-import domain.musicRecord.Address;
+import domain.Address;
 import domain.price.Price;
 
 /**

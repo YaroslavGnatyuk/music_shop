@@ -1,6 +1,6 @@
 package domain.price;
 
-import domain.musicRecord.Album;
+import domain.Album;
 
 /**
  * Created by root on 17.03.16.
