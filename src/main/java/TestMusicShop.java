@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -25,10 +26,10 @@ public class TestMusicShop {
 	public static void main(String[] args) {
 		sessionFactory = new Configuration().configure().buildSessionFactory();
 
-		// addStudios();
-		// selectCategories();
+		addStudios();
+		selectCategories();
 
-		insertCategory();
+		// insertCategory();
 
 		sessionFactory.close();
 	}
@@ -53,13 +54,29 @@ public class TestMusicShop {
 
 		List<Category> category = session.createQuery("from Category").list();
 
-		Artist wuTang = new Artist("Wu-tang clan", wuTangAddress, LocalDate.of(1992, 10, 19), null, "wutang@gmail.com", category.get(2), studioInNY);
-		Artist oElzi = new Artist("Океан Эльзы", oeAddress, LocalDate.of(1994, 1, 1), null, "oe@gmail.com", category.get(1), studioInUkraine);
-		Artist djKrush = new Artist("Dj Krush", krushAddress, LocalDate.of(1962, 7, 27), null, "krush@gmail.com", category.get(3), studioInJapan2);
-		Artist infectedMushroom = new Artist("Infected Mushroom", mushroomAddress, LocalDate.of(1996, 1, 1), null, "mushroom@gmail.com", category.get(3), studioInEngland);
-		Artist akiraYamaoka = new Artist("Akira Yamaoka", akiroAddress, LocalDate.of(1968, 2, 6), null, "silent@gmail.com", category.get(3), studioInJapan);
+		Artist wuTang = new Artist("Wu-tang clan", wuTangAddress, LocalDate.of(1992, 10, 19), new ArrayList<Album>(), "wutang@gmail.com", category.get(2), studioInNY);
+		Artist oElzi = new Artist("Океан Эльзы", oeAddress, LocalDate.of(1994, 1, 1), new ArrayList<Album>(), "oe@gmail.com", category.get(1), studioInUkraine);
+		Artist djKrush = new Artist("Dj Krush", krushAddress, LocalDate.of(1962, 7, 27), new ArrayList<Album>(), "krush@gmail.com", category.get(3), studioInJapan2);
+		Artist infectedMushroom = new Artist("Infected Mushroom", mushroomAddress, LocalDate.of(1996, 1, 1), new ArrayList<Album>(), "mushroom@gmail.com", category.get(3), studioInEngland);
+		Artist akiraYamaoka = new Artist("Akira Yamaoka", akiroAddress, LocalDate.of(1968, 2, 6), new ArrayList<Album>(), "silent@gmail.com", category.get(3), studioInJapan);
 
-		Album wuAlbum1 = new Album();
+		Album wuAlbum1 = new Album("The W", LocalDate.of(1994, 1, 1), wuTang, category.get(2), studioInNY);
+		Album elziAlbum1 = new Album("Я на неби", LocalDate.of(1998, 1, 1), oElzi, category.get(1), studioInUkraine);
+		Album krushAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), djKrush, category.get(3), studioInJapan2);
+		Album mushroomAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), infectedMushroom, category.get(3), studioInEngland);
+		Album akiraAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), akiraYamaoka, category.get(3), studioInJapan);
+
+		wuTang.getAlbums().add(wuAlbum1);
+		oElzi.getAlbums().add(elziAlbum1);
+		djKrush.getAlbums().add(krushAlbum1);
+		infectedMushroom.getAlbums().add(mushroomAlbum1);
+		akiraYamaoka.getAlbums().add(akiraAlbum1);
+
+		session.persist(wuAlbum1);
+		session.persist(elziAlbum1);
+		session.persist(krushAlbum1);
+		session.persist(mushroomAlbum1);
+		session.persist(akiraAlbum1);
 
 		session.persist(studioInUkraine);
 		session.persist(studioInEngland);
@@ -72,6 +89,26 @@ public class TestMusicShop {
 		session.persist(akiraYamaoka);
 		session.persist(djKrush);
 		session.persist(infectedMushroom);
+
+		session.save(wuAlbum1);
+		session.save(elziAlbum1);
+		session.save(krushAlbum1);
+		session.save(mushroomAlbum1);
+		session.save(akiraAlbum1);
+
+		session.save(studioInEngland);
+		session.save(studioInJapan);
+		session.save(studioInJapan2);
+		session.save(studioInNY);
+		session.save(studioInUkraine);
+
+		session.save(wuTang);
+		session.save(oElzi);
+		session.save(akiraYamaoka);
+		session.save(djKrush);
+		session.save(infectedMushroom);
+
+		session.save(category);
 
 		session.getTransaction().commit();
 		session.close();
@@ -90,10 +127,11 @@ public class TestMusicShop {
 			System.out.println(s.getId());
 			System.out.println(s.getCategory().getName());
 			System.out.println(s.getName());
+			System.out.println(s.getAlbums().get(0).getName());
 			System.out.println(address.getCountry());
 			System.out.println(address.getCity());
-			System.out.print(address.getStreet() + " ");
-			System.out.print(address.getHouse() + " ");
+			System.out.println(address.getStreet() + " ");
+			System.out.println(address.getHouse() + " ");
 			System.out.println(address.getFlat());
 			System.out.println("\n*****************************\n");
 		}

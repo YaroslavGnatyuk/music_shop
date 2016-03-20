@@ -1,12 +1,15 @@
 package domain.musicrecord;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "Studio")
+@Table(name = "studio")
 public class Studio {
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	// @GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(nullable = false)
 	private Long id;
 

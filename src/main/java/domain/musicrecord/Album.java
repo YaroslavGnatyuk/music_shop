@@ -1,14 +1,20 @@
 package domain.musicrecord;
 
-
-import javax.persistence.*;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 @Entity
-@Table(name = "Album")
+@Table(name = "album")
 public class Album {
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	// @GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(nullable = false)
 	private Long id;
 
@@ -19,13 +25,13 @@ public class Album {
 	private LocalDate releaseDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	private Artist artist;
+	private Artist artist_id;
 
 	@OneToOne
-	private Category category;
+	private Category category_id;
 
 	@OneToOne
-	private Studio studio;
+	private Studio studio_id;
 
 	public Album() {
 
@@ -34,9 +40,9 @@ public class Album {
 	public Album(String name, LocalDate releaseDate, Artist artist, Category category, Studio studio) {
 		this.name = name;
 		this.releaseDate = releaseDate;
-		this.artist = artist;
-		this.category = category;
-		this.studio = studio;
+		this.artist_id = artist;
+		this.category_id = category;
+		this.studio_id = studio;
 	}
 
 	public Long getId() {
@@ -64,26 +70,26 @@ public class Album {
 	}
 
 	public Artist getArtist() {
-		return artist;
+		return artist_id;
 	}
 
 	public void setArtist(Artist artist) {
-		this.artist = artist;
+		this.artist_id = artist;
 	}
 
 	public Category getCategory() {
-		return category;
+		return category_id;
 	}
 
 	public void setCategory(Category category) {
-		this.category = category;
+		this.category_id = category;
 	}
 
 	public Studio getStudio() {
-		return studio;
+		return studio_id;
 	}
 
 	public void setStudio(Studio studio) {
-		this.studio = studio;
+		this.studio_id = studio;
 	}
 }

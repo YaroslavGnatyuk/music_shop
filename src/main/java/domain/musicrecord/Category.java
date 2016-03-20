@@ -2,8 +2,6 @@ package domain.musicrecord;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "category")
 public class Category {
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	// @GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(nullable = false)
 	private Long id;
 

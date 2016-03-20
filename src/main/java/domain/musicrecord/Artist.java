@@ -1,15 +1,21 @@
 package domain.musicrecord;
 
-import javax.persistence.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 @Entity
-@Table(name = "Artist")
+@Table(name = "artist")
 public class Artist {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	// @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(nullable = false)
 	private Long id;
 
@@ -22,14 +28,14 @@ public class Artist {
 	@Column(nullable = false)
 	private LocalDate birthday;
 
-	@OneToMany(mappedBy = "artist")
-	private List<Album> albums;
+	@OneToMany(mappedBy = "artist_id")
+	private List<Album> album_id;
 
 	@Column(nullable = false)
 	private String email;
 
 	@OneToOne
-	private Category category;
+	private Category category_id;
 
 	@OneToOne
 	private Studio studio;
@@ -42,9 +48,9 @@ public class Artist {
 		this.name = name;
 		this.address = address;
 		this.birthday = birthday;
-		this.albums = albums;
+		this.album_id = albums;
 		this.email = email;
-		this.category = category;
+		this.category_id = category;
 		this.studio = studio;
 	}
 
@@ -81,11 +87,11 @@ public class Artist {
 	}
 
 	public List<Album> getAlbums() {
-		return albums;
+		return album_id;
 	}
 
 	public void setAlbums(List<Album> albums) {
-		this.albums = albums;
+		this.album_id = albums;
 	}
 
 	public String getEmail() {
@@ -97,11 +103,11 @@ public class Artist {
 	}
 
 	public Category getCategory() {
-		return category;
+		return category_id;
 	}
 
 	public void setCategory(Category category) {
-		this.category = category;
+		this.category_id = category;
 	}
 
 	public Studio getStudio() {
