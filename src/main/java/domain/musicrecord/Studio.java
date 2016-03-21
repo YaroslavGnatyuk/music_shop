@@ -1,21 +1,19 @@
 package domain.musicrecord;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "studio")
 public class Studio {
 	@Id
-	// @GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long id;
 
 	@Column(nullable = false)
 	private String name;
 
+	@Embedded
 	private Address address;
 
 	public Studio() {

@@ -3,21 +3,16 @@ package domain.musicrecord;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "artist")
 public class Artist {
 	@Id
-	// @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long id;
+
 
 	@Column(nullable = false)
 	private String name;
@@ -28,14 +23,14 @@ public class Artist {
 	@Column(nullable = false)
 	private LocalDate birthday;
 
-	@OneToMany(mappedBy = "artist_id")
-	private List<Album> album_id;
+	@OneToMany(mappedBy = "artist")
+	private List<Album> album;
 
 	@Column(nullable = false)
 	private String email;
 
-	@OneToOne
-	private Category category_id;
+	@OneToOne()
+	private Category category;
 
 	@OneToOne
 	private Studio studio;
@@ -48,9 +43,9 @@ public class Artist {
 		this.name = name;
 		this.address = address;
 		this.birthday = birthday;
-		this.album_id = albums;
+		this.album = albums;
 		this.email = email;
-		this.category_id = category;
+		this.category = category;
 		this.studio = studio;
 	}
 
@@ -87,11 +82,11 @@ public class Artist {
 	}
 
 	public List<Album> getAlbums() {
-		return album_id;
+		return album;
 	}
 
 	public void setAlbums(List<Album> albums) {
-		this.album_id = albums;
+		this.album = albums;
 	}
 
 	public String getEmail() {
@@ -103,18 +98,18 @@ public class Artist {
 	}
 
 	public Category getCategory() {
-		return category_id;
+		return category;
 	}
 
 	public void setCategory(Category category) {
-		this.category_id = category;
+		this.category = category;
 	}
 
 	public Studio getStudio() {
 		return studio;
 	}
 
-	public void setStudio(Studio studio) {
-		this.studio = studio;
+	public void setStudio(Studio studio_id) {
+		this.studio = studio_id;
 	}
 }

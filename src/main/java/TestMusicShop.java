@@ -66,17 +66,17 @@ public class TestMusicShop {
 		Album mushroomAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), infectedMushroom, category.get(3), studioInEngland);
 		Album akiraAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), akiraYamaoka, category.get(3), studioInJapan);
 
-		wuTang.getAlbums().add(wuAlbum1);
-		oElzi.getAlbums().add(elziAlbum1);
-		djKrush.getAlbums().add(krushAlbum1);
-		infectedMushroom.getAlbums().add(mushroomAlbum1);
-		akiraYamaoka.getAlbums().add(akiraAlbum1);
-
 		session.persist(wuAlbum1);
 		session.persist(elziAlbum1);
 		session.persist(krushAlbum1);
 		session.persist(mushroomAlbum1);
 		session.persist(akiraAlbum1);
+
+		wuTang.getAlbums().add(wuAlbum1);
+		oElzi.getAlbums().add(elziAlbum1);
+		djKrush.getAlbums().add(krushAlbum1);
+		infectedMushroom.getAlbums().add(mushroomAlbum1);
+		akiraYamaoka.getAlbums().add(akiraAlbum1);
 
 		session.persist(studioInUkraine);
 		session.persist(studioInEngland);
@@ -89,26 +89,6 @@ public class TestMusicShop {
 		session.persist(akiraYamaoka);
 		session.persist(djKrush);
 		session.persist(infectedMushroom);
-
-		session.save(wuAlbum1);
-		session.save(elziAlbum1);
-		session.save(krushAlbum1);
-		session.save(mushroomAlbum1);
-		session.save(akiraAlbum1);
-
-		session.save(studioInEngland);
-		session.save(studioInJapan);
-		session.save(studioInJapan2);
-		session.save(studioInNY);
-		session.save(studioInUkraine);
-
-		session.save(wuTang);
-		session.save(oElzi);
-		session.save(akiraYamaoka);
-		session.save(djKrush);
-		session.save(infectedMushroom);
-
-		session.save(category);
 
 		session.getTransaction().commit();
 		session.close();
