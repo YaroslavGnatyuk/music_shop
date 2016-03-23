@@ -48,4 +48,13 @@ public class Studio {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "Studio{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", address=" + address.toString() +
+				'}';
+	}
 }

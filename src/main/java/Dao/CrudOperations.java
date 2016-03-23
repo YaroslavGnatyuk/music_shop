@@ -18,6 +18,7 @@ public abstract class CrudOperations<T>{
 
         session.getTransaction().commit();
         session.close();
+        sessionFactory.close();
     }
 
     public abstract T findById(int id);
@@ -26,10 +27,11 @@ public abstract class CrudOperations<T>{
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        session.update(obj);
+//        session.update(obj);
         session.delete(obj);
 
         session.getTransaction().commit();
         session.close();
+        sessionFactory.close();
     }
 }

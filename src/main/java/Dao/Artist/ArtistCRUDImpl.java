@@ -1,26 +1,25 @@
 package Dao.Artist;
 
-import Dao.interfaces.CRUDOperations;
+import Dao.CrudOperations;
 import domain.musicrecord.Artist;
+import org.hibernate.Session;
 
 /**
  * Created by yaroslav on 21.03.16.
  */
-public class ArtistCRUDImpl implements CRUDOperations<Artist> {
-
-    @Override
-    public void createOrUpdate(Artist obj) {
-
-    }
+public class ArtistCRUDImpl extends CrudOperations<Artist> {
 
     @Override
     public Artist findById(int id) {
-        return null;
-    }
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
 
-    @Override
-    public void delete(Artist obj) {
+        Artist artist = (Artist) session.createQuery("from Artist e where e.id = id").uniqueResult();
 
+        session.getTransaction().commit();
+        session.close();
+
+        return artist;
     }
 }
 

@@ -22,11 +22,6 @@ public class MusicRecord implements Product {
 	public MusicRecord() {
 	}
 
-	@Override
-	public Class getTypeProduct() {
-		return this.getClass();
-	}
-
 	public TypeOfRecord getMusicRecord() {
 		return musicRecord;
 	}

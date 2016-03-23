@@ -26,7 +26,7 @@ public class TestMusicShop {
 	public static void main(String[] args) {
 		sessionFactory = new Configuration().configure().buildSessionFactory();
 
-		addStudios();
+		addDataToDB();
 		selectCategories();
 
 		// insertCategory();
@@ -34,7 +34,7 @@ public class TestMusicShop {
 		sessionFactory.close();
 	}
 
-	static void addStudios() {
+	static void addDataToDB() {
 		Session session = sessionFactory.openSession();
 		session.getTransaction().begin();
 
