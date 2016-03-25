@@ -37,6 +37,8 @@ public class FillDataBase {
 		sessionFactory.close();
 	}
 
+
+
 	static void deleteOldDataFromDB(){
 		Session session = sessionFactory.openSession();
 		session.getTransaction().begin();
@@ -85,11 +87,11 @@ public class FillDataBase {
 		session.persist(mushroomAlbum1);
 		session.persist(akiraAlbum1);
 
-		wuTang.getAlbums().add(wuAlbum1);
-		oElzi.getAlbums().add(elziAlbum1);
-		djKrush.getAlbums().add(krushAlbum1);
-		infectedMushroom.getAlbums().add(mushroomAlbum1);
-		akiraYamaoka.getAlbums().add(akiraAlbum1);
+		wuTang.setAlbums(wuAlbum1);
+		oElzi.setAlbums(elziAlbum1);
+		djKrush.setAlbums(krushAlbum1);
+		infectedMushroom.setAlbums(mushroomAlbum1);
+		akiraYamaoka.setAlbums(akiraAlbum1);
 
 		session.persist(studioInUkraine);
 		session.persist(studioInEngland);

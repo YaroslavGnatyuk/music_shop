@@ -13,11 +13,11 @@ import java.util.List;
 public class AlbumDAO extends CrudOperations<Album> implements TopAlbums{
 
     @Override
-    public Album findById(int id) {
+    public Album findById(Long id) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        Album album = (Album) session.createQuery("from Album where Album.id = id").uniqueResult();
+        Album album = (Album) session.createQuery("from Album where :id = id").setParameter("id",id).uniqueResult();
 
         session.getTransaction().commit();
         session.close();
@@ -31,21 +31,39 @@ public class AlbumDAO extends CrudOperations<Album> implements TopAlbums{
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        List<Album> topAlbumsByRating = session.createQuery("from Album a where a.rating > 5 ").list();
+        List<Album> albums = session.createQuery("from Album a order by a.rating").setMaxResults(10).list();
 
         session.getTransaction().commit();
         session.close();
 
-        return topAlbumsByRating;
+        return albums;
     }
 
     @Override
     public List<Album> getTop10AlbumsBySales() {
-        return null;
+
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        List<Album> albums = session.createQuery("from Album a order by a.countOfSales").setMaxResults(10).list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return albums;
     }
 
     @Override
     public List<Album> getTheBestAlbums() {
-        return null;
+
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        List<Album> albums = session.createQuery("from Album a where a.rating > 6 order by a.countOfSales").setMaxResults(10).list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return albums;
     }
 }

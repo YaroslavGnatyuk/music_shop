@@ -21,7 +21,7 @@ public abstract class CrudOperations<T>{
         sessionFactory.close();
     }
 
-    public abstract T findById(int id);
+    public abstract T findById(Long id);
 
     public void delete(T obj){
         Session session = sessionFactory.openSession();

@@ -24,7 +24,7 @@ public class Artist {
 	private LocalDate birthday;
 
 	@OneToMany(mappedBy = "artist")
-	private List<Album> album;
+	private List<Album> albums;
 
 	@Column(nullable = false)
 	private String email;
@@ -39,7 +39,7 @@ public class Artist {
 	private Byte rating;
 
 	@Column(nullable = false)
-	private Integer countOfSales;
+	private Integer countOfSales ;
 
 	public Artist() {
 
@@ -51,13 +51,12 @@ public class Artist {
 		this.name = name;
 		this.address = address;
 		this.birthday = birthday;
-		this.album = album;
+		this.albums = album;
 		this.email = email;
 		this.category = category;
 		this.studio = studio;
 		this.rating = rating;
-
-		setCountOfSales(album);
+		countOfSales = new Integer(0);
 	}
 
 	public Integer getCountOfSales() {
@@ -68,19 +67,7 @@ public class Artist {
 		this.countOfSales = countOfSales;
 	}
 
-	public void setCountOfSales(List<Album> albums) {
-		for (Album album:albums) {
-			countOfSales += album.getCountOfSales();
-		}
-	}
 
-	public List<Album> getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(List<Album> album) {
-        this.album = album;
-    }
 
     public Byte getRating() {
         return rating;
@@ -123,11 +110,16 @@ public class Artist {
 	}
 
 	public List<Album> getAlbums() {
-		return album;
+		return albums;
+	}
+
+	public void setAlbums(Album album) {
+		getAlbums().add(album);
+		countOfSales += album.getCountOfSales();
 	}
 
 	public void setAlbums(List<Album> albums) {
-		this.album = albums;
+		this.albums = albums;
 	}
 
 	public String getEmail() {
@@ -152,5 +144,21 @@ public class Artist {
 
 	public void setStudio(Studio studio_id) {
 		this.studio = studio_id;
+	}
+
+	@Override
+	public String toString() {
+		return "Artist{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", address=" + address +
+				", birthday=" + birthday +
+				", albums=" + albums +
+				", email='" + email + '\'' +
+				", category=" + category.toString() +
+				", studio=" + studio.toString() +
+				", rating=" + rating +
+				", countOfSales=" + countOfSales +
+				'}';
 	}
 }

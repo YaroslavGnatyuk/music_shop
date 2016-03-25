@@ -13,11 +13,11 @@ import java.util.List;
 public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
 
     @Override
-    public Artist findById(int id) {
+    public Artist findById(Long id) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        Artist artist = (Artist) session.createQuery("from Artist e where e.id = id").uniqueResult();
+        Artist artist = (Artist) session.createQuery("from Artist where :id = id ").setParameter("id",id).uniqueResult();
 
         session.getTransaction().commit();
         session.close();
@@ -51,7 +51,14 @@ public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
 
     @Override
     public List<Artist> getTheBestArtists() {
-        return null;
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        List<Artist> artists = session.createQuery("from Artist a where a.rating > 6 order by a.countOfSales").setMaxResults(10).list();
+
+        session.getTransaction().commit();
+        session.close();
+        return artists;
     }
 }
 
