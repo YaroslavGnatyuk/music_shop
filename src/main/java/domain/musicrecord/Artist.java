@@ -35,21 +35,42 @@ public class Artist {
 	@OneToOne
 	private Studio studio;
 
+	@Column(nullable = false)
+	Byte rating;
+
 	public Artist() {
 
 	}
 
-	public Artist(String name, Address address, LocalDate birthday, List<Album> albums, String email, Category category, Studio studio) {
-		this.name = name;
-		this.address = address;
-		this.birthday = birthday;
-		this.album = albums;
-		this.email = email;
-		this.category = category;
-		this.studio = studio;
-	}
+    public Artist(String name, Address address, LocalDate birthday, List<Album> album, String email, Category category, Studio studio, Byte rating) {
 
-	public Long getId() {
+        this.name = name;
+        this.address = address;
+        this.birthday = birthday;
+        this.album = album;
+        this.email = email;
+        this.category = category;
+        this.studio = studio;
+        this.rating = rating;
+    }
+
+    public List<Album> getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(List<Album> album) {
+        this.album = album;
+    }
+
+    public Byte getRating() {
+        return rating;
+    }
+
+    public void setRating(Byte rate) {
+        this.rating = rate;
+    }
+
+    public Long getId() {
 		return id;
 	}
 

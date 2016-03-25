@@ -27,16 +27,28 @@ public class Album {
 	@OneToOne
 	private Studio studio;
 
+	@Column(nullable = false)
+	Byte rating;
+
 	public Album() {
 
 	}
 
-	public Album(String name, LocalDate releaseDate, Artist artist, Category category, Studio studio) {
+	public Album(String name, LocalDate releaseDate, Artist artist, Category category, Studio studio, Byte rating) {
 		this.name = name;
 		this.releaseDate = releaseDate;
 		this.artist = artist;
 		this.category = category;
 		this.studio = studio;
+		this.rating = rating;
+	}
+
+	public Byte getRating() {
+		return rating;
+	}
+
+	public void setRating(Byte rate) {
+		this.rating = rate;
 	}
 
 	public Long getId() {

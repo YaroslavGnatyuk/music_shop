@@ -1,4 +1,4 @@
-import Dao.Studio.StudioCRUDImpl;
+import dao.Studio.StudioCRUDImpl;
 import domain.musicrecord.Address;
 import domain.musicrecord.Studio;
 import org.junit.Test;
