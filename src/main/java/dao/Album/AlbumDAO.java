@@ -31,7 +31,10 @@ public class AlbumDAO extends CrudOperations<Album> implements TopAlbums{
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        List<Album> topAlbumsByRating = (List<Album>) session.createQuery("from Album a where a.rating > 5 ");
+        List<Album> topAlbumsByRating = session.createQuery("from Album a where a.rating > 5 ").list();
+
+        session.getTransaction().commit();
+        session.close();
 
         return topAlbumsByRating;
     }

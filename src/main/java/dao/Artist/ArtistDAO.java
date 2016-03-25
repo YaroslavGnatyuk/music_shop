@@ -27,12 +27,26 @@ public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
 
     @Override
     public List<Artist> getTop10ArtistsByRating() {
-        return null;
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        List<Artist> artists = session.createQuery("from Artist a order by a.rating").setMaxResults(10).list();
+
+        session.getTransaction().commit();
+        session.close();
+        return artists;
     }
 
     @Override
     public List<Artist> getTop10ArtistsBySales() {
-        return null;
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        List<Artist> artists = session.createQuery("from Artist a order by a.countOfSales").setMaxResults(10).list();
+
+        session.getTransaction().commit();
+        session.close();
+        return artists;
     }
 
     @Override
