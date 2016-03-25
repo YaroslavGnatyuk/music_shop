@@ -28,19 +28,31 @@ public class Album {
 	private Studio studio;
 
 	@Column(nullable = false)
-	Byte rating;
+	private Byte rating;
+
+	@Column(nullable = false)
+	private Integer countOfSales;
 
 	public Album() {
 
 	}
 
-	public Album(String name, LocalDate releaseDate, Artist artist, Category category, Studio studio, Byte rating) {
+	public Album(String name, LocalDate releaseDate, Artist artist, Category category, Studio studio, Byte rating, Integer countOfSales) {
 		this.name = name;
 		this.releaseDate = releaseDate;
 		this.artist = artist;
 		this.category = category;
 		this.studio = studio;
 		this.rating = rating;
+		this.countOfSales = countOfSales;
+	}
+
+	public Integer getCountOfSales() {
+		return countOfSales;
+	}
+
+	public void setCountOfSales(Integer countOfSales) {
+		this.countOfSales = countOfSales;
 	}
 
 	public Byte getRating() {

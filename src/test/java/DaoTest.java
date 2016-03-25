@@ -1,4 +1,4 @@
-import dao.Studio.StudioCRUDImpl;
+import dao.Studio.StudioDAO;
 import domain.musicrecord.Address;
 import domain.musicrecord.Studio;
 import org.junit.Test;
@@ -12,7 +12,7 @@ public class DaoTest {
         Address address = new Address("USA", "L.A.", "BroadWay", "777b", 1);
         Studio studio = new Studio("Hollywood",address);
 
-        StudioCRUDImpl studioCRUD = new StudioCRUDImpl();
+        StudioDAO studioCRUD = new StudioDAO();
         studioCRUD.createOrUpdate(studio);
     }
 }

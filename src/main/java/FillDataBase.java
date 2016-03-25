@@ -73,11 +73,11 @@ public class FillDataBase {
 		Artist infectedMushroom = new Artist("Infected Mushroom", mushroomAddress, LocalDate.of(1996, 1, 1), new ArrayList<Album>(), "mushroom@gmail.com", category.get(3), studioInEngland,new Byte((byte)1));
 		Artist akiraYamaoka = new Artist("Akira Yamaoka", akiroAddress, LocalDate.of(1968, 2, 6), new ArrayList<Album>(), "silent@gmail.com", category.get(3), studioInJapan,new Byte((byte)3));
 
-		Album wuAlbum1 = new Album("The W", LocalDate.of(1994, 1, 1), wuTang, category.get(2), studioInNY,new Byte((byte)2));
-		Album elziAlbum1 = new Album("Я на неби", LocalDate.of(1998, 1, 1), oElzi, category.get(1), studioInUkraine,new Byte((byte)10));
-		Album krushAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), djKrush, category.get(3), studioInJapan2,new Byte((byte)9));
-		Album mushroomAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), infectedMushroom, category.get(3), studioInEngland,new Byte((byte)7));
-		Album akiraAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), akiraYamaoka, category.get(3), studioInJapan,new Byte((byte)4));
+		Album wuAlbum1 = new Album("The W", LocalDate.of(1994, 1, 1), wuTang, category.get(2), studioInNY,new Byte((byte)2),11);
+		Album elziAlbum1 = new Album("Я на неби", LocalDate.of(1998, 1, 1), oElzi, category.get(1), studioInUkraine,new Byte((byte)10),34);
+		Album krushAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), djKrush, category.get(3), studioInJapan2,new Byte((byte)9),19);
+		Album mushroomAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), infectedMushroom, category.get(3), studioInEngland,new Byte((byte)7),28);
+		Album akiraAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), akiraYamaoka, category.get(3), studioInJapan,new Byte((byte)4),3);
 
 		session.persist(wuAlbum1);
 		session.persist(elziAlbum1);

@@ -36,25 +36,45 @@ public class Artist {
 	private Studio studio;
 
 	@Column(nullable = false)
-	Byte rating;
+	private Byte rating;
+
+	@Column(nullable = false)
+	private Integer countOfSales;
 
 	public Artist() {
 
 	}
 
-    public Artist(String name, Address address, LocalDate birthday, List<Album> album, String email, Category category, Studio studio, Byte rating) {
+	public Artist(String name, Address address, LocalDate birthday, List<Album> album,
+				  String email, Category category, Studio studio, Byte rating)
+	{
+		this.name = name;
+		this.address = address;
+		this.birthday = birthday;
+		this.album = album;
+		this.email = email;
+		this.category = category;
+		this.studio = studio;
+		this.rating = rating;
 
-        this.name = name;
-        this.address = address;
-        this.birthday = birthday;
-        this.album = album;
-        this.email = email;
-        this.category = category;
-        this.studio = studio;
-        this.rating = rating;
-    }
+		setCountOfSales(album);
+	}
 
-    public List<Album> getAlbum() {
+	public Integer getCountOfSales() {
+		return countOfSales;
+	}
+
+	public void setCountOfSales(Integer countOfSales) {
+		this.countOfSales = countOfSales;
+	}
+
+	public void setCountOfSales(List<Album> albums) {
+		for (Album album:albums) {
+			countOfSales += album.getCountOfSales();
+		}
+	}
+
+	public List<Album> getAlbum() {
         return album;
     }
 

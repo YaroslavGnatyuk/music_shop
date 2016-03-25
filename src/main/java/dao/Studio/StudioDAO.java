@@ -7,7 +7,7 @@ import org.hibernate.Session;
 /**
  * Created by yaroslav on 21.03.16.
  */
-public class StudioCRUDImpl extends CrudOperations<Studio>{
+public class StudioDAO extends CrudOperations<Studio>{
 
     @Override
     public Studio findById(int id) {
