@@ -1,7 +1,7 @@
-package dao.Studio;
+package ua.gnatyuk.yaroslav.music_shop.dao.Studio;
 
-import dao.CrudOperations;
-import domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 import org.hibernate.Session;
 
 /**

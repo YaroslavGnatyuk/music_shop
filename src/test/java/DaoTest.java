@@ -1,11 +1,14 @@
-import dao.Album.AlbumDAO;
-import dao.Artist.ArtistDAO;
+import ua.gnatyuk.yaroslav.music_shop.dao.Album.AlbumDAO;
+import ua.gnatyuk.yaroslav.music_shop.dao.Artist.ArtistDAO;
 
-import dao.Studio.StudioDAO;
+import ua.gnatyuk.yaroslav.music_shop.dao.Studio.StudioDAO;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import org.hibernate.cfg.Configuration;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -51,6 +54,11 @@ public class DaoTest {
     @Test
     public void showTopArtist(){
         ArtistDAO findArtist = new ArtistDAO();
-        System.out.println(findArtist.getTop10ArtistsByRating());
+        List<Artist> artist= findArtist.getTop10ArtistsByRating();
+        for (Artist a :artist) {
+            System.out.println(a.getName() + " with rating " + a.getRating());
+        }
     }
+
+
 }

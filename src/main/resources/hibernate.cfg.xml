@@ -15,11 +15,11 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="connection.isolation">4</property>
 
-        <mapping class ="domain.musicrecord.Address"/>
-        <mapping class ="domain.musicrecord.Artist"/>
-        <mapping class ="domain.musicrecord.Album"/> 
-        <mapping class ="domain.musicrecord.Category"/>
-        <mapping class ="domain.musicrecord.Studio"/>
+        <mapping class ="ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address"/>
+        <mapping class ="ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist"/>
+        <mapping class ="ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album"/>
+        <mapping class ="ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category"/>
+        <mapping class ="ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio"/>
     </session-factory>
 
 </hibernate-configuration>

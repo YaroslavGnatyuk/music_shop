@@ -9,11 +9,11 @@ import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import domain.musicrecord.Address;
-import domain.musicrecord.Album;
-import domain.musicrecord.Artist;
-import domain.musicrecord.Category;
-import domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 
 /**
  * Created by yaroslav on 13.03.16.

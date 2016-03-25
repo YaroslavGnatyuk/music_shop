@@ -1,4 +1,4 @@
-package domain.musicrecord;
+package ua.gnatyuk.yaroslav.music_shop.domain.musicrecord;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Artist {
 	@Column(nullable = false)
 	private LocalDate birthday;
 
-	@OneToMany(mappedBy = "artist")
+	@OneToMany(mappedBy = "artist", fetch = FetchType.EAGER)
 	private List<Album> albums;
 
 	@Column(nullable = false)
@@ -158,7 +158,7 @@ public class Artist {
 				", category=" + category.toString() +
 				", studio=" + studio.toString() +
 				", rating=" + rating +
-				", countOfSales=" + countOfSales +
+				", countOfSales=" + countOfSales + "\n" +
 				'}';
 	}
 }

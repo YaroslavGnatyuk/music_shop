@@ -1,6 +1,6 @@
-package dao;
+package ua.gnatyuk.yaroslav.music_shop.dao;
 
-import domain.musicrecord.Artist;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package dao;
+package ua.gnatyuk.yaroslav.music_shop.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -1,8 +1,8 @@
-package dao.Album;
+package ua.gnatyuk.yaroslav.music_shop.dao.Album;
 
-import dao.CrudOperations;
-import dao.TopAlbums;
-import domain.musicrecord.Album;
+import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
+import ua.gnatyuk.yaroslav.music_shop.dao.TopAlbums;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import org.hibernate.Session;
 
 import java.util.List;

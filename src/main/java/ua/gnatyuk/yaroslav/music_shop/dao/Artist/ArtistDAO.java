@@ -1,8 +1,8 @@
-package dao.Artist;
+package ua.gnatyuk.yaroslav.music_shop.dao.Artist;
 
-import dao.CrudOperations;
-import dao.TopArtists;
-import domain.musicrecord.Artist;
+import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
+import ua.gnatyuk.yaroslav.music_shop.dao.TopArtists;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        List<Artist> artists = session.createQuery("from Artist a order by a.rating").setMaxResults(10).list();
+        List<Artist> artists = session.createQuery("from Artist a order by a.rating desc").setMaxResults(10).list();
 
         session.getTransaction().commit();
         session.close();
@@ -42,7 +42,7 @@ public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        List<Artist> artists = session.createQuery("from Artist a order by a.countOfSales").setMaxResults(10).list();
+        List<Artist> artists = session.createQuery("from Artist a order by a.countOfSales desc").setMaxResults(10).list();
 
         session.getTransaction().commit();
         session.close();
@@ -54,7 +54,7 @@ public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
-        List<Artist> artists = session.createQuery("from Artist a where a.rating > 6 order by a.countOfSales").setMaxResults(10).list();
+        List<Artist> artists = session.createQuery("from Artist a where a.rating > 6 order by a.countOfSales desc").setMaxResults(10).list();
 
         session.getTransaction().commit();
         session.close();

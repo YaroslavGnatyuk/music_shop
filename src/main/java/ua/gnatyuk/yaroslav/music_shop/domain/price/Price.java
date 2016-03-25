@@ -1,4 +1,4 @@
-package domain.price;
+package ua.gnatyuk.yaroslav.music_shop.domain.price;
 
 import java.util.List;
 

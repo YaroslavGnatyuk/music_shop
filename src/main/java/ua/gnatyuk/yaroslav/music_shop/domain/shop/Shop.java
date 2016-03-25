@@ -1,7 +1,7 @@
-package domain.shop;
+package ua.gnatyuk.yaroslav.music_shop.domain.shop;
 
-import domain.musicrecord.Address;
-import domain.price.Price;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
+import ua.gnatyuk.yaroslav.music_shop.domain.price.Price;
 
 /**
  * Created by yaroslav on 17.03.16.

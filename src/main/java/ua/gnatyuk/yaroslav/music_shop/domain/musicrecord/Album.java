@@ -1,4 +1,4 @@
-package domain.musicrecord;
+package ua.gnatyuk.yaroslav.music_shop.domain.musicrecord;
 
 import java.time.LocalDate;
 

@@ -1,6 +1,6 @@
-package domain.price;
+package ua.gnatyuk.yaroslav.music_shop.domain.price;
 
-import domain.musicrecord.Album;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 
 /**
  * Created by root on 17.03.16.
