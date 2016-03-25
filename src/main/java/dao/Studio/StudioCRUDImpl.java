@@ -1,6 +1,6 @@
-package Dao.Studio;
+package dao.Studio;
 
-import Dao.CrudOperations;
+import dao.CrudOperations;
 import domain.musicrecord.Studio;
 import org.hibernate.Session;
 
@@ -15,7 +15,6 @@ public class StudioCRUDImpl extends CrudOperations<Studio>{
         session.getTransaction().begin();
 
         Studio studio = (Studio) session.createQuery("from Studio e where e.id = id").uniqueResult();
-
         session.getTransaction().commit();
         session.close();
 

@@ -1,6 +1,6 @@
-package Dao.Album;
+package dao.Album;
 
-import Dao.CrudOperations;
+import dao.CrudOperations;
 import domain.musicrecord.Album;
 import org.hibernate.Session;
 

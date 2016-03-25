@@ -18,20 +18,33 @@ import domain.musicrecord.Studio;
 /**
  * Created by yaroslav on 13.03.16.
  */
-public class TestMusicShop {
+public class FillDataBase {
 
-	private static final Logger log = LoggerFactory.getLogger(TestMusicShop.class);
+	private static final Logger log = LoggerFactory.getLogger(FillDataBase.class);
 	static SessionFactory sessionFactory;
+
+
 
 	public static void main(String[] args) {
 		sessionFactory = new Configuration().configure().buildSessionFactory();
+		deleteOldDataFromDB();
+		sessionFactory.close();
 
+		sessionFactory = new Configuration().configure().buildSessionFactory();
 		addDataToDB();
 		selectCategories();
-
 		// insertCategory();
-
 		sessionFactory.close();
+	}
+
+	static void deleteOldDataFromDB(){
+		Session session = sessionFactory.openSession();
+		session.getTransaction().begin();
+		log.info("In delete method! ");
+		session.createSQLQuery("DROP TABLE IF EXISTS album,category,artist,studio;").executeUpdate();
+
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	static void addDataToDB() {
@@ -54,17 +67,17 @@ public class TestMusicShop {
 
 		List<Category> category = session.createQuery("from Category").list();
 
-		Artist wuTang = new Artist("Wu-tang clan", wuTangAddress, LocalDate.of(1992, 10, 19), new ArrayList<Album>(), "wutang@gmail.com", category.get(2), studioInNY);
-		Artist oElzi = new Artist("Океан Эльзы", oeAddress, LocalDate.of(1994, 1, 1), new ArrayList<Album>(), "oe@gmail.com", category.get(1), studioInUkraine);
-		Artist djKrush = new Artist("Dj Krush", krushAddress, LocalDate.of(1962, 7, 27), new ArrayList<Album>(), "krush@gmail.com", category.get(3), studioInJapan2);
-		Artist infectedMushroom = new Artist("Infected Mushroom", mushroomAddress, LocalDate.of(1996, 1, 1), new ArrayList<Album>(), "mushroom@gmail.com", category.get(3), studioInEngland);
-		Artist akiraYamaoka = new Artist("Akira Yamaoka", akiroAddress, LocalDate.of(1968, 2, 6), new ArrayList<Album>(), "silent@gmail.com", category.get(3), studioInJapan);
+		Artist wuTang = new Artist("Wu-tang clan", wuTangAddress, LocalDate.of(1992, 10, 19), new ArrayList<Album>(), "wutang@gmail.com", category.get(2), studioInNY,new Byte((byte)9));
+		Artist oElzi = new Artist("Океан Эльзы", oeAddress, LocalDate.of(1994, 1, 1), new ArrayList<Album>(), "oe@gmail.com", category.get(1), studioInUkraine,new Byte((byte)7));
+		Artist djKrush = new Artist("Dj Krush", krushAddress, LocalDate.of(1962, 7, 27), new ArrayList<Album>(), "krush@gmail.com", category.get(3), studioInJapan2,new Byte((byte)7));
+		Artist infectedMushroom = new Artist("Infected Mushroom", mushroomAddress, LocalDate.of(1996, 1, 1), new ArrayList<Album>(), "mushroom@gmail.com", category.get(3), studioInEngland,new Byte((byte)1));
+		Artist akiraYamaoka = new Artist("Akira Yamaoka", akiroAddress, LocalDate.of(1968, 2, 6), new ArrayList<Album>(), "silent@gmail.com", category.get(3), studioInJapan,new Byte((byte)3));
 
-		Album wuAlbum1 = new Album("The W", LocalDate.of(1994, 1, 1), wuTang, category.get(2), studioInNY);
-		Album elziAlbum1 = new Album("Я на неби", LocalDate.of(1998, 1, 1), oElzi, category.get(1), studioInUkraine);
-		Album krushAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), djKrush, category.get(3), studioInJapan2);
-		Album mushroomAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), infectedMushroom, category.get(3), studioInEngland);
-		Album akiraAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), akiraYamaoka, category.get(3), studioInJapan);
+		Album wuAlbum1 = new Album("The W", LocalDate.of(1994, 1, 1), wuTang, category.get(2), studioInNY,new Byte((byte)2));
+		Album elziAlbum1 = new Album("Я на неби", LocalDate.of(1998, 1, 1), oElzi, category.get(1), studioInUkraine,new Byte((byte)10));
+		Album krushAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), djKrush, category.get(3), studioInJapan2,new Byte((byte)9));
+		Album mushroomAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), infectedMushroom, category.get(3), studioInEngland,new Byte((byte)7));
+		Album akiraAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), akiraYamaoka, category.get(3), studioInJapan,new Byte((byte)4));
 
 		session.persist(wuAlbum1);
 		session.persist(elziAlbum1);
