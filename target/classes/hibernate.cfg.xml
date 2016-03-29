@@ -6,20 +6,15 @@
 <hibernate-configuration>
 
     <session-factory>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+       <!-- <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://178.219.93.93:3306/music_shop_autogen</property>
         <property name="connection.username">123</property>
-        <property name="connection.password">123</property>
+        <property name="connection.password">123</property>-->
 
+        <property name = "dialect">org.hibernate.dialect.H2Dialect</property>
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="connection.isolation">4</property>
-
-        <mapping class ="domain.musicrecord.Address"/>
-        <mapping class ="domain.musicrecord.Artist"/>
-        <mapping class ="domain.musicrecord.Album"/> 
-        <mapping class ="domain.musicrecord.Category"/>
-        <mapping class ="domain.musicrecord.Studio"/>
     </session-factory>
 
 </hibernate-configuration>

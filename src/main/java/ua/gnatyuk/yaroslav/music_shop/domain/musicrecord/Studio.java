@@ -51,7 +51,7 @@ public class Studio {
 
 	@Override
 	public String toString() {
-		return "Studio{" +
+		return "studio{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", address=" + address.toString() +

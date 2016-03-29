@@ -1,59 +1,60 @@
+package ua.gnatyuk.yaroslav.music_shop.app;
+
+import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.*;
+
+import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
-
 /**
  * Created by yaroslav on 13.03.16.
  */
+
+@Repository
 public class FillDataBase {
 
-	private static final Logger log = LoggerFactory.getLogger(FillDataBase.class);
-	static SessionFactory sessionFactory;
+	public static final Logger log = LoggerFactory.getLogger(FillDataBase.class);
 
+	@Inject
+	protected SessionFactory sessionFactory;
 
 
 	public static void main(String[] args) {
-		sessionFactory = new Configuration().configure().buildSessionFactory();
-		deleteOldDataFromDB();
-		sessionFactory.close();
+/*		final ApplicationContext appCtx =
+				new AnnotationConfigApplicationContext(SpringConfiguration.class);*/
+		FillDataBase fillDB = new FillDataBase();
 
-		sessionFactory = new Configuration().configure().buildSessionFactory();
-		addDataToDB();
-		selectCategories();
-		// insertCategory();
-		sessionFactory.close();
+//		fillDB.deleteOldDataFromDB();
+		fillDB.addDataToDB();
+		fillDB.selectCategories();
+
 	}
 
 
+	@Transactional
+	public void deleteOldDataFromDB(){
 
-	static void deleteOldDataFromDB(){
-		Session session = sessionFactory.openSession();
-		session.getTransaction().begin();
 		log.info("In delete method! ");
-		session.createSQLQuery("DROP TABLE IF EXISTS album,category,artist,studio;").executeUpdate();
-
-		session.getTransaction().commit();
-		session.close();
+		sessionFactory.getCurrentSession()
+				.createSQLQuery("DROP TABLE IF EXISTS album,category,artist,studio;")
+				.executeUpdate();
 	}
 
-	static void addDataToDB() {
-		Session session = sessionFactory.openSession();
-		session.getTransaction().begin();
+	@Transactional
+	public void addDataToDB() {
 
-		Stream.of("Pop", "Rock", "Hip-Hop", "Elecnronic music", "Classic music").map(Category::new).forEach(session::persist);
+		log.info("In addDataToDB ! ");
+
+		Stream.of("Pop", "Rock", "Hip-Hop", "Elecnronic music", "Classic music")
+				.map(Category::new)
+				.forEach(sessionFactory.getCurrentSession()::persist);
 
 		Address oeAddress = new Address("Ukraine", "Kiev", "Michail Grushevskiy str.", "12-b", 12);
 		Address mushroomAddress = new Address("England", "Manchester", "Arsenicheva str.", "1", 145);
@@ -67,7 +68,8 @@ public class FillDataBase {
 		Studio studioInJapan = new Studio("Akiros studio", akiroAddress);
 		Studio studioInNY = new Studio("Wu-Tang clans studio", wuTangAddress);
 
-		List<Category> category = session.createQuery("from Category").list();
+		List<Category> category = sessionFactory.getCurrentSession()
+				.createQuery("from Category").list();
 
 		Artist wuTang = new Artist("Wu-tang clan", wuTangAddress, LocalDate.of(1992, 10, 19), new ArrayList<Album>(), "wutang@gmail.com", category.get(2), studioInNY,new Byte((byte)9));
 		Artist oElzi = new Artist("Океан Эльзы", oeAddress, LocalDate.of(1994, 1, 1), new ArrayList<Album>(), "oe@gmail.com", category.get(1), studioInUkraine,new Byte((byte)7));
@@ -81,11 +83,11 @@ public class FillDataBase {
 		Album mushroomAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), infectedMushroom, category.get(3), studioInEngland,new Byte((byte)7),28);
 		Album akiraAlbum1 = new Album("Some album", LocalDate.of(1998, 1, 1), akiraYamaoka, category.get(3), studioInJapan,new Byte((byte)4),3);
 
-		session.persist(wuAlbum1);
-		session.persist(elziAlbum1);
-		session.persist(krushAlbum1);
-		session.persist(mushroomAlbum1);
-		session.persist(akiraAlbum1);
+		sessionFactory.getCurrentSession().persist(wuAlbum1);
+		sessionFactory.getCurrentSession().persist(elziAlbum1);
+		sessionFactory.getCurrentSession().persist(krushAlbum1);
+		sessionFactory.getCurrentSession().persist(mushroomAlbum1);
+		sessionFactory.getCurrentSession().persist(akiraAlbum1);
 
 		wuTang.setAlbums(wuAlbum1);
 		oElzi.setAlbums(elziAlbum1);
@@ -93,29 +95,23 @@ public class FillDataBase {
 		infectedMushroom.setAlbums(mushroomAlbum1);
 		akiraYamaoka.setAlbums(akiraAlbum1);
 
-		session.persist(studioInUkraine);
-		session.persist(studioInEngland);
-		session.persist(studioInJapan2);
-		session.persist(studioInJapan);
-		session.persist(studioInNY);
+		sessionFactory.getCurrentSession().persist(studioInUkraine);
+		sessionFactory.getCurrentSession().persist(studioInEngland);
+		sessionFactory.getCurrentSession().persist(studioInJapan2);
+		sessionFactory.getCurrentSession().persist(studioInJapan);
+		sessionFactory.getCurrentSession().persist(studioInNY);
 
-		session.persist(wuTang);
-		session.persist(oElzi);
-		session.persist(akiraYamaoka);
-		session.persist(djKrush);
-		session.persist(infectedMushroom);
-
-		session.getTransaction().commit();
-		session.close();
+		sessionFactory.getCurrentSession().persist(wuTang);
+		sessionFactory.getCurrentSession().persist(oElzi);
+		sessionFactory.getCurrentSession().persist(akiraYamaoka);
+		sessionFactory.getCurrentSession().persist(djKrush);
+		sessionFactory.getCurrentSession().persist(infectedMushroom);
 	}
-
-	static void selectCategories() {
+	@Transactional
+	public void selectCategories() {
 		log.info("SELECT CATEGORIES");
 
-		final Session session = sessionFactory.openSession();
-		session.getTransaction().begin();
-
-		List<Artist> studios = session.createQuery("from Artist ").list();
+		List<Artist> studios = sessionFactory.getCurrentSession().createQuery("from Artist ").list();
 
 		for (Artist s : studios) {
 			Address address = s.getAddress();
@@ -131,17 +127,5 @@ public class FillDataBase {
 			System.out.println("\n*****************************\n");
 		}
 
-		session.getTransaction().commit();
-		session.close();
-	}
-
-	static void insertCategory() {
-		Session session = sessionFactory.openSession();
-		session.getTransaction().begin();
-
-		Stream.of("Pop", "Rock", "Hip-Hop", "Elecnronic music", "Classic music").map(Category::new).forEach(session::persist);
-
-		session.getTransaction().commit();
-		session.close();
 	}
 }

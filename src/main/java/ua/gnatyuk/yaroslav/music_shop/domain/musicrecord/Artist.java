@@ -23,7 +23,7 @@ public class Artist {
 	@Column(nullable = false)
 	private LocalDate birthday;
 
-	@OneToMany(mappedBy = "artist", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "artist", fetch = FetchType.LAZY)
 	private List<Album> albums;
 
 	@Column(nullable = false)
@@ -148,7 +148,7 @@ public class Artist {
 
 	@Override
 	public String toString() {
-		return "Artist{" +
+		return "artist{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", address=" + address +
