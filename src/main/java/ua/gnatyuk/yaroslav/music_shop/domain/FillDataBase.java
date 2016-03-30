@@ -1,4 +1,4 @@
-package ua.gnatyuk.yaroslav.music_shop.app;
+package ua.gnatyuk.yaroslav.music_shop.domain;
 
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;

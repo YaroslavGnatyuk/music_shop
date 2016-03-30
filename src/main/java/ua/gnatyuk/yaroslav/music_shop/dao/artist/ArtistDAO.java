@@ -1,35 +1,32 @@
 package ua.gnatyuk.yaroslav.music_shop.dao.artist;
 
-import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
-import ua.gnatyuk.yaroslav.music_shop.dao.TopArtists;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 
-import javax.inject.Inject;
 import java.util.List;
 
 /**
  * Created by yaroslav on 21.03.16.
  */
-@Service
-@Transactional
-public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
 
-    @Inject
-    SessionFactory sessionFactory;
+@Repository
+public class ArtistDAO extends CrudOperations<Artist> {
 
+    @Transactional
     @Override
     public Artist findById(Long id) {
-        sessionFactory.getCurrentSession()
+        Artist artist = (Artist) sessionFactory.getCurrentSession()
                 .createQuery("from Artist where :id = id ")
                 .setParameter("id",id).uniqueResult();
-        return new Artist();
+
+        return  artist;
     }
 
+    @Transactional
     @Override
-    public List<Artist> getTop10ArtistsByRating() {
+    public List<Artist> getTop10ByRate() {
 
         List<Artist> artists = sessionFactory.getCurrentSession()
                 .createQuery("from Artist a order by a.rating desc")
@@ -39,8 +36,9 @@ public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
 
     }
 
+    @Transactional
     @Override
-    public List<Artist> getTop10ArtistsBySales() {
+    public List<Artist> getTop10BySales() {
 
         List<Artist> artists = sessionFactory.getCurrentSession()
                 .createQuery("from Artist a order by a.countOfSales desc")
@@ -49,8 +47,9 @@ public class ArtistDAO extends CrudOperations<Artist> implements TopArtists {
         return artists;
     }
 
+    @Transactional
     @Override
-    public List<Artist> getTheBestArtists() {
+    public List<Artist> getTheBest() {
 
         List<Artist> artists = sessionFactory.getCurrentSession()
                 .createQuery("from Artist a where a.rating > 6 order by a.countOfSales desc")

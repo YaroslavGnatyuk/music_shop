@@ -12,7 +12,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ua.gnatyuk.yaroslav.music_shop.app.FillDataBase;
+import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 
 import javax.sql.DataSource;
 
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  * Created by yaroslav on 25.03.16.
  */
 @Configuration
-@ComponentScan()
+@ComponentScan(value = {"ua.gnatyuk.yaroslav.music_shop.dao","ua.gnatyuk.yaroslav.music_shop.domain"})
 @EnableTransactionManagement
 public class SpringConfiguration {
     private static final Logger log = LoggerFactory.getLogger(FillDataBase.class);
@@ -43,8 +43,7 @@ public class SpringConfiguration {
         log.info("I'm in sessionFactory");
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ua.gnatyuk.yaroslav.music_shop.domain.musicrecord",
-                "ua.gnatyuk.yaroslav.music_shop.dao");
+        sessionFactory.setPackagesToScan("ua.gnatyuk.yaroslav.music_shop.domain.musicrecord");
         sessionFactory.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 
         return sessionFactory;
