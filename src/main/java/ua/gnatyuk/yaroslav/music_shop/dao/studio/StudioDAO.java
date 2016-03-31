@@ -1,7 +1,6 @@
 package ua.gnatyuk.yaroslav.music_shop.dao.studio;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 
@@ -10,8 +9,7 @@ import java.util.List;
 /**
  * Created by yaroslav on 21.03.16.
  */
-@Service
-@Transactional
+@Repository
 public class StudioDAO extends CrudOperations<Studio>{
 
     @Override
@@ -33,8 +31,17 @@ public class StudioDAO extends CrudOperations<Studio>{
     public Studio findById(Long id) {
 
         Studio studio = (Studio) sessionFactory.getCurrentSession()
-                .createQuery("from Studio e where :id = id")
+                .createQuery("from Studio where :id = id")
                 .setParameter("id",id).uniqueResult();
+
+        return studio;
+    }
+    @Override
+    public Studio findByName(String nameOfTheStudio){
+
+        Studio studio = (Studio) sessionFactory.getCurrentSession()
+                .createQuery("from Studio where :name = name")
+                .setParameter("name",nameOfTheStudio).uniqueResult();
 
         return studio;
     }

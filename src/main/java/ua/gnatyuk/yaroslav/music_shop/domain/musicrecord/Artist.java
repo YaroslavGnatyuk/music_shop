@@ -30,9 +30,11 @@ public class Artist {
 	private String email;
 
 	@OneToOne()
+	@JoinColumn(name = "category_id")
 	private Category category;
 
 	@OneToOne
+	@JoinColumn(name = "studio_id")
 	private Studio studio;
 
 	@Column(nullable = false)

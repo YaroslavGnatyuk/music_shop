@@ -3,7 +3,6 @@ package ua.gnatyuk.yaroslav.music_shop.dao.album;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
-import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 
 import java.util.List;
@@ -23,6 +22,15 @@ public class AlbumDao extends CrudOperations<Album> {
 
         return album;
     }
+
+    @Override
+    public Album findByName(String nameOfTheAlbum) {
+        Album album = (Album) sessionFactory.getCurrentSession()
+                .createQuery("from Album where :name = name")
+                .setParameter(nameOfTheAlbum,"name");
+        return album;
+    }
+
     @Transactional
     @Override
     public List<Album> getTop10ByRate() {

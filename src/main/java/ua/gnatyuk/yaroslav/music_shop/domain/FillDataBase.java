@@ -31,7 +31,7 @@ public class FillDataBase {
 				new AnnotationConfigApplicationContext(SpringConfiguration.class);*/
 		FillDataBase fillDB = new FillDataBase();
 
-//		fillDB.deleteOldDataFromDB();
+//		fillDB.deleteDataFromDB();
 		fillDB.addDataToDB();
 		fillDB.selectCategories();
 
@@ -39,7 +39,7 @@ public class FillDataBase {
 
 
 	@Transactional
-	public void deleteOldDataFromDB(){
+	public void deleteDataFromDB(){
 
 		log.info("In delete method! ");
 		sessionFactory.getCurrentSession()

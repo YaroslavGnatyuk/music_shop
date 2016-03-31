@@ -24,6 +24,15 @@ public class ArtistDAO extends CrudOperations<Artist> {
         return  artist;
     }
 
+    @Override
+    public Artist findByName(String nameOfArtist) {
+        Artist artist = (Artist) sessionFactory.getCurrentSession()
+                .createQuery("from Artist where :name = name")
+                .setParameter("name",nameOfArtist).uniqueResult();
+
+        return artist;
+    }
+
     @Transactional
     @Override
     public List<Artist> getTop10ByRate() {
