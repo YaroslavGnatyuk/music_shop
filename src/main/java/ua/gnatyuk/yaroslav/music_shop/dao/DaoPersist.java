@@ -10,7 +10,8 @@ public interface DaoPersist <T>{
     List<T> getTop10BySales();
     List<T> getTheBest(); //get 10 albums where rating and sales better at same time
 
-    void createOrUpdate(T obj);
+    void create(T obj);
+    void update(T obj);
     T findById(Long id);
     void delete(T obj);
 

@@ -32,4 +32,22 @@ public class StudioServImpl implements StudioService{
     public Studio findByName(String nameOfTheStudio) {
         return daoStudio.findByName(nameOfTheStudio);
     }
+
+    @Transactional
+    @Override
+    public void updateStudio(Studio studio) {
+        daoStudio.update(studio);
+    }
+
+    @Transactional
+    @Override
+    public void createStudio(Studio studio) {
+        daoStudio.create(studio);
+    }
+
+    @Transactional
+    @Override
+    public void deleteStudio(Studio studio) {
+        daoStudio.delete(studio);
+    }
 }

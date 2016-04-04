@@ -22,7 +22,7 @@ public class AlbumDao extends CrudOperations<Album> {
 
         return album;
     }
-
+    @Transactional
     @Override
     public Album findByName(String nameOfTheAlbum) {
         Album album = (Album) sessionFactory.getCurrentSession()

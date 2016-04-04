@@ -39,7 +39,7 @@ public class SpringConfiguration {
         return new HikariDataSource(hikariConfig);
     }
 
-    @Bean
+    @Bean(name = "sessionFactory")
     public LocalSessionFactoryBean sessionFactory() {
         log.info("I'm in sessionFactory");
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();

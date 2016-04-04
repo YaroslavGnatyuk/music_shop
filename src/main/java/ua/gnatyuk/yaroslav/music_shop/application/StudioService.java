@@ -8,4 +8,7 @@ import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 public interface StudioService {
     Studio findById(Long id);
     Studio findByName(String nameOfTheStudio);
+    void createStudio(Studio studio);
+    void updateStudio(Studio studio);
+    void deleteStudio(Studio studio);
 }

@@ -1,6 +1,7 @@
 package ua.gnatyuk.yaroslav.music_shop.domain.musicrecord;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class Artist {
 	private Long id;
 
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 
 	@Embedded
@@ -24,7 +25,7 @@ public class Artist {
 	private LocalDate birthday;
 
 	@OneToMany(mappedBy = "artist", fetch = FetchType.LAZY)
-	private List<Album> albums;
+	private List<Album> albums  ;
 
 	@Column(nullable = false)
 	private String email;
@@ -47,13 +48,12 @@ public class Artist {
 
 	}
 
-	public Artist(String name, Address address, LocalDate birthday, List<Album> album,
+	public Artist(String name, Address address, LocalDate birthday,
 				  String email, Category category, Studio studio, Byte rating)
 	{
 		this.name = name;
 		this.address = address;
 		this.birthday = birthday;
-		this.albums = album;
 		this.email = email;
 		this.category = category;
 		this.studio = studio;
@@ -116,6 +116,9 @@ public class Artist {
 	}
 
 	public void setAlbums(Album album) {
+		if(albums == null){
+			albums = new ArrayList<>();
+		}
 		getAlbums().add(album);
 		countOfSales += album.getCountOfSales();
 	}
@@ -148,6 +151,14 @@ public class Artist {
 		this.studio = studio_id;
 	}
 
+	public String getNameOfAllAlbums(){
+		StringBuilder names = new StringBuilder();
+		for (Album a:albums) {
+			name.concat(a.getName() + " \n");
+		}
+		return names.toString();
+	}
+
 	@Override
 	public String toString() {
 		return "artist{" +
@@ -155,12 +166,13 @@ public class Artist {
 				", name='" + name + '\'' +
 				", address=" + address +
 				", birthday=" + birthday +
-				", albums=" + albums +
+				/*", albums=" + getNameOfAllAlbums() +*/
 				", email='" + email + '\'' +
 				", category=" + category.toString() +
 				", studio=" + studio.toString() +
 				", rating=" + rating +
 				", countOfSales=" + countOfSales + "\n" +
 				'}';
-	}
+
+			}
 }
