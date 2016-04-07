@@ -66,5 +66,10 @@ public class ArtistDAO extends CrudOperations<Artist> {
 
         return artists;
     }
+
+    @Override
+    public List<Artist> getAll() {
+        return null;
+    }
 }
 

@@ -10,7 +10,7 @@
 <body>
 
 <h3>Find by id</h3>
-<form:form method="post" commandName="artist">
+<form:form method="post" action="artist">
     <table>
          <tr>
             <td>Id :</td>

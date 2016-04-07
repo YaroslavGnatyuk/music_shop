@@ -62,4 +62,9 @@ public class AlbumDao extends CrudOperations<Album> {
 
         return albums;
     }
+
+    @Override
+    public List<Album> getAll() {
+        return null;
+    }
 }

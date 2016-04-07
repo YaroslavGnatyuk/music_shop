@@ -1,3 +1,5 @@
+package ua.gnatyuk.yaroslav.test;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

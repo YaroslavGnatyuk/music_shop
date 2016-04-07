@@ -28,6 +28,12 @@ public class StudioDAO extends CrudOperations<Studio>{
     }
 
     @Override
+    public List<Studio> getAll() {
+        List<Studio> studios = sessionFactory.getCurrentSession().createQuery("from Studio").list();
+        return studios;
+    }
+
+    @Override
     public Studio findById(Long id) {
 
         Studio studio = (Studio) sessionFactory.getCurrentSession()
