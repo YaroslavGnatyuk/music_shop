@@ -1,21 +1,17 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: yaroslav
   Date: 4/9/16
-  Time: 8:54 PM
+  Time: 8:53 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-
 </head>
 <body>
 
@@ -50,46 +46,30 @@
 <div class="raw">
     <div div class="col-lg-2" style="margin-top:10px">
         <ul class="list-group">
-            <a href="/admin/admin-main-page" class="list-group-item active">
-                Artist
+            <a href="/admin/studio-main-page" class="list-group-item active">
+                Studio
             </a>
-            <a href="/admin/add-artist" class="list-group-item">Create</a>
-            <a href="/admin/update-artist" class="list-group-item">Update</a>
-            <a href="/admin/find-artist-by-id" class="list-group-item">Find</a>
-            <a href="/admin/delete-artist" class="list-group-item">Delete</a>
+            <a href="/admin/add-studio" class="list-group-item">Create</a>
+            <a href="/admin/update-studio" class="list-group-item">Update</a>
+            <a href="/admin/find-studio-by-id" class="list-group-item">Find</a>
+            <a href="/admin/delete-studio" class="list-group-item">Delete</a>
         </ul>
 
     </div>
     <div class="raw">
-
         <div div class="col-lg-8" style="margin-top:10px">
-            <table class ="table table-striped" border="1" cellpadding="5" align="centr">
-                <tr>${messageAboutError}</tr>
-                <tr>
-                    <th style="margin-right: 5px; margin-left: 5px">id</th>
-                    <th>name</th>
-                    <th>address</th>
-                    <th>category</th>
-                    <th>studio</th>
-                    <th>email</th>
-                    <th>year of create</th>
-                </tr>
-
-                <tr>
-                    <td><c:out value="${artist.id}" /></td>
-                    <td><c:out value="${artist.name}" /></td>
-                    <td><c:out value="${artist.address.country}" /></td>
-                    <td><c:out value="${artist.category.name}" /></td>
-                    <td><c:out value="${artist.studio.name}" /></td>
-                    <td><c:out value="${artist.email}" /></td>
-                    <td><c:out value="${artist.birthday}" /></td>
-                </tr>
-            </table>
+            <h3>Studio main page</h3>
+            <div class="jumbotron" >
+                <h1>Welcome to landing page!</h1>
+                <p>This is an example for jumbotron.</p>
+                <p><a class="btn btn-primary btn-lg" role="button">
+                    Learn more</a>
+                </p>
+            </div>
         </div>
     </div>
 
     <div div class="col-lg-2" style="margin-top:10px">
-
         <div class="well">
             The page header is a nice little feature to add appropriate spacing around the
             headings on a page. This is particularly helpful on a web page where you may
@@ -107,7 +87,5 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

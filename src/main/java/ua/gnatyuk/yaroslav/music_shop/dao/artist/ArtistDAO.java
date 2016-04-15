@@ -67,9 +67,11 @@ public class ArtistDAO extends CrudOperations<Artist> {
         return artists;
     }
 
+    @Transactional
     @Override
     public List<Artist> getAll() {
-        return null;
+        return sessionFactory.getCurrentSession()
+                .createQuery("from Artist ").list();
     }
 }
 

@@ -8,6 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
     <title>Find album by id</title>
 </head>
 <body>

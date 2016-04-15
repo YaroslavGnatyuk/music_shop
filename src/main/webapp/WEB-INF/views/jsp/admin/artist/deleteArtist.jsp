@@ -1,7 +1,6 @@
-
+<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: yaroslav
@@ -63,28 +62,33 @@
     <div class="raw">
 
         <div div class="col-lg-8" style="margin-top:10px">
-            <table class ="table table-striped" border="1" cellpadding="5" align="centr">
-                <tr>${messageAboutError}</tr>
-                <tr>
-                    <th style="margin-right: 5px; margin-left: 5px">id</th>
-                    <th>name</th>
-                    <th>address</th>
-                    <th>category</th>
-                    <th>studio</th>
-                    <th>email</th>
-                    <th>year of create</th>
-                </tr>
+            <from:form method="post">
+                <table  class ="table table-striped" border="1" cellpadding="5" align="centr" >
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>address</th>
+                        <th>delete</th>
+                    </tr>
+
+                    <c:forEach items="${}" var="res">
+                        <tr>
+                            <td><c:out value="${res.id}" /></td>
+                            <td><c:out value="${res.name}" /></td>
+                            <td><c:out value="${res.address.country}" /></td>
+                            <td><input type="checkbox" name="selected" value="${res.name}" unchecked></td>
+                        </tr>
+                    </c:forEach>
+                </table>
 
                 <tr>
-                    <td><c:out value="${artist.id}" /></td>
-                    <td><c:out value="${artist.name}" /></td>
-                    <td><c:out value="${artist.address.country}" /></td>
-                    <td><c:out value="${artist.category.name}" /></td>
-                    <td><c:out value="${artist.studio.name}" /></td>
-                    <td><c:out value="${artist.email}" /></td>
-                    <td><c:out value="${artist.birthday}" /></td>
+                    <td colspan="2">
+                        <input type="submit" class="btn btn-info btn-block"
+                               value="Delete studio ( studio's )" style="margin-top: 15px;
+                                   background-color: #337AB7;border-color: #337AB7"/>
+                    </td>
                 </tr>
-            </table>
+            </from:form>
         </div>
     </div>
 

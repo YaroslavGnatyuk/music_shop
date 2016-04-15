@@ -16,6 +16,6 @@ public interface DaoPersist <T>{
     T findById(Long id);
     void delete(T obj);
 
-    public T findByName(String nameOfTheStudio);
+    T findByName(String nameOfTheStudio);
 
 }

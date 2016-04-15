@@ -1,7 +1,3 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: yaroslav
@@ -9,6 +5,7 @@
   Time: 8:54 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,41 +47,27 @@
 <div class="raw">
     <div div class="col-lg-2" style="margin-top:10px">
         <ul class="list-group">
-            <a href="/admin/admin-main-page" class="list-group-item active">
-                Artist
+            <a href="#" class="list-group-item active">
+                Album
             </a>
-            <a href="/admin/add-artist" class="list-group-item">Create</a>
-            <a href="/admin/update-artist" class="list-group-item">Update</a>
-            <a href="/admin/find-artist-by-id" class="list-group-item">Find</a>
-            <a href="/admin/delete-artist" class="list-group-item">Delete</a>
+            <a href="#" class="list-group-item">Create</a>
+            <a href="#" class="list-group-item">Update</a>
+            <a href="#" class="list-group-item">Find</a>
+            <a href="#" class="list-group-item">Delete</a>
         </ul>
 
     </div>
     <div class="raw">
 
         <div div class="col-lg-8" style="margin-top:10px">
-            <table class ="table table-striped" border="1" cellpadding="5" align="centr">
-                <tr>${messageAboutError}</tr>
-                <tr>
-                    <th style="margin-right: 5px; margin-left: 5px">id</th>
-                    <th>name</th>
-                    <th>address</th>
-                    <th>category</th>
-                    <th>studio</th>
-                    <th>email</th>
-                    <th>year of create</th>
-                </tr>
-
-                <tr>
-                    <td><c:out value="${artist.id}" /></td>
-                    <td><c:out value="${artist.name}" /></td>
-                    <td><c:out value="${artist.address.country}" /></td>
-                    <td><c:out value="${artist.category.name}" /></td>
-                    <td><c:out value="${artist.studio.name}" /></td>
-                    <td><c:out value="${artist.email}" /></td>
-                    <td><c:out value="${artist.birthday}" /></td>
-                </tr>
-            </table>
+            <h3>Album main page</h3>
+            <div class="jumbotron" >
+                <h1>Welcome to landing page!</h1>
+                <p>This is an example for jumbotron.</p>
+                <p><a class="btn btn-primary btn-lg" role="button">
+                    Learn more</a>
+                </p>
+            </div>
         </div>
     </div>
 

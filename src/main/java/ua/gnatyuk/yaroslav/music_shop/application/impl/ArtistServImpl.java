@@ -8,6 +8,8 @@ import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 
+import java.util.List;
+
 /**
  * Created by yaroslav on 31.03.16.
  */
@@ -27,6 +29,24 @@ public class ArtistServImpl implements ArtistService {
     @Override
     public Artist findByName(String nameOfTheStudio) {
         return daoArtist.findByName(nameOfTheStudio);
+    }
+
+    @Transactional
+    @Override
+    public void createArtist(Artist artist) {
+        daoArtist.create(artist);
+    }
+
+    @Transactional
+    @Override
+    public void updateArtist(Artist artist) {
+        daoArtist.update(artist);
+    }
+
+    @Transactional
+    @Override
+    public List<Artist> getAll() {
+        return daoArtist.getAll();
     }
 
 

@@ -51,6 +51,7 @@ public class StudioServImpl implements StudioService{
         daoStudio.delete(studio);
     }
 
+    @Transactional
     @Override
     public java.util.List<Studio> getAll() {
         return daoStudio.getAll();

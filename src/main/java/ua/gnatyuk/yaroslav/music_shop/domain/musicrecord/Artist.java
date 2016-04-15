@@ -59,6 +59,8 @@ public class Artist {
 		this.studio = studio;
 		this.rating = rating;
 		countOfSales = new Integer(0);
+
+
 	}
 
 	public Integer getCountOfSales() {

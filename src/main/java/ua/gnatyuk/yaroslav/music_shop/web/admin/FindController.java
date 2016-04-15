@@ -38,7 +38,7 @@ public class FindController {
         Artist searchArtist = artistService.findById(artist.getId());
 
         if(searchArtist != null){
-            model.addAttribute("result", searchArtist);
+            model.addAttribute("artist", searchArtist);
             return new ModelAndView("admin/artist/resultArtist");
         }
         else

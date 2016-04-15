@@ -1,42 +1,93 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yaroslav
-  Date: 4/4/16
-  Time: 12:02 PM
-  To change this template use File | Settings | File Templates.
---%>
-
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0 Final//EN">
-<html lang="en">
+<html>
 
 <head>
-    <link  rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css" >
-    <link rel="stylesheet" type="text/css" href=“/resources/css/bootstrap.min.css”>
-
-<%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>--%>
-
-
+    <link  rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
+    <link  rel="stylesheet" type="text/css" href="/resources/css/style.css">
 </head>
 <body>
-<h3>Hello, dear administrator</h3>
-<a class="btn btn-info" style="margin: 2px" href="/admin/find-artist-by-id">Find artist</a><br>
-<a class="btn btn-info" style="margin: 2px" href="/admin/delete-artist">Delete artist</a><br>
-<a class="btn btn-info" href="/admin/add-artist">You can add artist, if click here!</a><br>
-<a class="btn btn-info" href="/admin/update-artist">You can update artist, if click here!</a><br>
-<br>
-<a class="btn btn-info" href="/admin/find-album-by-id" role="link">You can find album, if click here!</a><br>
-<a class="btn btn-info" href="/admin/delete-album">You can delete album, if click here!</a><br>
-<a class="btn btn-info" href="/admin/add-album">You can add album, if click here!</a><br>
-<a class="btn btn-info" href="/admin/update-album">You can update album, if click here!</a><br>
-<br>
-<a class="btn btn-info" href="/admin/find-studio-by-id">You can find studio, if click here!</a><br>
-<a class="btn btn-info" href="/admin/delete-studio">You can delete studio, if click here!</a><br>
-<a class="btn btn-info" href="/admin/add-studio" role="button">You can add studio, if click here!</a><br>
-<a class="btn btn-info"  href="/admin/update-studio">You can update studio, if click here!</a><br>
+<div class="raw">
+    <div div class="col-lg-12">
+        <div class="page-header">
+            <h1>Music for life
+                <small>Administrator page</small>
+            </h1>
+        </div>
+        <p>
+            Here you can update, create, find and delete records from database!
+            Be careful!
+        </p>
+
+    </div>
+</div>
+
+<div class="raw">
+    <div div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/admin/admin-main-page">Home</a></li>
+           <%-- <li><a href="/admin/artist-main-page">Artist</a></li>
+            <li><a href="/admin/studio-main-page">Studio</a></li>
+            <li><a href="/admin/album-main-page">Album</a></li>
+            <li><a href="#">Store</a></li>--%>
+        </ul>
+    </div>
+</div>
+
+<div class="raw">
+    <div div class="col-lg-2" style="margin-top:10px">
+        <ul class="list-group">
+            <a href="#" class="list-group-item active">
+                Options
+            </a>
+            <a href="/admin/artist-main-page" class="list-group-item">Artist</a>
+            <a href="/admin/studio-main-page" class="list-group-item">Studio</a>
+            <a href="/admin/album-main-page" class="list-group-item">Album</a>
+            <a href="#" class="list-group-item">Store</a>
+        </ul>
+
+    </div>
+    <div class="raw">
+
+        <div div class="col-lg-8" style="margin-top:10px">
+            <h3>Admin main page</h3>
+            <div class="jumbotron" >
+                <h1>Welcome to landing page!</h1>
+                <p>This is an example for jumbotron.</p>
+                <p><a class="btn btn-primary btn-lg" role="button">
+                    Learn more</a>
+                </p>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div div class="col-lg-2" style="margin-top:10px">
+
+        <div class="well">
+            The page header is a nice little feature to add appropriate spacing around the
+            headings on a page. This is particularly helpful on a web page where you may
+            have several post titles and need a way to add distinction to each of them. To
+            use a page header, wrap your heading in a with a class of .page-header:
+            Hi, am in well !!
+        </div>
+    </div>
+</div>
+
+<div class="raw">
+    <div div class="col-lg-12" style = "margin-top: 200px">
+        <div class="well">
+            Author sunrise@gmail.com
+        </div>
+    </div>
+</div>
+
+
+
 </body>
+
+
 </html>
