@@ -1,5 +1,5 @@
-<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
@@ -41,6 +41,7 @@
             <li><a href="/admin/artist-main-page">Artist</a></li>
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>
+            <li><a href="/admin/category-main-page">Category</a></li>
             <li><a href="#">Store</a></li>
         </ul>
     </div>
@@ -62,33 +63,36 @@
     <div class="raw">
 
         <div div class="col-lg-8" style="margin-top:10px">
-            <from:form method="post">
-                <table  class ="table table-striped" border="1" cellpadding="5" align="centr" >
+            <form:form method="post">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Panel Heading</div>
+                        <table  class ="table table-bordered"cellpadding="5" align="centr" >
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>address</th>
+                                <th>delete</th>
+                            </tr>
+
+                            <c:forEach items="${artists}" var="artist">
+                                <tr>
+                                    <td><c:out value="${artist.id}" /></td>
+                                    <td><c:out value="${artist.name}" /></td>
+                                    <td><c:out value="${artist.address.country}" /></td>
+                                    <td><input type="checkbox" name="selected" value="${artist.name}" unchecked></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
                     <tr>
-                        <th>id</th>
-                        <th>name</th>
-                        <th>address</th>
-                        <th>delete</th>
+                        <td colspan="2">
+                            <input type="submit" class="btn btn-info btn-block"
+                                   value="Delete studio ( studio's )" style="margin-top: 15px;
+                                       background-color: #337AB7;border-color: #337AB7"/>
+                        </td>
                     </tr>
 
-                    <c:forEach items="${}" var="res">
-                        <tr>
-                            <td><c:out value="${res.id}" /></td>
-                            <td><c:out value="${res.name}" /></td>
-                            <td><c:out value="${res.address.country}" /></td>
-                            <td><input type="checkbox" name="selected" value="${res.name}" unchecked></td>
-                        </tr>
-                    </c:forEach>
-                </table>
-
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" class="btn btn-info btn-block"
-                               value="Delete studio ( studio's )" style="margin-top: 15px;
-                                   background-color: #337AB7;border-color: #337AB7"/>
-                    </td>
-                </tr>
-            </from:form>
+            </form:form>
         </div>
     </div>
 

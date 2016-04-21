@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ua.gnatyuk.yaroslav.music_shop.application.AlbumService;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 
@@ -20,6 +22,8 @@ import javax.inject.Inject;
 @Controller
 @RequestMapping(path = "/admin")
 public class FindController {
+    @Inject
+    AlbumService albumService;
     @Inject
     ArtistService artistService;
     @Inject
@@ -60,5 +64,20 @@ public class FindController {
         }
         else
             return new ModelAndView("admin/studio/findStudioById","command",new Studio());
+    }
+
+    @RequestMapping(path = "/find-album-by-id",method = RequestMethod.GET)
+    public ModelAndView findAlbum(){
+        return new ModelAndView("/admin/album/findAlbumById","command", new Album());
+    }
+
+    @RequestMapping(path = "/album",method = RequestMethod.POST)
+    public ModelAndView showAlbum(@ModelAttribute Album album){
+        Album searchAlbum = albumService.findById(album.getId());
+        if(searchAlbum != null){
+            return new ModelAndView("/admin/album/resultAlbum").addObject("album",searchAlbum);
+        }else{
+            return new ModelAndView("/admin/album/findAlbumById","command", new Album());
+        }
     }
 }

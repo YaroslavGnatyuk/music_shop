@@ -3,63 +3,55 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="-53.611111111111086" y="-70.55555555555561">ua.gnatyuk.yaroslav.music_shop.application.StudioService</node>
-    <node x="273.5" y="234.0">ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations</node>
-    <node x="-90.0" y="45.77777777777783">ua.gnatyuk.yaroslav.music_shop.application.impl.StudioServImpl</node>
-    <node x="564.0" y="380.0">ua.gnatyuk.yaroslav.music_shop.dao.artist.ArtistDAO</node>
-    <node x="282.0" y="380.0">ua.gnatyuk.yaroslav.music_shop.dao.studio.StudioDAO</node>
-    <node x="0.0" y="380.0">ua.gnatyuk.yaroslav.music_shop.dao.album.AlbumDao</node>
-    <node x="622.0" y="40.22222222222217">ua.gnatyuk.yaroslav.music_shop.application.impl.ArtistServImpl</node>
-    <node x="656.3888888888889" y="-79.44444444444446">ua.gnatyuk.yaroslav.music_shop.application.ArtistService</node>
-    <node x="253.5" y="0.0">ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist</node>
+    <node x="291.5" y="278.0">ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations</node>
+    <node x="103.01020408163265" y="645.7210884353742">ua.gnatyuk.yaroslav.music_shop.application.StudioService</node>
+    <node x="65.51020408163265" y="857.7210884353742">ua.gnatyuk.yaroslav.music_shop.application.impl.StudioServImpl</node>
+    <node x="600.0" y="446.0">ua.gnatyuk.yaroslav.music_shop.dao.studio.StudioDAO</node>
+    <node x="302.0" y="446.0">ua.gnatyuk.yaroslav.music_shop.dao.artist.ArtistDAO</node>
+    <node x="0.0" y="446.0">ua.gnatyuk.yaroslav.music_shop.dao.album.AlbumDao</node>
+    <node x="467.51020408163265" y="857.7210884353742">ua.gnatyuk.yaroslav.music_shop.application.impl.ArtistServImpl</node>
+    <node x="292.0" y="0.0">ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist</node>
+    <node x="503.01020408163265" y="645.7210884353742">ua.gnatyuk.yaroslav.music_shop.application.ArtistService</node>
   </nodes>
   <notes />
   <edges>
     <edge source="ua.gnatyuk.yaroslav.music_shop.dao.album.AlbumDao" target="ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations">
-      <point x="0.0" y="-70.0" />
-      <point x="131.0" y="355.0" />
-      <point x="320.0" y="355.0" />
-      <point x="-93.0" y="48.0" />
+      <point x="0.0" y="-81.0" />
+      <point x="141.0" y="421.0" />
+      <point x="341.3333333333333" y="421.0" />
+      <point x="-99.66666666666669" y="59.0" />
     </edge>
     <edge source="ua.gnatyuk.yaroslav.music_shop.application.impl.ArtistServImpl" target="ua.gnatyuk.yaroslav.music_shop.application.ArtistService">
-      <point x="0.0" y="-48.0" />
-      <point x="0.0" y="36.5" />
-    </edge>
-    <edge source="ua.gnatyuk.yaroslav.music_shop.application.impl.ArtistServImpl" target="ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="0.0" y="-92.5" />
+      <point x="0.0" y="81.0" />
     </edge>
     <edge source="ua.gnatyuk.yaroslav.music_shop.application.impl.StudioServImpl" target="ua.gnatyuk.yaroslav.music_shop.application.StudioService">
-      <point x="0.0" y="-48.0" />
-      <point x="0.0" y="36.5" />
+      <point x="0.0" y="-92.5" />
+      <point x="0.0" y="81.0" />
     </edge>
     <edge source="ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations" target="ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist">
-      <point x="0.0" y="-48.0" />
-      <point x="0.0" y="92.0" />
-    </edge>
-    <edge source="ua.gnatyuk.yaroslav.music_shop.application.impl.StudioServImpl" target="ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="0.0" y="-59.0" />
+      <point x="0.0" y="114.0" />
     </edge>
     <edge source="ua.gnatyuk.yaroslav.music_shop.dao.studio.StudioDAO" target="ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations">
-      <point x="0.0" y="-70.0" />
-      <point x="0.0" y="48.0" />
+      <point x="0.0" y="-81.0" />
+      <point x="741.0" y="421.0" />
+      <point x="540.6666666666667" y="421.0" />
+      <point x="99.66666666666674" y="59.0" />
     </edge>
     <edge source="ua.gnatyuk.yaroslav.music_shop.dao.artist.ArtistDAO" target="ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations">
-      <point x="0.0" y="-70.0" />
-      <point x="693.0" y="355.0" />
-      <point x="506.0" y="355.0" />
-      <point x="93.0" y="48.0" />
+      <point x="0.0" y="-81.0" />
+      <point x="0.0" y="59.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.9" x="655.3333333333333" y="341.88888888888886" />
+  <settings layout="Hierarchic Group" zoom="0.8242990654205608" x="441.0895691609977" y="545.0" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
+    <Category>Inner Classes</Category>
     <Category>Constructors</Category>
     <Category>Properties</Category>
     <Category>Methods</Category>
-    <Category>Inner Classes</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

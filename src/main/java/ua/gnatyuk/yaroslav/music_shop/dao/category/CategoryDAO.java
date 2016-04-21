@@ -28,12 +28,16 @@ public class CategoryDAO extends CrudOperations<Category>{
 
     @Override
     public List<Category> getAll() {
-        return sessionFactory.getCurrentSession().createQuery("from Category").list();
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("from Category")
+                .list();
     }
 
     @Override
     public Category findById(Long id) {
-        Category category = (Category) sessionFactory.getCurrentSession()
+        Category category = (Category) sessionFactory
+                .getCurrentSession()
                 .createQuery("from Category where :id = id")
                 .setParameter("id",id).uniqueResult();
         return category;
@@ -42,7 +46,8 @@ public class CategoryDAO extends CrudOperations<Category>{
     @Override
     public Category findByName(String nameOfTheStudio) {
 
-        Category category = (Category) sessionFactory.getCurrentSession()
+        Category category = (Category) sessionFactory
+                .getCurrentSession()
                 .createQuery("from Category where :name = name")
                 .setParameter("name",nameOfTheStudio).uniqueResult();
         return category;

@@ -2,14 +2,13 @@ package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.gnatyuk.yaroslav.music_shop.application.AlbumService;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.application.CategoryService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
@@ -25,6 +24,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class UpdateController {
+    @Inject
+    AlbumService albumService;
     @Inject
     ArtistService artistService;
     @Inject
@@ -81,4 +82,61 @@ public class UpdateController {
            return new ModelAndView("/admin/artist/resultArtist").addObject("messageAboutError","You should input correct id!");
        }
     }
+
+    @RequestMapping(path = "/update-album", method = RequestMethod.GET)
+    public ModelAndView inputAlbum(){
+        List<Studio> studios = studioService.getAll();
+        List<Category> categories = categoryService.getAll();
+        List<Artist> artists = artistService.getAll();
+
+
+        return new ModelAndView("/admin/album/updateAlbum","command", new Album())
+                .addObject("studios",studios)
+                .addObject("categories",categories)
+                .addObject("artists",artists);
+    }
+
+    @RequestMapping(path = "/update-album", method = RequestMethod.POST)
+    public ModelAndView updateAlbumCommit(@ModelAttribute Album album, @RequestParam Map<String,String> request){
+        if(albumService.findById(album.getId()) != null) {
+            LocalDate date = LocalDate.parse(request.get("date"));
+            Studio studio = studioService.findByName(album.getStudio().getName());
+            Category category = categoryService.findByName(album.getCategory().getName());
+            Artist artist = artistService.findByName(album.getArtist().getName());
+
+            album.setStudio(studio);
+            album.setCategory(category);
+            album.setArtist(artist);
+            album.setReleaseDate(date);
+
+            albumService.updateAlbum(album);
+
+            return new ModelAndView("/admin/album/resultAlbum").addObject("album",album).addObject("update", true);
+        }
+        else{
+            List<Studio> studios = studioService.getAll();
+            List<Category> categories = categoryService.getAll();
+            List<Artist> artists = artistService.getAll();
+
+            return new ModelAndView("/admin/album/updateAlbum","command", new Album())
+                    .addObject("studios",studios)
+                    .addObject("categories",categories)
+                    .addObject("artists",artists)
+                    .addObject("update", false);
+        }
+    }
+
+    @RequestMapping(path = "/update-category/{id}",method = RequestMethod.GET)
+    public ModelAndView updateCategory(@PathVariable("id") Long id){
+            Category category = categoryService.findById(id);
+        return new ModelAndView("/admin/category/updateCategory","command", category);
+    }
+
+    @RequestMapping(path = "/update-category/{id}",method = RequestMethod.POST)
+    public ModelAndView updateCategoryCommit(@ModelAttribute Category category){
+        categoryService.updateCategory(category);
+        return new ModelAndView("/admin/category/categoryMainPage")
+                .addObject("categories", categoryService.getAll());
+    }
+
 }

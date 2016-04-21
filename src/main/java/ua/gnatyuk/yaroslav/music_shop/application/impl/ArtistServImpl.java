@@ -45,9 +45,13 @@ public class ArtistServImpl implements ArtistService {
 
     @Transactional
     @Override
+    public void deleteArtist(Artist artist) {
+        daoArtist.delete(artist);
+    }
+
+    @Transactional
+    @Override
     public List<Artist> getAll() {
         return daoArtist.getAll();
     }
-
-
 }

@@ -19,7 +19,6 @@ public class AlbumDao extends CrudOperations<Album> {
         Album album = (Album) sessionFactory.getCurrentSession()
                 .createQuery("from Album where :id = id")
                 .setParameter("id",id).uniqueResult();
-
         return album;
     }
     @Transactional
@@ -27,44 +26,40 @@ public class AlbumDao extends CrudOperations<Album> {
     public Album findByName(String nameOfTheAlbum) {
         Album album = (Album) sessionFactory.getCurrentSession()
                 .createQuery("from Album where :name = name")
-                .setParameter(nameOfTheAlbum,"name");
+                .setParameter("name",nameOfTheAlbum).uniqueResult();
         return album;
     }
 
     @Transactional
     @Override
     public List<Album> getTop10ByRate() {
-
         List<Album> albums = sessionFactory.getCurrentSession()
                 .createQuery("from Album a order by a.rating")
                 .setMaxResults(10).list();
-
         return albums;
     }
+
     @Transactional
     @Override
     public List<Album> getTop10BySales() {
-
         List<Album> albums = sessionFactory.getCurrentSession()
                 .createQuery("from Album a order by a.countOfSales")
                 .setMaxResults(10).list();
-
         return albums;
     }
 
     @Override
     @Transactional
     public List<Album> getTheBest() {
-
         List<Album> albums = sessionFactory.getCurrentSession()
                 .createQuery("from Album a where a.rating > 6 order by a.countOfSales")
                 .setMaxResults(10).list();
-
         return albums;
     }
 
+    @Transactional
     @Override
     public List<Album> getAll() {
-        return null;
+        return sessionFactory.getCurrentSession().createQuery("from Album").list();
     }
 }

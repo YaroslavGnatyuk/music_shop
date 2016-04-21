@@ -39,6 +39,7 @@
             <li><a href="/admin/artist-main-page">Artist</a></li>
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>
+            <li><a href="/admin/category-main-page">Category</a></li>
             <li><a href="#">Store</a></li>
         </ul>
     </div>
@@ -47,13 +48,13 @@
 <div class="raw">
     <div div class="col-lg-2" style="margin-top:10px">
         <ul class="list-group">
-            <a href="#" class="list-group-item active">
+            <a href="/admin/album-main-page" class="list-group-item active">
                 Album
             </a>
-            <a href="#" class="list-group-item">Create</a>
-            <a href="#" class="list-group-item">Update</a>
-            <a href="#" class="list-group-item">Find</a>
-            <a href="#" class="list-group-item">Delete</a>
+            <a href="/admin/add-album" class="list-group-item">Create</a>
+            <a href="/admin/update-album" class="list-group-item">Update</a>
+            <a href="/admin/find-album-by-id" class="list-group-item">Find</a>
+            <a href="/admin/delete-album" class="list-group-item">Delete</a>
         </ul>
 
     </div>

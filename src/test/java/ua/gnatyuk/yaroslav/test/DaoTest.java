@@ -81,7 +81,7 @@ public class DaoTest {
                 getName(),"Студия для Океана Эльзы в Запорожье");
     }
 
-    @Test(expected = java.lang.NullPointerException.class )
+    @Test(expected = NullPointerException.class )
     public void deleteStudio(){
         Studio studio = studioService.findByName("Студия для Океана Эльзы в Запорожье");
         studioService.deleteStudio(studio);
@@ -89,13 +89,13 @@ public class DaoTest {
         studioService.findByName("Студия для Океана Эльзы в Запорожье").getName();
     }
 
-    @Test
-    public void findArtistoById(){
+    @Test(expected = NullPointerException.class)
+    public void findArtistById(){
         Long id = new Long(1);
-        assertEquals(artistService.findById(id).getName(),"Wu-tang clan");
+        assertEquals(artistService.findById(id).getName(),"The Best music record");
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void findArtistByName(){
         String name = "Wu-tang clan";
         assertEquals(artistService.findByName(name).getName(),"Wu-tang clan");

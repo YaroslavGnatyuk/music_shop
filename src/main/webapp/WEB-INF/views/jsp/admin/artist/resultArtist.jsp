@@ -42,6 +42,7 @@
             <li><a href="/admin/artist-main-page">Artist</a></li>
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>
+            <li><a href="/admin/category-main-page">Category</a></li>
             <li><a href="#">Store</a></li>
         </ul>
     </div>
@@ -63,28 +64,31 @@
     <div class="raw">
 
         <div div class="col-lg-8" style="margin-top:10px">
-            <table class ="table table-striped" border="1" cellpadding="5" align="centr">
-                <tr>${messageAboutError}</tr>
-                <tr>
-                    <th style="margin-right: 5px; margin-left: 5px">id</th>
-                    <th>name</th>
-                    <th>address</th>
-                    <th>category</th>
-                    <th>studio</th>
-                    <th>email</th>
-                    <th>year of create</th>
-                </tr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Panel Heading</div>
+                <table class ="table table-bordered" cellpadding="5" align="centr">
+                    <tr>${messageAboutError}</tr>
+                    <tr>
+                        <th style="margin-right: 5px; margin-left: 5px">id</th>
+                        <th>name</th>
+                        <th>address</th>
+                        <th>category</th>
+                        <th>studio</th>
+                        <th>email</th>
+                        <th>year of create</th>
+                    </tr>
 
-                <tr>
-                    <td><c:out value="${artist.id}" /></td>
-                    <td><c:out value="${artist.name}" /></td>
-                    <td><c:out value="${artist.address.country}" /></td>
-                    <td><c:out value="${artist.category.name}" /></td>
-                    <td><c:out value="${artist.studio.name}" /></td>
-                    <td><c:out value="${artist.email}" /></td>
-                    <td><c:out value="${artist.birthday}" /></td>
-                </tr>
-            </table>
+                    <tr>
+                        <td><c:out value="${artist.id}" /></td>
+                        <td><c:out value="${artist.name}" /></td>
+                        <td><c:out value="${artist.address.country}" /></td>
+                        <td><c:out value="${artist.category.name}" /></td>
+                        <td><c:out value="${artist.studio.name}" /></td>
+                        <td><c:out value="${artist.email}" /></td>
+                        <td><c:out value="${artist.birthday}" /></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 

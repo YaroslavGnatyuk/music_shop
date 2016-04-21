@@ -1,13 +1,24 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0 Final//EN">
-<html>
+<%--
+  Created by IntelliJ IDEA.
+  User: yaroslav
+  Date: 4/9/16
+  Time: 8:53 PM
+  To change this template use File | Settings | File Templates.
+--%>
 
+<!DOCTYPE html>
+<html>
 <head>
-    <link  rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
-    <link  rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+
 </head>
 <body>
+
 <div class="raw">
     <div div class="col-lg-12">
         <div class="page-header">
@@ -25,12 +36,14 @@
 
 <div class="raw">
     <div div class="col-lg-12">
+
         <ul class="nav nav-tabs">
             <li class="active"><a href="/admin/admin-main-page">Home</a></li>
-           <%-- <li><a href="/admin/artist-main-page">Artist</a></li>
+            <li><a href="/admin/artist-main-page">Artist</a></li>
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>
-            <li><a href="#">Store</a></li>--%>
+            <li><a href="/admin/category-main-page">Category</a></li>
+            <li><a href="#">Store</a></li>
         </ul>
     </div>
 </div>
@@ -38,36 +51,34 @@
 <div class="raw">
     <div div class="col-lg-2" style="margin-top:10px">
         <ul class="list-group">
-            <a href="#" class="list-group-item active">
-                Options
+            <a href="/admin/studio-main-page" class="list-group-item active">
+                Category
             </a>
-            <a href="/admin/artist-main-page" class="list-group-item">Artist</a>
-            <a href="/admin/studio-main-page" class="list-group-item">Studio</a>
-            <a href="/admin/album-main-page" class="list-group-item">Album</a>
-            <a href="/admin/category-main-page" class="list-group-item">Category</a>
-            <a href="#" class="list-group-item">Store</a>
+            <a href="/admin/find-category-by-id" class="list-group-item">Find</a>
         </ul>
 
     </div>
     <div class="raw">
 
         <div div class="col-lg-8" style="margin-top:10px">
-            <h3>Admin main page</h3>
-            <div class="jumbotron" >
-                <h1>Welcome to landing page!</h1>
-                <p>This is an example for jumbotron.</p>
-                <p><a class="btn btn-primary btn-lg" role="button">
-                    Learn more</a>
-                </p>
-            </div>
+            <form:form method="post" cssStyle="margin-left: 150px" >
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" cssStyle="width: 500px;margin-top: 3px"/></td>
+                    </tr>
+                    <td colspan="2">
+                        <input type="submit" class="btn btn-info btn-block"
+                               value="Create" style="margin-top: 15px;
+                                   background-color: #337AB7;border-color: #337AB7"/>
+                    </td>
+                    </tr>
+                </table>
+            </form:form>
         </div>
-
-
-
     </div>
 
     <div div class="col-lg-2" style="margin-top:10px">
-
         <div class="well">
             The page header is a nice little feature to add appropriate spacing around the
             headings on a page. This is particularly helpful on a web page where you may
@@ -85,10 +96,5 @@
         </div>
     </div>
 </div>
-
-
-
 </body>
-
-
 </html>

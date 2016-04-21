@@ -24,7 +24,7 @@ public class Artist {
 	@Column(nullable = false)
 	private LocalDate birthday;
 
-	@OneToMany(mappedBy = "artist", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "artist", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Album> albums  ;
 
 	@Column(nullable = false)

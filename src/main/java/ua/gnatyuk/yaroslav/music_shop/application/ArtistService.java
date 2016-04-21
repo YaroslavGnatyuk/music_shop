@@ -10,7 +10,10 @@ import java.util.List;
 public interface ArtistService {
     Artist findById(Long id);
     Artist findByName(String nameOfTheStudio);
+
     void createArtist(Artist artist);
     void updateArtist(Artist artist);
+    void deleteArtist(Artist artist);
+
     List<Artist> getAll();
 }
