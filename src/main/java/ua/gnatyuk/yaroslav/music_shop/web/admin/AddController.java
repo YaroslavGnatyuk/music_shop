@@ -38,9 +38,6 @@ public class AddController {
     @Inject
     AlbumService albumService;
 
-    @Inject
-    SessionFactory sessionFactory;
-
     @RequestMapping(path = "/add-studio",method = RequestMethod.GET)
     public ModelAndView addStudio(){
         return new ModelAndView("admin/studio/addStudio","command", new Studio());
@@ -78,7 +75,7 @@ public class AddController {
 
         artistService.createArtist(artist);
 
-        return new ModelAndView("/admin/artist/resultArtist").addObject("artist",artist);
+        return new ModelAndView("/admin/artist/artistMainPage").addObject("artists",artistService.getAll());
     }
 
     @RequestMapping(path = "/add-album",method = RequestMethod.GET)
@@ -107,7 +104,7 @@ public class AddController {
 
         albumService.createAlbum(album);
 
-        return new ModelAndView("/admin/album/resultAlbum");
+        return new ModelAndView("/admin/album/albumMainPage").addObject("albums",albumService.getAll());
     }
 
     @RequestMapping(path = "/add-category",method = RequestMethod.GET)

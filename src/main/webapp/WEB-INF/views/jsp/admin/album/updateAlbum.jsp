@@ -1,6 +1,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: yaroslav
+  Date: 4/9/16
+  Time: 8:54 PM
+  To change this template use File | Settings | File Templates.
+--%>
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +21,7 @@
     <script type="text/javascript" src="/resources/js/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap-datetimepicker.min.js"></script>
+
 </head>
 <body>
 
@@ -47,44 +55,22 @@
 </div>
 
 <div class="raw">
-    <div div class="col-lg-2" style="margin-top:10px">
-        <ul class="list-group">
-            <a href="/admin/admin-main-page" class="list-group-item active">
-                Album
-            </a>
-            <a href="/admin/add-artist" class="list-group-item">Create</a>
-            <a href="/admin/update-artist" class="list-group-item">Update</a>
-            <a href="/admin/find-artist-by-id" class="list-group-item">Find</a>
-            <a href="/admin/delete-artist" class="list-group-item">Delete</a>
-        </ul>
-
+    <div div class="col-lg-1" style="margin-top:10px">
     </div>
     <div class="raw">
 
-        <div div class="col-lg-8" style="margin-top:10px">
-
-            <c:if test="${update == false}">
-                <div align="center" class="alert alert-danger">Error ! Album didn't update. Because album with this id didn't find!</div>
-            </c:if>
-
-            <h5 align="center">Update album </h5>
-
+        <div div class="col-lg-8" style="margin-top:10px" align="center">
             <form:form method="post" cssStyle="margin-left: 150px" >
                 <table>
                     <tr>
-                        <td>Id:</td>
-                        <td><form:input cssClass = "form-control" id = "focusedInput" type = "text" path="id" cssStyle="width: 500px;margin-top: 3px"/></td>
-                    </tr>
-
-                    <tr>
                         <td>Name:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" cssStyle="width: 500px;margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" value="${command.name}" cssStyle="width: 500px;margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td> Date of release: </td>
                         <td>
-                            <input type="text" class="form-control" id="datetimepicker" name="date" path="birthday"  style="margin-top: 3px"/>
+                            <input type="text" class="form-control" id="datetimepicker" name="date" path="birthday" value="${command.releaseDate}" style="margin-top: 3px"/>
                             <script type="text/javascript">
                                 $(function () {
                                     $('#datetimepicker').datetimepicker({language: 'en',pickTime:false, format:'YYYY-MM-DD'});
@@ -96,7 +82,7 @@
                     <tr>
                         <td>Artist:</td>
                         <td>
-                            <form:select class="form-control" path="artist.name" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
+                            <form:select class="form-control" path="artist.name" value="${command.artist.name}" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
                                 <c:forEach items="${artists}" var="artist">
                                     <option>${artist.name}</option>
                                 </c:forEach>
@@ -107,7 +93,7 @@
                     <tr>
                         <td>Studio:</td>
                         <td>
-                            <form:select class="form-control" path="studio.name" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
+                            <form:select class="form-control" path="studio.name" value="${command.studio.name}" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
                                 <c:forEach items="${studios}" var="studio">
                                     <option>${studio.name}</option>
                                 </c:forEach>
@@ -118,7 +104,7 @@
                     <tr>
                         <td>Category:</td>
                         <td>
-                            <form:select class="form-control" path="category.name" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
+                            <form:select class="form-control" path="category.name" value="${command.category.name}" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
                                 <c:forEach items="${categories}" var="category">
                                     <option>${category.name}</option>
                                 </c:forEach>
@@ -128,18 +114,18 @@
 
                     <tr>
                         <td>Rating:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="rating" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="rating" value="${command.rating}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Sold albums:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="countOfSales" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="countOfSales" value="${command.countOfSales}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td colspan="2">
                             <input type="submit" class="btn btn-info btn-block"
-                                   value="Create" style="margin-top: 15px;
+                                   value="Update album" style="margin-top: 15px;
                                    background-color: #337AB7;border-color: #337AB7"/>
                         </td>
                     </tr>
@@ -148,15 +134,7 @@
         </div>
     </div>
 
-    <div div class="col-lg-2" style="margin-top:10px">
-
-        <div class="well">
-            The page header is a nice little feature to add appropriate spacing around the
-            headings on a page. This is particularly helpful on a web page where you may
-            have several post titles and need a way to add distinction to each of them. To
-            use a page header, wrap your heading in a with a class of .page-header:
-            Hi, am in well !!
-        </div>
+    <div div class="col-lg-1" style="margin-top:10px">
     </div>
 </div>
 
@@ -167,6 +145,7 @@
         </div>
     </div>
 </div>
+
+
 </body>
 </html>
-

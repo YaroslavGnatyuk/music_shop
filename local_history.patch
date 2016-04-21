@@ -1,0 +1,17 @@
+Index: src/main/webapp/WEB-INF/views/jsp/admin/category/categoryMainPage.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/views/jsp/admin/category/categoryMainPage.jsp	(revision )
++++ src/main/webapp/WEB-INF/views/jsp/admin/category/categoryMainPage.jsp	(revision )
+@@ -64,7 +64,7 @@
+                              <span class="span12">
+                                 <form id="custom-search-form" class="form-search form-horizontal pull-right">
+                                     <span class="input-append span12">
+-                                        <input type="text" class="" placeholder="Search">
++                                        <input type="text" class="form-control-feedback" placeholder="Search">
+                                         <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+                                     </span>
+                                 </form>
+\ No newline at end of file

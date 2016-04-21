@@ -6,15 +6,21 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.gnatyuk.yaroslav.music_shop.application.AlbumService;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
+import ua.gnatyuk.yaroslav.music_shop.application.CategoryService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yaroslav on 4/6/16.
@@ -22,6 +28,8 @@ import javax.inject.Inject;
 @Controller
 @RequestMapping(path = "/admin")
 public class FindController {
+    @Inject
+    CategoryService categoryService;
     @Inject
     AlbumService albumService;
     @Inject
@@ -31,53 +39,45 @@ public class FindController {
     @Inject
     SessionFactory sessionFactory;
 
-    @RequestMapping(path="/find-artist-by-id", method = RequestMethod.GET)
-    public ModelAndView findArtistById(){
-        return new ModelAndView("admin/artist/findArtistById","command",new Artist());
+
+
+    @RequestMapping(path = "/find-studio-by-id",method = RequestMethod.POST)
+    public ModelAndView findStudioById(@RequestParam Map<String, String> map){
+
+        Studio studio = studioService.findById(Long.parseLong(map.get("id")));
+        List<Studio> studios = new ArrayList<>();
+        studios.add(studio);
+        return new ModelAndView("admin/studio/studioMainPage").addObject("studios",studios);
     }
 
-    @RequestMapping(path="/artist", method = RequestMethod.POST)
-    public ModelAndView showArtist(@ModelAttribute Artist artist, ModelMap model){
+    @RequestMapping(path = "/find-album-by-id",method = RequestMethod.POST)
+    public ModelAndView findAlbum(@RequestParam Map<String, String> map){
 
-        Artist searchArtist = artistService.findById(artist.getId());
+        Album album = albumService.findById(Long.parseLong(map.get("id")));
+        List<Album> albums = new ArrayList<>();
+        albums.add(album);
 
-        if(searchArtist != null){
-            model.addAttribute("artist", searchArtist);
-            return new ModelAndView("admin/artist/resultArtist");
-        }
-        else
-            return new ModelAndView("admin/artist/findArtistById","command" , new Artist());
+        return new ModelAndView("/admin/album/albumMainPage").addObject("albums",albums);
     }
 
-    @RequestMapping(path = "/find-studio-by-id",method = RequestMethod.GET)
-    public ModelAndView findStudioById(){
-        return new ModelAndView("admin/studio/findStudioById","command",new Studio());
+    @RequestMapping(path = "/find-category-by-id", method = RequestMethod.POST)
+    public ModelAndView findCategory(@RequestParam Map<String,String> map){
+
+        Category category = categoryService.findById(Long.parseLong(map.get("id")));
+        List<Category> categories = new ArrayList<Category>();
+        categories.add(category);
+
+        return new ModelAndView("/admin/category/categoryMainPage").addObject("categories",categories);
     }
 
-    @RequestMapping(path = "/studio",method = RequestMethod.POST)
-    public ModelAndView showStudio(@ModelAttribute Studio studio, ModelMap model){
-        Studio searchStudio = studioService.findById(studio.getId());
+    @RequestMapping(path="/find-artist-by-id", method = RequestMethod.POST)
+    public ModelAndView showArtist(@RequestParam Map<String,String> request){
 
-        if(searchStudio != null){
-            model.addAttribute("result",searchStudio);
-            return new ModelAndView("admin/studio/resultStudio");
-        }
-        else
-            return new ModelAndView("admin/studio/findStudioById","command",new Studio());
-    }
+        Artist artist= artistService.findById(Long.parseLong(request.get("id")));
 
-    @RequestMapping(path = "/find-album-by-id",method = RequestMethod.GET)
-    public ModelAndView findAlbum(){
-        return new ModelAndView("/admin/album/findAlbumById","command", new Album());
-    }
-
-    @RequestMapping(path = "/album",method = RequestMethod.POST)
-    public ModelAndView showAlbum(@ModelAttribute Album album){
-        Album searchAlbum = albumService.findById(album.getId());
-        if(searchAlbum != null){
-            return new ModelAndView("/admin/album/resultAlbum").addObject("album",searchAlbum);
-        }else{
-            return new ModelAndView("/admin/album/findAlbumById","command", new Album());
-        }
+        List<Artist> artists= new ArrayList<>();
+        artists.add(artist);
+        return new ModelAndView("admin/artist/artistMainPage")
+                .addObject("artists",artists);
     }
 }

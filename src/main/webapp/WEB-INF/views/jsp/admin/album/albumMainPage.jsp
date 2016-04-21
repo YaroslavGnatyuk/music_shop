@@ -1,11 +1,14 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: yaroslav
   Date: 4/9/16
-  Time: 8:54 PM
+  Time: 8:53 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,41 +49,96 @@
 </div>
 
 <div class="raw">
-    <div div class="col-lg-2" style="margin-top:10px">
-        <ul class="list-group">
-            <a href="/admin/album-main-page" class="list-group-item active">
-                Album
-            </a>
-            <a href="/admin/add-album" class="list-group-item">Create</a>
-            <a href="/admin/update-album" class="list-group-item">Update</a>
-            <a href="/admin/find-album-by-id" class="list-group-item">Find</a>
-            <a href="/admin/delete-album" class="list-group-item">Delete</a>
-        </ul>
+    <div div class="col-lg-1" style="margin-top:10px">
 
     </div>
-    <div class="raw">
 
-        <div div class="col-lg-8" style="margin-top:10px">
-            <h3>Album main page</h3>
-            <div class="jumbotron" >
-                <h1>Welcome to landing page!</h1>
-                <p>This is an example for jumbotron.</p>
-                <p><a class="btn btn-primary btn-lg" role="button">
-                    Learn more</a>
-                </p>
+    <div class="raw">
+        <div class="col-lg-10" style="margin-top:10px">
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <a href="/admin/add-album" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="/admin/album-main-page" type="button" class="btn btn-sm btn-primary btn-success"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                        </div>
+                        <div class="col-lg-7">
+                        </div>
+
+                        <div class="col-lg-3">
+                             <span class="span12">
+                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-album-by-id">
+                                    <span class="input-append span12">
+                                        <input type="text" placeholder="Search" name="id" />
+                                        <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </form>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <table  class ="table table-bordered" cellpadding="5" align="centr" >
+                    <thead>
+                    <tr>
+                        <th><span class="glyphicon glyphicon-cog"></span></th>
+                        <th class="hidden-xs">ID</th>
+                        <th>Name</th>
+                        <th>Artist</th>
+                        <th>Category</th>
+                        <th>Studio</th>
+                        <th>Release</th>
+                        <th>Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${albums}" var="album">
+                        <tr>
+                            <td align="center"  style="width: 150px">
+                                <a href="/admin/update-album/${album.id}" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <a href="/admin/delete-album/${album.id}" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                            <td><c:out value="${album.id}" /></td>
+                            <td><c:out value="${album.name}" /></td>
+                            <td><c:out value="${album.artist.name}" /></td>
+                            <td><c:out value="${album.category.name}" /></td>
+                            <td><c:out value="${album.studio.name}" /></td>
+                            <td><c:out value="${album.releaseDate}" /></td>
+                            <td><c:out value="${album.rating}" /></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col col-xs-4">Page 1 of 5
+                    </div>
+                    <div class="col col-xs-8">
+                        <ul class="pagination hidden-xs pull-right">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                        <ul class="pagination visible-xs pull-right">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div div class="col-lg-2" style="margin-top:10px">
+    <div div class="col-lg-1" style="margin-top:10px">
 
-        <div class="well">
-            The page header is a nice little feature to add appropriate spacing around the
-            headings on a page. This is particularly helpful on a web page where you may
-            have several post titles and need a way to add distinction to each of them. To
-            use a page header, wrap your heading in a with a class of .page-header:
-            Hi, am in well !!
-        </div>
     </div>
 </div>
 
@@ -91,7 +149,5 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

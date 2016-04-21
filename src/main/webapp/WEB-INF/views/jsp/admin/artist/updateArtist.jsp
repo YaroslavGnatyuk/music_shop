@@ -54,38 +54,27 @@
 </div>
 
 <div class="raw">
-    <div div class="col-lg-2" style="margin-top:10px">
-        <ul class="list-group">
-            <a href="/admin/admin-main-page" class="list-group-item active">
-                Artist
-            </a>
-            <a href="/admin/add-artist" class="list-group-item">Create</a>
-            <a href="/admin/update-artist" class="list-group-item">Update</a>
-            <a href="/admin/find-artist-by-id" class="list-group-item">Find</a>
-            <a href="/admin/delete-artist" class="list-group-item">Delete</a>
-        </ul>
-
+    <div div class="col-lg-1 col-md-1 col-sm-1" style="margin-top:10px">
     </div>
     <div class="raw">
 
-        <div div class="col-lg-8" style="margin-top:10px">
-            <h3 align="center">Page update artist </h3>
-            <form:form method="post" cssStyle="margin-left: 150px" >
+        <div div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:10px" align="center">
+            <form:form method="post" >
                 <table>
                     <tr>
                         <td>Id:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="id" cssStyle="width: 500px;margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" value="${command.id}" type = "text" path="id" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Name:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" cssStyle="width: 500px;margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" value="${command.name}" type = "text" path="name" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td> Birthday: </td>
                         <td>
-                            <input type="text" class="form-control" id="datetimepicker" name="date" path="birthday"  style="margin-top: 3px"/>
+                            <input type="text" class="form-control" id="datetimepicker" value="${command.birthday}" name="date" path="birthday"  style="margin-top: 3px"/>
                             <script type="text/javascript">
                                 $(function () {
                                     $('#datetimepicker').datetimepicker({language: 'ru',pickTime:false, format:'YYYY-MM-DD'});
@@ -96,48 +85,48 @@
 
                     <tr>
                         <td>Country:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.country" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" value="${command.address.country}" path="address.country" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>City:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.city" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.city" value="${command.address.city}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Street:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.street" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.street" value="${command.address.street}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Building:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.house" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.house" value="${command.address.house}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Flat:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.flat" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="address.flat" value="${command.address.flat}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>E-mail:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="email" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="email" value="${command.email}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Rating:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="rating" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="rating" value="${command.rating}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Sold albums:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="countOfSales" cssStyle="margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="countOfSales" value="${command.countOfSales}" cssStyle="margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
                         <td>Studio:</td>
                         <td>
-                            <form:select class="form-control" path="studio.name" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
+                            <form:select class="form-control" path="studio.name" value="${command.studio.name}" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
                                 <c:forEach items="${studios}" var="studio">
                                     <option>${studio.name}</option>
                                 </c:forEach>
@@ -148,7 +137,7 @@
                     <tr>
                         <td>Category:</td>
                         <td>
-                            <form:select class="form-control" path="category.name" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
+                            <form:select class="form-control" path="category.name" value="${command.category.name}" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
                                 <c:forEach items="${categories}" var="category">
                                     <option>${category.name}</option>
                                 </c:forEach>
@@ -159,7 +148,7 @@
                     <tr>
                         <td colspan="2">
                             <input type="submit" class="btn btn-info btn-block"
-                                   value="Add new studio" style="margin-top: 15px;
+                                   value="Update artist" style="margin-top: 15px;
                                    background-color: #337AB7;border-color: #337AB7"/>
                         </td>
                     </tr>
@@ -168,20 +157,12 @@
         </div>
     </div>
 
-    <div div class="col-lg-2" style="margin-top:10px">
-
-        <div class="well">
-            The page header is a nice little feature to add appropriate spacing around the
-            headings on a page. This is particularly helpful on a web page where you may
-            have several post titles and need a way to add distinction to each of them. To
-            use a page header, wrap your heading in a with a class of .page-header:
-            Hi, am in well !!
-        </div>
+    <div div class="col-lg-1 col-md-1 col-sm-1" style="margin-top:10px">
     </div>
 </div>
 
 <div class="raw">
-    <div div class="col-lg-12" style = "margin-top: 200px">
+    <div div class="col-lg-12 col-md-12 col-sm-12" style = "margin-top: 200px">
         <div class="well">
             Author sunrise@gmail.com
         </div>

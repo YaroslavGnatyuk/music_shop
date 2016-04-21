@@ -54,16 +54,28 @@
     </div>
 
     <div class="raw">
-        <div div class="col-lg-10" style="margin-top:10px">
+        <div class="col-lg-10" style="margin-top:10px">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col col-xs-6">
-                            <h3 class="panel-title">Here you can manipulate your's music categories</h3>
-                        </div>
-                        <div class="col col-xs-6 text-right">
+                        <div class="col-lg-1">
                             <a href="/admin/add-category" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
-                            <a href="/admin/find-category-by-id" type="button" class="btn btn-sm btn-primary btn-create">Search category</a>
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="/admin/category-main-page" type="button" class="btn btn-sm btn-primary btn-success"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                        </div>
+                        <div class="col-lg-7">
+                        </div>
+
+                        <div class="col-lg-3">
+                             <span class="span12">
+                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-category-by-id">
+                                    <span class="input-append span12">
+                                        <input type="text" placeholder="Search" name="id" />
+                                        <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </form>
+                            </span>
                         </div>
                     </div>
                 </div>

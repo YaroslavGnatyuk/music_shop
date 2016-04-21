@@ -49,13 +49,7 @@
 </div>
 
 <div class="raw">
-    <div div class="col-lg-2" style="margin-top:10px">
-        <ul class="list-group">
-            <a href="/admin/studio-main-page" class="list-group-item active">
-                Category
-            </a>
-            <a href="/admin/find-category-by-id" class="list-group-item">Find</a>
-        </ul>
+    <div div class="col-lg-1" style="margin-top:10px">
 
     </div>
     <div class="raw">
@@ -81,15 +75,8 @@
 
     </div>
 
-    <div div class="col-lg-2" style="margin-top:10px">
+    <div div class="col-lg-1" style="margin-top:10px">
 
-        <div class="well">{}
-            The page header is a nice little feature to add appropriate spacing around the
-            headings on a page. This is particularly helpful on a web page where you may
-            have several post titles and need a way to add distinction to each of them. To
-            use a page header, wrap your heading in a with a class of .page-header:
-            Hi, am in well !!
-        </div>
     </div>
 </div>
 

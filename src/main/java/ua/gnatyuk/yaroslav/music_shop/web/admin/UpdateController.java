@@ -57,73 +57,38 @@ public class UpdateController {
        }
     }
 
-    @RequestMapping(path = "/update-artist",method = RequestMethod.GET)
-    public ModelAndView toUpdateArtist(){
-        List<Studio> studios = studioService.getAll();
-        List<Category> categories = categoryService.getAll();
-        return new ModelAndView("admin/artist/updateArtist","command",new Artist())
-                .addObject("studios",studios)
-                .addObject("categories",categories);
-    }
 
-    @RequestMapping(path = "/update-artist",method = RequestMethod.POST)
-    public ModelAndView updateArtistCommit(@ModelAttribute Artist artist, @RequestParam Map<String,String> request){
-       if (artistService.findById(artist.getId()) != null){
 
-           artist.setBirthday(LocalDate.parse(request.get("date")));
-           artist.setCategory(categoryService.findByName(request.get("category.name")));
-           artist.setStudio(studioService.findByName(request.get("studio.name")));
+    @RequestMapping(path = "/update-album/{id}", method = RequestMethod.GET)
+    public ModelAndView inputAlbum(@PathVariable("id") Long id){
+        Album album = albumService.findById(id);
 
-           artistService.updateArtist(artist);
-
-           return new ModelAndView("/admin/artist/resultArtist").addObject("artist",artist);
-       }
-       else{
-           return new ModelAndView("/admin/artist/resultArtist").addObject("messageAboutError","You should input correct id!");
-       }
-    }
-
-    @RequestMapping(path = "/update-album", method = RequestMethod.GET)
-    public ModelAndView inputAlbum(){
         List<Studio> studios = studioService.getAll();
         List<Category> categories = categoryService.getAll();
         List<Artist> artists = artistService.getAll();
 
-
-        return new ModelAndView("/admin/album/updateAlbum","command", new Album())
+        return new ModelAndView("/admin/album/updateAlbum","command", album)
                 .addObject("studios",studios)
                 .addObject("categories",categories)
                 .addObject("artists",artists);
     }
 
-    @RequestMapping(path = "/update-album", method = RequestMethod.POST)
+    @RequestMapping(path = "/update-album/{id}", method = RequestMethod.POST)
     public ModelAndView updateAlbumCommit(@ModelAttribute Album album, @RequestParam Map<String,String> request){
-        if(albumService.findById(album.getId()) != null) {
-            LocalDate date = LocalDate.parse(request.get("date"));
-            Studio studio = studioService.findByName(album.getStudio().getName());
-            Category category = categoryService.findByName(album.getCategory().getName());
-            Artist artist = artistService.findByName(album.getArtist().getName());
 
-            album.setStudio(studio);
-            album.setCategory(category);
-            album.setArtist(artist);
-            album.setReleaseDate(date);
+        LocalDate date = LocalDate.parse(request.get("date"));
+        Studio studio = studioService.findByName(album.getStudio().getName());
+        Category category = categoryService.findByName(album.getCategory().getName());
+        Artist artist = artistService.findByName(album.getArtist().getName());
 
-            albumService.updateAlbum(album);
+        album.setStudio(studio);
+        album.setCategory(category);
+        album.setArtist(artist);
+        album.setReleaseDate(date);
 
-            return new ModelAndView("/admin/album/resultAlbum").addObject("album",album).addObject("update", true);
-        }
-        else{
-            List<Studio> studios = studioService.getAll();
-            List<Category> categories = categoryService.getAll();
-            List<Artist> artists = artistService.getAll();
+        albumService.updateAlbum(album);
 
-            return new ModelAndView("/admin/album/updateAlbum","command", new Album())
-                    .addObject("studios",studios)
-                    .addObject("categories",categories)
-                    .addObject("artists",artists)
-                    .addObject("update", false);
-        }
+        return new ModelAndView("/admin/album/albumMainPage").addObject("albums",albumService.getAll());
     }
 
     @RequestMapping(path = "/update-category/{id}",method = RequestMethod.GET)
@@ -137,6 +102,27 @@ public class UpdateController {
         categoryService.updateCategory(category);
         return new ModelAndView("/admin/category/categoryMainPage")
                 .addObject("categories", categoryService.getAll());
+    }
+
+    @RequestMapping(path = "/update-artist/{id}",method = RequestMethod.GET)
+    public ModelAndView updateArtist(@PathVariable("id")Long id){
+        Artist artist = artistService.findById(id);
+        List<Studio> studios = studioService.getAll();
+        List<Category> categories = categoryService.getAll();
+        return new ModelAndView("admin/artist/updateArtist","command",artist)
+                .addObject("studios",studios)
+                .addObject("categories",categories);
+    }
+
+    @RequestMapping(path = "/update-artist/{id}",method = RequestMethod.POST)
+    public ModelAndView updateArtistCommit(@ModelAttribute Artist artist, @RequestParam Map<String,String> request){
+        artist.setBirthday(LocalDate.parse(request.get("date")));
+        artist.setCategory(categoryService.findByName(request.get("category.name")));
+        artist.setStudio(studioService.findByName(request.get("studio.name")));
+
+        artistService.updateArtist(artist);
+
+        return new ModelAndView("/admin/artist/artistMainPage").addObject("artists",artistService.getAll());
     }
 
 }
