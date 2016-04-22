@@ -20,11 +20,18 @@
 <body>
 
 <div class="raw">
-    <div div class="col-lg-12">
+    <div div class="col-lg-12" >
         <div class="page-header">
-            <h1>Music for life
-                <small>Administrator page</small>
-            </h1>
+
+            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px"><img src="/resources/img/corso-musica.jpg"
+                 class="img-rounded" align="center" width="300" height="100" >
+            </div>
+            <div class="col-lg-8">
+                <h1>Music for life
+                    <small>Administrator page</small>
+                </h1>
+            </div>
+
         </div>
         <p>
             Here you can update, create, find and delete records from database!
@@ -36,7 +43,6 @@
 
 <div class="raw">
     <div div class="col-lg-12">
-
         <ul class="nav nav-tabs">
             <li class="active"><a href="/admin/admin-main-page">Home</a></li>
             <li><a href="/admin/artist-main-page">Artist</a></li>
@@ -62,9 +68,12 @@
                             <a href="/admin/add-album" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
                         </div>
                         <div class="col-lg-1">
-                            <a href="/admin/album-main-page" type="button" class="btn btn-sm btn-primary btn-success"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                            <a href="/admin/album-main-page" type="button" class="btn btn-sm btn-primary btn-success" style="margin-left: 5px"><span class="glyphicon glyphicon-arrow-up"></span></a>
                         </div>
+
+
                         <div class="col-lg-7">
+                            <p ><h4 align="center"> Albums </h4></p>
                         </div>
 
                         <div class="col-lg-3">

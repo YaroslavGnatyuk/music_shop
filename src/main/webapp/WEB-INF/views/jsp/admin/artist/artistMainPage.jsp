@@ -22,9 +22,14 @@
 <div class="raw">
     <div div class="col-lg-12">
         <div class="page-header">
-            <h1>Music for life
-                <small>Administrator page</small>
-            </h1>
+            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px">
+                <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
+            </div>
+            <div class="col-lg-8">
+                <h1>Music for life
+                    <small>Administrator page</small>
+                </h1>
+            </div>
         </div>
         <p>
             Here you can update, create, find and delete records from database!
@@ -49,27 +54,30 @@
 </div>
 
 <div class="raw">
-    <div div class="col-lg-1" style="margin-top:10px">
+    <div div class="col-lg-1 col-md-1 col-sm-1 " style="margin-top:10px">
 
     </div>
 
     <div class="raw">
-        <div class="col-lg-10" style="margin-top:10px">
+        <div class="col-lg-10 col-md-10 col-sm-10" style="margin-top:10px">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-lg-1">
-                            <a href="/admin/add-artist" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
+                            <a href="/admin/add-album" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
                         </div>
                         <div class="col-lg-1">
-                            <a href="/admin/artist-main-page" type="button" class="btn btn-sm btn-primary btn-success"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                            <a href="/admin/album-main-page" type="button" class="btn btn-sm btn-primary btn-success" style="margin-left: 5px"><span class="glyphicon glyphicon-arrow-up"></span></a>
                         </div>
+
+
                         <div class="col-lg-7">
+                            <p ><h4 align="center"> Artists </h4></p>
                         </div>
 
                         <div class="col-lg-3">
                              <span class="span12">
-                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-artist-by-id">
+                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-album-by-id">
                                     <span class="input-append span12">
                                         <input type="text" placeholder="Search" name="id" />
                                         <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
@@ -137,7 +145,7 @@
         </div>
     </div>
 
-    <div div class="col-lg-1" style="margin-top:10px">
+    <div div class="col-lg-1 col-md-1 col-sm-1 " style="margin-top:10px">
 
     </div>
 </div>

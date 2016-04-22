@@ -20,9 +20,14 @@
 <div class="raw">
     <div div class="col-lg-12">
         <div class="page-header">
-            <h1>Music for life
-                <small>Administrator page</small>
-            </h1>
+            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px">
+                <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
+            </div>
+            <div class="col-lg-8">
+                <h1>Music for life
+                    <small>Administrator page</small>
+                </h1>
+            </div>
         </div>
         <p>
             Here you can update, create, find and delete records from database!

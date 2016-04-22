@@ -9,12 +9,9 @@ import ua.gnatyuk.yaroslav.music_shop.application.AlbumService;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.application.CategoryService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * @author leopold
@@ -44,6 +41,11 @@ public class LoginController {
     }
     else
       return new ModelAndView("admin/login");
+  }
+
+  @RequestMapping(path = "/admin-main-page",method = RequestMethod.GET)
+  public String showAdminMainPage(){
+    return "/admin/adminMainPage";
   }
 
   @RequestMapping(path = "/category-main-page",method = RequestMethod.GET)

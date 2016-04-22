@@ -1,6 +1,5 @@
 package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,7 +47,7 @@ public class AddController {
         studioService.createStudio(studio);
         model.addAttribute("result",studio);
 
-        return new ModelAndView("/admin/studio/resultStudio");
+        return new ModelAndView("/admin/studio/studioMainPage");
     }
 
     @RequestMapping(path = "/add-artist",method = RequestMethod.GET)
