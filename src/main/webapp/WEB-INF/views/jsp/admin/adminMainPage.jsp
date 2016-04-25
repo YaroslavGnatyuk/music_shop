@@ -4,8 +4,15 @@
 <html>
 
 <head>
-    <link  rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
-    <link  rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap-datetimepicker.min.css" />
+
+    <script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/resources/js/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body>
 <div class="raw">
@@ -66,13 +73,9 @@
                 </p>
             </div>
         </div>
-
-
-
     </div>
 
     <div div class="col-lg-2" style="margin-top:10px">
-
         <div class="well">
             The page header is a nice little feature to add appropriate spacing around the
             headings on a page. This is particularly helpful on a web page where you may
@@ -90,10 +93,5 @@
         </div>
     </div>
 </div>
-
-
-
 </body>
-
-
 </html>

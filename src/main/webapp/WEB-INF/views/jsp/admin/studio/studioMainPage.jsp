@@ -42,7 +42,6 @@
     <div div class="col-lg-12">
 
         <ul class="nav nav-tabs">
-            <li class="active"><a href="/admin/admin-main-page">Home</a></li>
             <li><a href="/admin/artist-main-page">Artist</a></li>
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>

@@ -36,8 +36,8 @@ public class LoginController {
 
   @RequestMapping(method = RequestMethod.POST)
   public ModelAndView checkLogin(@ModelAttribute("user")User user){
-    if (user.getName().equals("admin") && user.getPassword().equals("admin")){
-      return new ModelAndView("admin/adminMainPage") ;
+    if (user.getName().equals("admin@admin.com") && user.getPassword().equals("admin")){
+      return new ModelAndView("admin/artist/artistMainPage").addObject("artists", artistService.getAll()) ;
     }
     else
       return new ModelAndView("admin/login");
