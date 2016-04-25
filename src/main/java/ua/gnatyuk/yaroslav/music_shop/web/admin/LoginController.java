@@ -29,7 +29,7 @@ public class LoginController {
   @Inject
   ArtistService artistService;
 
-  @RequestMapping(method = RequestMethod.GET)
+ /* @RequestMapping(method = RequestMethod.GET)
   public String login (@ModelAttribute("user") User user) {
     return "admin/login";
   }
@@ -41,7 +41,7 @@ public class LoginController {
     }
     else
       return new ModelAndView("admin/login");
-  }
+  }*/
 
   @RequestMapping(path = "/admin-main-page",method = RequestMethod.GET)
   public String showAdminMainPage(){

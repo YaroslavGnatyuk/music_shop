@@ -42,9 +42,10 @@ public class FindController {
 
 
     @RequestMapping(path = "/find-studio-by-id",method = RequestMethod.POST)
-    public ModelAndView findStudioById(@RequestParam Map<String, String> map){
+    public ModelAndView findStudio(@RequestParam Map<String, String> map){
 
         Studio studio = studioService.findById(Long.parseLong(map.get("id")));
+        System.out.println(studio);
         List<Studio> studios = new ArrayList<>();
         studios.add(studio);
         return new ModelAndView("admin/studio/studioMainPage").addObject("studios",studios);
@@ -71,7 +72,7 @@ public class FindController {
     }
 
     @RequestMapping(path="/find-artist-by-id", method = RequestMethod.POST)
-    public ModelAndView showArtist(@RequestParam Map<String,String> request){
+    public ModelAndView findArtist(@RequestParam Map<String,String> request){
 
         Artist artist= artistService.findById(Long.parseLong(request.get("id")));
 

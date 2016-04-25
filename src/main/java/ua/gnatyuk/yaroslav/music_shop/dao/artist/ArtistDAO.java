@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public class ArtistDAO extends CrudOperations<Artist> {
 
-    @Transactional
     @Override
     public Artist findById(Long id) {
         Artist artist = (Artist) sessionFactory.getCurrentSession()
@@ -33,7 +32,6 @@ public class ArtistDAO extends CrudOperations<Artist> {
         return artist;
     }
 
-    @Transactional
     @Override
     public List<Artist> getTop10ByRate() {
 

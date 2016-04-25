@@ -1,6 +1,5 @@
 package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,29 +31,16 @@ public class UpdateController {
     StudioService studioService;
     @Inject
     CategoryService categoryService;
-    @Inject
-    SessionFactory sessionFactory;
 
-    @RequestMapping(path = "/update-studio",method = RequestMethod.GET)
-    public ModelAndView toUpdateStudio(){
-        return new ModelAndView("admin/studio/updateStudio","command",new Studio())
-                .addObject("aboutUpdatePage",new String("Input id of the studio for update"));
+    @RequestMapping(path = "/update-studio/{id}",method = RequestMethod.GET)
+    public ModelAndView toUpdateStudio(@PathVariable("id") Long id){
+        return new ModelAndView("admin/studio/updateStudio","command",studioService.findById(id));
     }
 
-    @RequestMapping(path = "/update-studio",method = RequestMethod.POST)
+    @RequestMapping(path = "/update-studio/{id}",method = RequestMethod.POST)
     public ModelAndView updateStudioCommit(@ModelAttribute Studio studio){
-       if(studioService.findById(studio.getId()) != null){
-           System.out.println("Created studio!");
-           studioService.updateStudio(studio);
-
-           return new ModelAndView("admin/studio/updateStudio","command",studio)
-                   .addObject("aboutUpdatePage",new String("Input id of the studio for update"));
-       }
-        else{
-           System.out.println("Didn't create studio!");
-           return new ModelAndView("admin/studio/updateStudio","command",studio)
-                   .addObject("aboutUpdatePage",new String("input other id! Previous doesn't exist!"));
-       }
+       studioService.updateStudio(studio);
+       return new ModelAndView("admin/studio/studioMainPage").addObject("studios",studioService.getAll());
     }
 
 

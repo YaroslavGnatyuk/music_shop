@@ -18,7 +18,7 @@ public class Album {
 	@Column(nullable = false)
 	private LocalDate releaseDate;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	private Artist artist;
 
 	@OneToOne

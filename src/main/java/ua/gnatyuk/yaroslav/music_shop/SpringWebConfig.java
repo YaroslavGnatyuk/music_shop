@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan("ua.gnatyuk.yaroslav.music_shop.web")
 @EnableWebMvc
-@Import(SpringConfiguration.class)
+@Import({SpringConfig.class,SpringSequrityConfig.class})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override

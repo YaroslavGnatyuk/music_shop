@@ -35,7 +35,6 @@
             Here you can update, create, find and delete records from database!
             Be careful!
         </p>
-
     </div>
 </div>
 
@@ -64,10 +63,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-lg-1">
-                            <a href="/admin/add-album" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
+                            <a href="/admin/add-studio" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
                         </div>
                         <div class="col-lg-1">
-                            <a href="/admin/album-main-page" type="button" class="btn btn-sm btn-primary btn-success" style="margin-left: 5px"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                            <a href="/admin/studio-main-page" type="button" class="btn btn-sm btn-primary btn-success" style="margin-left: 5px"><span class="glyphicon glyphicon-arrow-up"></span></a>
                         </div>
 
 
@@ -77,7 +76,7 @@
 
                         <div class="col-lg-3">
                              <span class="span12">
-                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-album-by-id">
+                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-studio-by-id">
                                     <span class="input-append span12">
                                         <input type="text" placeholder="Search" name="id" />
                                         <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>

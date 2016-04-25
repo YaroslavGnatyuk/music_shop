@@ -98,9 +98,9 @@
                     <tr>
                         <td>Studio:</td>
                         <td>
-                            <form:select class="form-control" path="studio.name" value="${command.studio.name}" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
+                            <form:select class="form-control" path="studio.name" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
                                 <c:forEach items="${studios}" var="studio">
-                                    <option>${studio.name}</option>
+                                    <option  value="${command.studio.name}">${studio.name}</option>
                                 </c:forEach>
                             </form:select>
                         </td>

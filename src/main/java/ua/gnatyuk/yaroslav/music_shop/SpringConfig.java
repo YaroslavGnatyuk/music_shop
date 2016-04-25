@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 @ComponentScan(value = {"ua.gnatyuk.yaroslav.music_shop.dao","ua.gnatyuk.yaroslav.music_shop.domain",
                         "ua.gnatyuk.yaroslav.music_shop.application.impl"})
 @EnableTransactionManagement
-public class SpringConfiguration {
+public class SpringConfig {
     private static final Logger log = LoggerFactory.getLogger(FillDataBase.class);
 
     @Bean
@@ -34,7 +34,7 @@ public class SpringConfiguration {
         hikariConfig.setUsername("123");
         hikariConfig.setPassword("123");
 
-       /* hikariConfig.setJdbcUrl("jdbc:h2:mem:books_db;DB_CLOSE_DELAY=-1");*/
+        /* hikariConfig.setJdbcUrl("jdbc:h2:mem:books_db;DB_CLOSE_DELAY=-1");*/
 
         return new HikariDataSource(hikariConfig);
     }
