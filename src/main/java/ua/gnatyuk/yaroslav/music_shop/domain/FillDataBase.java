@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.*;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -48,6 +49,11 @@ public class FillDataBase {
 	@Transactional
 	public void addDataToDB() {
 
+		User admin = new User(User.Role.ROLE_ADMIN,"admin","admin","some#1@email.com",true);
+		User user = new User(User.Role.ROLE_USER,"user","user","some#2@email.com",true);
+
+
+
 		log.info("In addDataToDB ! ");
 
 		Stream.of("Pop", "Rock", "Hip-Hop", "Elecnronic music", "Classic music")
@@ -86,6 +92,9 @@ public class FillDataBase {
 		sessionFactory.getCurrentSession().persist(krushAlbum1);
 		sessionFactory.getCurrentSession().persist(mushroomAlbum1);
 		sessionFactory.getCurrentSession().persist(akiraAlbum1);
+
+		sessionFactory.getCurrentSession().persist(admin);
+		sessionFactory.getCurrentSession().persist(user);
 
 		wuTang.setAlbums(wuAlbum1);
 		oElzi.setAlbums(elziAlbum1);

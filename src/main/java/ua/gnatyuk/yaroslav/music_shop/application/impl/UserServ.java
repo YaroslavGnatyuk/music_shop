@@ -35,9 +35,4 @@ public class UserServ implements UserDetailsService {
 
         return userDetaile;
     }
-
-    @Transactional
-    public void createNewUser(User user){
-        daoUser.create(user);
-    }
 }

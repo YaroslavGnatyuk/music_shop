@@ -1,21 +1,21 @@
 package ua.gnatyuk.yaroslav.test;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.gnatyuk.yaroslav.music_shop.SpringConfig;
+import ua.gnatyuk.yaroslav.music_shop.SpringSequrityConfig;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
-import ua.gnatyuk.yaroslav.music_shop.application.impl.UserServ;
+import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 
 import javax.inject.Inject;
-
+import javax.inject.Named;
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = {SpringConfig.class, SpringSequrityConfig.class})
 public class DaoTest {
     @Inject
     private FillDataBase fillDataBase;
@@ -34,15 +34,16 @@ public class DaoTest {
     @Inject
     private ArtistService artistService;
     @Inject
-    private UserServ userServ;
+    @Named(value = "userDAO")
+    DaoPersist<User> userDao;
 
-    @Ignore
+//    @Ignore
     @Test
     public void deleteDB(){
         fillDataBase.deleteDataFromDB();
     }
 
-    @Ignore
+//    @Ignore
     @Test
     public void createDB(){
         fillDataBase.addDataToDB();
@@ -116,11 +117,5 @@ public class DaoTest {
     public void getData(){
         LocalDate localDate = LocalDate.parse("2016-04-05");
         System.out.println(localDate);
-    }
-
-    @Test
-    public void createUser(){
-        User user = new User(User.Role.ROLE_ADMIN,"admin","admin","some@email.com",true);
-        userServ.createNewUser(user);
     }
 }
