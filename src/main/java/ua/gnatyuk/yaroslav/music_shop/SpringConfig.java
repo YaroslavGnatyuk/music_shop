@@ -44,7 +44,8 @@ public class SpringConfig {
         log.info("I'm in sessionFactory");
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ua.gnatyuk.yaroslav.music_shop.domain.musicrecord");
+        sessionFactory.setPackagesToScan("ua.gnatyuk.yaroslav.music_shop.domain.musicrecord"
+                ,"ua.gnatyuk.yaroslav.music_shop.domain.user");
         sessionFactory.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 
         return sessionFactory;

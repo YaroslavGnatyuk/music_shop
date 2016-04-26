@@ -2,61 +2,52 @@ package ua.gnatyuk.yaroslav.music_shop.domain.user;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by yaroslav on 4/2/16.
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Enumerated
-    @Column(name = "ROLE")
-    Role role;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role")
+    Set<UserRole> role = new HashSet<>(0);
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     String name;
 
-    @Column(name ="PASS")
+    @Column(name ="pass")
     String password;
 
-    @Column(name = "EMAIL")
+    @Column(name = "email")
     String email;
 
-    @Column(name = "ENABLE")
+    @Column(name = "enable")
     Boolean enable;
-
-    public enum Role {
-        ROLE_USER, ROLE_ADMIN;
-
-    }
 
     public User() {
     }
 
-    public User(Role role, String name, String password, String email, Boolean enable) {
-        this.role = role;
+    public User(UserRole role, String name, String password, String email, Boolean enable) {
+        this.role.add(role);
         this.name = name;
         this.password = password;
         this.email = email;
         this.enable = enable;
     }
 
-    public Role getRole() {
+    public Set<UserRole> getRole() {
         return role;
     }
 
-    public List<Role> getRoles() {
-        List<Role> roles = new ArrayList<>();
-        roles.add(this.role);
-        return roles;
-    }
-
-    public void setRole(Role role) {
+    public void setRole(Set<UserRole> role) {
         this.role = role;
     }
 

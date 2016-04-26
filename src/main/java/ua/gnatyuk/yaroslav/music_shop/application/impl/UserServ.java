@@ -12,8 +12,6 @@ import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import static java.util.stream.Collectors.toSet;
-
 /**
  * Created by asutp on 25.04.16.
  */

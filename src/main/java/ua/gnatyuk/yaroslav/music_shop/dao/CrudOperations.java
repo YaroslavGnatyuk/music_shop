@@ -12,7 +12,6 @@ public abstract class CrudOperations<T> implements DaoPersist<T> {
     @Inject
     protected SessionFactory sessionFactory;
 
-    @Transactional
     public void create(T obj) {
         sessionFactory.getCurrentSession().persist(obj);
     }

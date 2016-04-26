@@ -8,14 +8,11 @@ import ua.gnatyuk.yaroslav.music_shop.SpringConfig;
 import ua.gnatyuk.yaroslav.music_shop.SpringSequrityConfig;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
-import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
-import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
@@ -33,9 +30,9 @@ public class DaoTest {
     private StudioService studioService;
     @Inject
     private ArtistService artistService;
-    @Inject
+/*    @Inject
     @Named(value = "userDAO")
-    DaoPersist<User> userDao;
+    DaoPersist<User> userDao;*/
 
 //    @Ignore
     @Test

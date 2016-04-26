@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -24,35 +26,33 @@ public class FillDataBase {
 	@Inject
 	protected SessionFactory sessionFactory;
 
-
-	public static void main(String[] args) {
-/*		final ApplicationContext appCtx =
-				new AnnotationConfigApplicationContext(SpringConfiguration.class);*/
-		FillDataBase fillDB = new FillDataBase();
-
-//		fillDB.deleteDataFromDB();
-		fillDB.addDataToDB();
-		fillDB.selectCategories();
-
-	}
-
-
 	@Transactional
 	public void deleteDataFromDB(){
 
 		log.info("In delete method! ");
 		sessionFactory.getCurrentSession()
-				.createSQLQuery("DROP TABLE IF EXISTS album,category,artist,studio;")
+				.createSQLQuery("DROP TABLE IF EXISTS album,category,artist,studio,user,user_role;")
 				.executeUpdate();
 	}
 
 	@Transactional
 	public void addDataToDB() {
 
-		User admin = new User(User.Role.ROLE_ADMIN,"admin","admin","some#1@email.com",true);
-		User user = new User(User.Role.ROLE_USER,"user","user","some#2@email.com",true);
+		UserRole roleAdmin = new UserRole(null,UserRole.UserType.setAdmin());
+		User admin = new User(roleAdmin,"admin","admin","some#1@email.com",true);
+		roleAdmin.setUser(admin);
+		sessionFactory.getCurrentSession().persist(admin);
+		sessionFactory.getCurrentSession().persist(roleAdmin);
 
+		UserRole roleUser = new UserRole(null,UserRole.UserType.setUser());
+		User user = new User(roleUser,"user","user","some#2@email.com",true);
+		roleUser.setUser(user);
+		sessionFactory.getCurrentSession().persist(user);
+		sessionFactory.getCurrentSession().persist(roleUser);
 
+		List<UserRole> userTypes = new ArrayList<>();
+		userTypes.addAll(user.getRole());
+		System.out.println("!!! from List" + userTypes.get(0).getRole() + "!!!");
 
 		log.info("In addDataToDB ! ");
 
