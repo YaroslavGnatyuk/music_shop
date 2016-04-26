@@ -1,5 +1,6 @@
 package ua.gnatyuk.yaroslav.test;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,17 +31,14 @@ public class DaoTest {
     private StudioService studioService;
     @Inject
     private ArtistService artistService;
-/*    @Inject
-    @Named(value = "userDAO")
-    DaoPersist<User> userDao;*/
 
-//    @Ignore
+    @Ignore
     @Test
     public void deleteDB(){
         fillDataBase.deleteDataFromDB();
     }
 
-//    @Ignore
+    @Ignore
     @Test
     public void createDB(){
         fillDataBase.addDataToDB();
@@ -91,13 +89,13 @@ public class DaoTest {
         studioService.findByName("Студия для Океана Эльзы в Запорожье").getName();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test/*(expected = NullPointerException.class)*/
     public void findArtistById(){
         Long id = new Long(1);
-        assertEquals(artistService.findById(id).getName(),"The Best music record");
+        assertEquals(artistService.findById(id).getName(),"Wu-tang clan");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test/*(expected = NullPointerException.class)*/
     public void findArtistByName(){
         String name = "Wu-tang clan";
         assertEquals(artistService.findByName(name).getName(),"Wu-tang clan");

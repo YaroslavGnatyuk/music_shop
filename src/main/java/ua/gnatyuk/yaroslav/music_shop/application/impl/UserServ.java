@@ -1,5 +1,6 @@
 package ua.gnatyuk.yaroslav.music_shop.application.impl;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,9 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by asutp on 25.04.16.
@@ -25,12 +31,19 @@ public class UserServ implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = daoUser.findByName(username);
+        Set<UserRole> userRoles = user.getRole();
 
-        org.springframework.security.core.userdetails.User userDetaile =
-                new org.springframework.security.core.userdetails
-                        .User(user.getName(),user.getPassword(),user.getRoles().stream().map(r->new SimpleGrantedAuthority(r.name())).collect(toSet()));
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (UserRole role : userRoles) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+        }
 
+        List<GrantedAuthority> authorities = new ArrayList<>(grantedAuthorities);
 
-        return userDetaile;
+        org.springframework.security.core.userdetails.User newUser =
+                new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
+                user.getEnable(), true, true, true, authorities);
+
+        return newUser;
     }
 }
