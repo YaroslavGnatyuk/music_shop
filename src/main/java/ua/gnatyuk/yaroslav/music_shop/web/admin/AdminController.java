@@ -19,7 +19,7 @@ import javax.inject.Inject;
  */
 @Controller
 @RequestMapping(path = "/admin")
-public class LoginController {
+public class AdminController {
   @Inject
   StudioService studioService;
   @Inject
@@ -29,15 +29,6 @@ public class LoginController {
   @Inject
   ArtistService artistService;
 
-  @RequestMapping(method = RequestMethod.GET)
-  public String main (@ModelAttribute("user")User user) {
-    return "admin/login";
-  }
-
-  @RequestMapping(method = RequestMethod.POST)
-  public ModelAndView checkLogin(@ModelAttribute("user")User user){
-    return new ModelAndView("admin/adminMainPage");
-  }
 
   @RequestMapping(path = "/admin-main-page",method = RequestMethod.GET)
   public String showAdminMainPage(){
@@ -66,5 +57,19 @@ public class LoginController {
   public ModelAndView mainStudio(){
     return new ModelAndView("/admin/studio/studioMainPage")
             .addObject("studios",studioService.getAll());
+  }
+}
+
+@Controller
+@RequestMapping(path = "/login")
+class LoginController {
+  @RequestMapping( method = RequestMethod.GET)
+  public String main (@ModelAttribute("user")User user) {
+    return "admin/login";
+  }
+
+  @RequestMapping( method = RequestMethod.POST)
+  public ModelAndView checkLogin(@ModelAttribute("user")User user){
+    return new ModelAndView("admin/adminMainPage");
   }
 }

@@ -38,13 +38,13 @@ public class FillDataBase {
 	@Transactional
 	public void addDataToDB() {
 
-		UserRole roleAdmin = new UserRole(null,UserRole.UserType.setAdmin());
+		UserRole roleAdmin = new UserRole(null,UserRole.UserType.setRoleAdmin());
 		User admin = new User(roleAdmin,"admin","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#1@email.com",true);
 		roleAdmin.setUser(admin);
 		sessionFactory.getCurrentSession().persist(admin);
 		sessionFactory.getCurrentSession().persist(roleAdmin);
 
-		UserRole roleUser = new UserRole(null,UserRole.UserType.setUser());
+		UserRole roleUser = new UserRole(null,UserRole.UserType.setRoleUser());
 		User user = new User(roleUser,"user","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#2@email.com",true);
 		roleUser.setUser(user);
 		sessionFactory.getCurrentSession().persist(user);

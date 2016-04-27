@@ -32,11 +32,11 @@ public class UserRole {
     public enum UserType{
         ROLE_ADMIN,ROLE_USER;
 
-        public static String setAdmin(){
+        public static String setRoleAdmin(){
             return UserType.ROLE_ADMIN.name();
         }
 
-        public static String setUser(){
+        public static String setRoleUser(){
             return UserType.ROLE_USER.name();
         }
     }

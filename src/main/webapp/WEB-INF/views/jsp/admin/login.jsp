@@ -19,15 +19,15 @@
 
 <div class="container">
 
-    <form:form class="form-signin" method="post" commandName="user" role="form">
+    <form class="form-signin" action="/login" method="post" role="form">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <form:input type="username" class="form-control" placeholder="Email address" path="name" cssStyle="margin-bottom: 5px"/>
-        <form:input type="password" class="form-control" placeholder="Password" path="password"/>
+        <input type="text" class="form-control" placeholder="Email address" name="name" cssStyle="margin-bottom: 5px"/>
+        <input type="password" class="form-control" placeholder="Password" name="password"/>
         <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form:form>
+    </form>
 
 </div> <!-- /container -->
 
