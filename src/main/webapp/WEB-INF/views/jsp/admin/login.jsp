@@ -21,7 +21,7 @@
 
     <form:form class="form-signin" method="post" commandName="user" role="form">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <form:input type="email" class="form-control" placeholder="Email address" path="name" cssStyle="margin-bottom: 5px"/>
+        <form:input type="username" class="form-control" placeholder="Email address" path="name" cssStyle="margin-bottom: 5px"/>
         <form:input type="password" class="form-control" placeholder="Password" path="password"/>
         <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me

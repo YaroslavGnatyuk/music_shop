@@ -1,6 +1,7 @@
 package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,6 +9,7 @@ import ua.gnatyuk.yaroslav.music_shop.application.AlbumService;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.application.CategoryService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 
 import javax.inject.Inject;
 
@@ -27,19 +29,15 @@ public class LoginController {
   @Inject
   ArtistService artistService;
 
-  @RequestMapping(method = RequestMethod.POST)
-  public String main () {
-    return "admin/adminMainPage";
+  @RequestMapping(method = RequestMethod.GET)
+  public String main (@ModelAttribute("user")User user) {
+    return "admin/login";
   }
 
- /* @RequestMapping(method = RequestMethod.POST)
+  @RequestMapping(method = RequestMethod.POST)
   public ModelAndView checkLogin(@ModelAttribute("user")User user){
-    if (user.getName().equals("admin@admin.com") && user.getPassword().equals("admin")){
-      return new ModelAndView("admin/artist/artistMainPage").addObject("artists", artistService.getAll()) ;
-    }
-    else
-      return new ModelAndView("admin/login");
-  }*/
+    return new ModelAndView("admin/adminMainPage");
+  }
 
   @RequestMapping(path = "/admin-main-page",method = RequestMethod.GET)
   public String showAdminMainPage(){
