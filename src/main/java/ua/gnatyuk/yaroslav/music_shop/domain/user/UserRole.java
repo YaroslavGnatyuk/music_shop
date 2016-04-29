@@ -13,8 +13,8 @@ public class UserRole {
     Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id",nullable = true)
-    User user;
+    @JoinColumn(name = "user_id")
+    User user_id;
 
     @Column(name = "role",nullable = false,length = 45)
     String role;
@@ -23,26 +23,16 @@ public class UserRole {
     }
 
     public UserRole(User user, String role) {
-        System.out.println("!!!!!" + role + "!!!!");
-
-        this.user = user;
-        this.role = role;
+        this.user_id = user;
+        this.role = new String(role);
     }
 
     public enum UserType{
         ROLE_ADMIN,ROLE_USER;
-
-        public static String setRoleAdmin(){
-            return UserType.ROLE_ADMIN.name();
-        }
-
-        public static String setRoleUser(){
-            return UserType.ROLE_USER.name();
-        }
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser_id(User user) {
+        this.user_id = user;
     }
 
     public String getRole() {

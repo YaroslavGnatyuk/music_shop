@@ -34,14 +34,16 @@ public class SpringSequrityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasRole("USER")
                 .and().formLogin()
                 .and().csrf().disable();*/
-        http.authorizeRequests().antMatchers("/admin*")
-                .access("hasRole('ROLE_ADMIN')").and().formLogin()
-                .loginPage("/login").failureUrl("/login?error")
-                .usernameParameter("name")
-                .passwordParameter("password")
+        http.authorizeRequests().antMatchers("/admin/**")
+                .access("hasRole('ROLE_ADMIN')")
+                .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/admin/admin-main-page")
+                    .usernameParameter("j_username")
+                    .passwordParameter("j_password")
                 .and().logout().logoutSuccessUrl("/login?logout")
-
-                .and().exceptionHandling().accessDeniedPage("/403")
+//                .and().exceptionHandling().accessDeniedPage("/403")
                 .and().csrf().disable();
     }
 

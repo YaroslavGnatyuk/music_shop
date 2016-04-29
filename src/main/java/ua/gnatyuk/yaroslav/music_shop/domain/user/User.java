@@ -16,8 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role")
+    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
     Set<UserRole> role = new HashSet<>(0);
 
     @Column(name = "name")
@@ -35,8 +34,7 @@ public class User {
     public User() {
     }
 
-    public User(UserRole role, String name, String password, String email, Boolean enable) {
-        this.role.add(role);
+    public User(String name, String password, String email, Boolean enable) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -49,6 +47,9 @@ public class User {
 
     public void setRole(Set<UserRole> role) {
         this.role = role;
+    }
+    public void addRole(UserRole userRole){
+        role.add(userRole);
     }
 
     public boolean getEnable() {

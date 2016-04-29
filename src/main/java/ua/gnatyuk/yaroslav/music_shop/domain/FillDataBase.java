@@ -38,21 +38,20 @@ public class FillDataBase {
 	@Transactional
 	public void addDataToDB() {
 
-		UserRole roleAdmin = new UserRole(null,UserRole.UserType.setRoleAdmin());
-		User admin = new User(roleAdmin,"admin","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#1@email.com",true);
-		roleAdmin.setUser(admin);
-		sessionFactory.getCurrentSession().persist(admin);
+		User user1 = new User("admin","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#1@email.com",true);
+		User user2 = new User("user","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#2@email.com",true);
+
+		UserRole roleUser1 = new UserRole(user1,UserRole.UserType.ROLE_USER.toString());
+		UserRole roleUser2 = new UserRole(user2,UserRole.UserType.ROLE_ADMIN.toString());
+		UserRole roleAdmin = new UserRole(user2,UserRole.UserType.ROLE_USER.toString());
+
+		sessionFactory.getCurrentSession().persist(user2);
+		sessionFactory.getCurrentSession().persist(user1);
+
+		sessionFactory.getCurrentSession().persist(roleUser1);
+		sessionFactory.getCurrentSession().persist(roleUser2);
 		sessionFactory.getCurrentSession().persist(roleAdmin);
 
-		UserRole roleUser = new UserRole(null,UserRole.UserType.setRoleUser());
-		User user = new User(roleUser,"user","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#2@email.com",true);
-		roleUser.setUser(user);
-		sessionFactory.getCurrentSession().persist(user);
-		sessionFactory.getCurrentSession().persist(roleUser);
-
-		List<UserRole> userTypes = new ArrayList<>();
-		userTypes.addAll(user.getRole());
-		System.out.println("!!! from List" + userTypes.get(0).getRole() + "!!!");
 
 		log.info("In addDataToDB ! ");
 
@@ -92,9 +91,6 @@ public class FillDataBase {
 		sessionFactory.getCurrentSession().persist(krushAlbum1);
 		sessionFactory.getCurrentSession().persist(mushroomAlbum1);
 		sessionFactory.getCurrentSession().persist(akiraAlbum1);
-
-		sessionFactory.getCurrentSession().persist(admin);
-		sessionFactory.getCurrentSession().persist(user);
 
 		wuTang.setAlbums(wuAlbum1);
 		oElzi.setAlbums(elziAlbum1);

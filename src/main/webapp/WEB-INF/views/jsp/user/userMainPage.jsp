@@ -26,29 +26,68 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
-            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px">
+            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px" >
                 <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-5">
                 <h1>Music for life
                     <small>A lot of music for you!</small>
                 </h1>
             </div>
+
+            <div class="col-lg-3">
+                <div class="btn-group btn-group-lg" style="margin-left: 75px">
+                    <a type="button" class="btn btn-default" href="/login">Login</a>
+                    <button type="button" class="btn btn-default">Registration</button>
+                </div>
+            </div>
         </div>
-        <p>
+       <%-- <p>
             Here you can find your favorite artist and music!
             Enjoy it!
-        </p>
+        </p>--%>
     </div>
 </div>
 
 <div class="raw">
-    <div div class="col-lg-12">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="/admin/admin-main-page">Home</a></li>
-            <li class="active"><a href="/admin/admin-main-page">Top 10 artist</a></li>
-            <li class="active"><a href="/admin">As administrator</a></li>
-        </ul>
+    <div class="col-md-12">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">TutorialsPoint</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">iOS</a></li>
+                    <li><a href="#">SVN</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Java
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div>
+                <form class="navbar-form navbar-right" role="search" style="margin-right: 20px">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </nav>
+
     </div>
 </div>
 
@@ -56,8 +95,11 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-12">
 
+        <div class="col-lg-1">
+        </div>
+
+        <div class="col-lg-10">
             <div class="row carousel-holder">
 
             </div>
@@ -204,9 +246,10 @@
                 </div>
 
             </div>
-
         </div>
 
+        <div class="col-lg-1">
+        </div>
     </div>
 
 </div>
