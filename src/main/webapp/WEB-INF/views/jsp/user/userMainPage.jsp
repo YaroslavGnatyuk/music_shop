@@ -38,7 +38,7 @@
             <div class="col-lg-3">
                 <div class="btn-group btn-group-lg" style="margin-left: 75px">
                     <a type="button" class="btn btn-default" href="/login">Login</a>
-                    <button type="button" class="btn btn-default">Registration</button>
+                    <a type="button" class="btn btn-default" href="/registration">Registration</a>
                 </div>
             </div>
         </div>
@@ -53,12 +53,12 @@
     <div class="col-md-12">
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">TutorialsPoint</a>
+                <a class="navbar-brand" href="/">MainPage</a>
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">iOS</a></li>
-                    <li><a href="#">SVN</a></li>
+                    <li class="active"><a href="#">New's</a></li>
+                    <li><a href="#">Artist's</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Java

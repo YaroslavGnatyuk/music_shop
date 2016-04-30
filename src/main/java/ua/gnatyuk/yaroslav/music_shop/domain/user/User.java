@@ -1,9 +1,7 @@
 package ua.gnatyuk.yaroslav.music_shop.domain.user;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,8 +17,14 @@ public class User {
     @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
     Set<UserRole> role = new HashSet<>(0);
 
-    @Column(name = "name")
-    String name;
+    @Column(name = "firstName")
+    String firstName;
+
+    @Column(name = "lastName")
+    String lastName;
+
+    @Column(name = "username")
+    String username;
 
     @Column(name ="pass")
     String password;
@@ -34,15 +38,40 @@ public class User {
     public User() {
     }
 
-    public User(String name, String password, String email, Boolean enable) {
-        this.name = name;
+    public User(String firstName, String password, String email, Boolean enable) {
+        this.firstName = firstName;
         this.password = password;
         this.email = email;
         this.enable = enable;
     }
 
+    public User(String firstName, String lastName, String username, String password, String email, Boolean enable) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.enable = enable;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Set<UserRole> getRole() {
         return role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setRole(Set<UserRole> role) {
@@ -76,12 +105,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
     }
 
     public String getPassword() {

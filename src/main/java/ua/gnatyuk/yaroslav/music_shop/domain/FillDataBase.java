@@ -11,7 +11,6 @@ import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -38,8 +37,8 @@ public class FillDataBase {
 	@Transactional
 	public void addDataToDB() {
 
-		User user1 = new User("admin","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#1@email.com",true);
-		User user2 = new User("user","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#2@email.com",true);
+		User user1 = new User("Elena","Some second name","admin","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#1@email.com",true);
+		User user2 = new User("Yaroslav","Some second name","user","$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y","some#2@email.com",true);
 
 		UserRole roleUser1 = new UserRole(user1,UserRole.UserType.ROLE_USER.toString());
 		UserRole roleUser2 = new UserRole(user2,UserRole.UserType.ROLE_ADMIN.toString());

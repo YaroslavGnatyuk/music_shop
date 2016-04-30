@@ -12,7 +12,6 @@ import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
-import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;
 
 import javax.inject.Inject;
 import java.time.LocalDate;

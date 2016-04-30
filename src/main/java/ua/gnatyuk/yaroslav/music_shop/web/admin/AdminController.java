@@ -65,7 +65,7 @@ public class AdminController {
 class LoginController {
   @RequestMapping( method = RequestMethod.GET)
   public String main (@ModelAttribute("user")User user) {
-    return "admin/login";
+    return "admin/login_form";
   }
 
   @RequestMapping( method = RequestMethod.POST)

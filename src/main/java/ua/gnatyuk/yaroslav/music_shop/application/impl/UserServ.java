@@ -41,7 +41,7 @@ public class UserServ implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>(grantedAuthorities);
 
         org.springframework.security.core.userdetails.User newUser =
-                new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
+                new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(),
                 user.getEnable(), true, true, true, authorities);
 
         return newUser;

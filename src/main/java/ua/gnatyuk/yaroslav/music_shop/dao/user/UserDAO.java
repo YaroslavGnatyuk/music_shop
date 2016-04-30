@@ -44,7 +44,7 @@ public class UserDAO extends CrudOperations<User>{
     @Override
     public User findByName(String userName) {
         return (User)sessionFactory.getCurrentSession()
-                .createQuery("from User where :name = name")
+                .createQuery("from User where :name = firstName")
                 .setParameter("name",userName)
                 .uniqueResult();
     }
