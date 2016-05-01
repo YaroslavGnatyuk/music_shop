@@ -22,7 +22,7 @@ import java.util.Set;
  * Created by asutp on 25.04.16.
  */
 @Service
-public class UserServ implements UserDetailsService {
+public class UserServImpl implements UserDetailsService {
     @Inject
     @Named(value = "userDAO")
     DaoPersist<User> daoUser;
