@@ -18,4 +18,6 @@ public interface DaoPersist <T>{
 
     T findByName(String nameOfTheStudio);
 
+    long getTotalRecords();
+
 }

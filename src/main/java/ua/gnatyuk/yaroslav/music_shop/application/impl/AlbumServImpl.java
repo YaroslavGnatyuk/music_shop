@@ -54,4 +54,10 @@ public class AlbumServImpl implements AlbumService{
     public List<Album> getAll() {
         return daoAlbum.getAll();
     }
+
+    @Transactional
+    @Override
+    public long getCountAllAlbums() {
+        return daoAlbum.getTotalRecords();
+    }
 }

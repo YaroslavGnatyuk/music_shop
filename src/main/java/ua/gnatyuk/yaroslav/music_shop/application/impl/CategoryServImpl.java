@@ -54,4 +54,16 @@ public class CategoryServImpl implements CategoryService {
     public List<Category> getAll() {
         return daoCategory.getAll();
     }
+
+    @Transactional
+    @Override
+    public long getCountAllCategories( ) {
+        long pages = 0;
+        long count = daoCategory.getTotalRecords();
+        for ( ;  count > 0 ; count -= 4) {
+            pages++;
+        }
+
+        return pages;
+    }
 }

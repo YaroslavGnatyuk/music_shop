@@ -54,4 +54,10 @@ public class ArtistServImpl implements ArtistService {
     public List<Artist> getAll() {
         return daoArtist.getAll();
     }
+
+    @Transactional
+    @Override
+    public long getCountArtists() {
+        return daoArtist.getTotalRecords();
+    }
 }

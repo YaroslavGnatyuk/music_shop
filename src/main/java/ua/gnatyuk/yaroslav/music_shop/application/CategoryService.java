@@ -15,4 +15,5 @@ public interface CategoryService {
     void updateCategory(Category category);
     void deleteCategory(Category category);
     List<Category> getAll();
+    long getCountAllCategories();
 }

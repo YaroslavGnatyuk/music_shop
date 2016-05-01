@@ -14,4 +14,5 @@ public interface StudioService {
     void updateStudio(Studio studio);
     void deleteStudio(Studio studio);
     List<Studio> getAll();
+    long getCountAllStudios();
 }

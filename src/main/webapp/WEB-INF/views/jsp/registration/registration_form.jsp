@@ -22,11 +22,11 @@
 
     <form:form class="form-signin " action="/registration" commandName="user" method="post" role="form">
         <h2 class="form-signin-heading" align="center">Registration</h2>
-        <form:input type="text" class="form-control" placeholder="Username" name="username" style="margin-bottom: 5px" path="user.username"/>
-        <form:input type="text" class="form-control" placeholder="First name" name="first_name" style="margin-bottom: 5px" path="user.firstname"/>
-        <form:input type="text" class="form-control" placeholder="Last name" name="last_name" style="margin-bottom: 5px" path="user.lastname"/>
-        <form:input type="text" class="form-control" placeholder="Email address" name="email" style="margin-bottom: 5px" path="user.email"/>
-        <form:input id = "pass" type="password" class="form-control" placeholder="Password" name="password" style="margin-bottom: 5px" path="user.pass"/>
+        <form:input type="text" class="form-control" placeholder="Username" name="username" style="margin-bottom: 5px" path="username"/>
+        <form:input type="text" class="form-control" placeholder="First name" name="first_name" style="margin-bottom: 5px" path="firstName"/>
+        <form:input type="text" class="form-control" placeholder="Last name" name="last_name" style="margin-bottom: 5px" path="lastName"/>
+        <form:input type="text" class="form-control" placeholder="Email address" name="email" style="margin-bottom: 5px" path="email"/>
+        <form:input id = "pass" type="password" class="form-control" placeholder="Password" name="password" style="margin-bottom: 5px" path="password"/>
         <input id = "confirm_pass" type="password" class="form-control" onkeyup="checkPass(); return false;" placeholder="Password confirm" name="password" style="margin-bottom: 5px" />
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>

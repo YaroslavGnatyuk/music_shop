@@ -16,4 +16,5 @@ public interface ArtistService {
     void deleteArtist(Artist artist);
 
     List<Artist> getAll();
+    long getCountArtists();
 }

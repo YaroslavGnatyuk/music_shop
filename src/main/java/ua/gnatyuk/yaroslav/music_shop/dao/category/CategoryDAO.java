@@ -52,4 +52,9 @@ public class CategoryDAO extends CrudOperations<Category>{
                 .setParameter("name",nameOfTheStudio).uniqueResult();
         return category;
     }
+
+    @Override
+    public long getTotalRecords() {
+        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Category").uniqueResult();
+    }
 }

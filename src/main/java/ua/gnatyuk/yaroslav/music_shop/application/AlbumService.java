@@ -16,4 +16,5 @@ public interface AlbumService {
     void deleteAlbum(Album album);
 
     List<Album> getAll();
+    long getCountAllAlbums();
 }

@@ -9,12 +9,12 @@ import ua.gnatyuk.yaroslav.music_shop.SpringConfig;
 import ua.gnatyuk.yaroslav.music_shop.SpringSequrityConfig;
 import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.application.UserService;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,6 +31,8 @@ public class DaoTest {
     private StudioService studioService;
     @Inject
     private ArtistService artistService;
+    @Inject
+    private UserService userService;
 
     @Ignore
     @Test
@@ -109,8 +111,20 @@ public class DaoTest {
     }
 
     @Test
-    public void getData(){
-        LocalDate localDate = LocalDate.parse("2016-04-05");
-        System.out.println(localDate);
+    public void getTotalUser(){
+        System.out.println("We have: " + userService.getCountAllUsers() + " users");
+    }
+
+    @Test
+    public void getTotalStudios(){
+        Long totalElements = studioService.getCountAllStudios();
+        System.out.println("We have: " + totalElements + " studios");
+        int pages=0;
+
+        for (   ; totalElements > 0 ; totalElements-=4) {
+            pages++;
+        }
+
+        System.out.println("We have " + pages + " pages in pagination");
     }
 }

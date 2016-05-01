@@ -42,10 +42,17 @@ public class UserDAO extends CrudOperations<User>{
     }
 
     @Override
-    public User findByName(String userName) {
+    public User findByName(String username) {
         return (User)sessionFactory.getCurrentSession()
-                .createQuery("from User where :name = firstName")
-                .setParameter("name",userName)
+                .createQuery("from User where :name = username")
+                .setParameter("name", username)
                 .uniqueResult();
     }
+
+    @Override
+    public long getTotalRecords() {
+        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM User").uniqueResult();
+    }
+
+
 }

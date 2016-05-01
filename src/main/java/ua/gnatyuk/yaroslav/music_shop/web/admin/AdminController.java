@@ -37,8 +37,9 @@ public class AdminController {
 
   @RequestMapping(path = "/category-main-page",method = RequestMethod.GET)
   public ModelAndView mainCategory(){
+
     return new ModelAndView("/admin/category/categoryMainPage")
-            .addObject("categories",categoryService.getAll());
+            .addObject("categories",categoryService.getAll()).addObject("pagenation",categoryService.getCountAllCategories());
   }
 
   @RequestMapping(path = "/artist-main-page", method = RequestMethod.GET)

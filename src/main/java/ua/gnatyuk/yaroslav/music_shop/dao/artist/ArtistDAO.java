@@ -33,6 +33,11 @@ public class ArtistDAO extends CrudOperations<Artist> {
     }
 
     @Override
+    public long getTotalRecords() {
+        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Artist").uniqueResult();
+    }
+
+    @Override
     public List<Artist> getTop10ByRate() {
 
         List<Artist> artists = sessionFactory.getCurrentSession()

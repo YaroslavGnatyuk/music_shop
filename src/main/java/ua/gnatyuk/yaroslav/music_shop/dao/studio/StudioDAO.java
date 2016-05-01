@@ -51,4 +51,9 @@ public class StudioDAO extends CrudOperations<Studio>{
 
         return studio;
     }
+
+    @Override
+    public long getTotalRecords() {
+        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Studio").uniqueResult();
+    }
 }

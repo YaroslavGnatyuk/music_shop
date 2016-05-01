@@ -56,4 +56,10 @@ public class StudioServImpl implements StudioService{
     public java.util.List<Studio> getAll() {
         return daoStudio.getAll();
     }
+
+    @Transactional
+    @Override
+    public long getCountAllStudios() {
+        return daoStudio.getTotalRecords();
+    }
 }

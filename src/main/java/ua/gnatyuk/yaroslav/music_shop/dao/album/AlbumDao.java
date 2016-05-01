@@ -21,6 +21,7 @@ public class AlbumDao extends CrudOperations<Album> {
                 .setParameter("id",id).uniqueResult();
         return album;
     }
+
     @Transactional
     @Override
     public Album findByName(String nameOfTheAlbum) {
@@ -61,5 +62,11 @@ public class AlbumDao extends CrudOperations<Album> {
     @Override
     public List<Album> getAll() {
         return sessionFactory.getCurrentSession().createQuery("from Album").list();
+    }
+
+
+    @Override
+    public long getTotalRecords() {
+        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Album").uniqueResult();
     }
 }

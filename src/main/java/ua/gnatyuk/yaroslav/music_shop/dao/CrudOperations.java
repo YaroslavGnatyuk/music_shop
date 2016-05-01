@@ -24,4 +24,6 @@ public abstract class CrudOperations<T> implements DaoPersist<T> {
         sessionFactory.getCurrentSession().delete(obj);
     }
 
+
+
 }
