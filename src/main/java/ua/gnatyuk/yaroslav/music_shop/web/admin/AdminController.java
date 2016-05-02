@@ -5,11 +5,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.services.AlbumService;
-import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
-import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PaginationImpl;
 
 import javax.inject.Inject;
 
@@ -28,12 +26,14 @@ public class AdminController {
   CategoryService categoryService;
   @Inject
   ArtistService artistService;
+  @Inject
+  Pagination pagination;
 
   @RequestMapping(path = "/category-main-page",method = RequestMethod.GET)
   public ModelAndView mainCategory(){
-
+    pagination.buildNewPage(1,PaginationImpl.TypeOfMaterial.CATEGORY);
     return new ModelAndView("/admin/category/categoryMainPage")
-            .addObject("categories",categoryService.getAll()).addObject("pagenation",categoryService.getCountAllCategories());
+            .addObject("pagenation",pagination);
   }
 
   @RequestMapping(path = "/artist-main-page", method = RequestMethod.GET)

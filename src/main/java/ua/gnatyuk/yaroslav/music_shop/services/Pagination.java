@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yaroslav on 5/2/16.
  */
 public interface Pagination<T> {
-    List buildNewPage();
+    void buildNewPage(int pageNumber,PaginationImpl.TypeOfMaterial type);
     List getPage(int number);
 
     void setCountOfMaterials();

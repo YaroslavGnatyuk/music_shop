@@ -20,41 +20,83 @@ public class PaginationImpl implements Pagination{
 
     @Inject
     @Named(value = "artistDAO")
-    DaoPersist<Artist> daoArtist;
+    private DaoPersist<Artist> daoArtist;
 
     @Inject
     @Named(value = "categoryDAO")
-    DaoPersist<Category> daoCategory;
+    private DaoPersist<Category> daoCategory;
 
     @Inject
     @Named(value = "albumDao")
-    DaoPersist<Album> daoAlbum;
+    private DaoPersist<Album> daoAlbum;
 
-    DaoPersist daoPersist;
+    private DaoPersist daoPersist;
 
-    long countOfMaterials;
-    int countOfPages;
-    int currentPage = 1;
-    int materials_per_page = 4;
+    List<Album> albums;
+    List<Category> categories;
+    List<Artist> artists;
+
+    TypeOfMaterial type;
+
+    private long countOfMaterials;
+    private int lastPage;
+    private int currentPage = 1;
+    private int previousPage = 0;
+    private int materials_per_page = 4;
+    private boolean isFirstPage = true;
+    private boolean isLastPage = false;
 
     public void setTypeOfMaterials(TypeOfMaterial type){
-        if (type.name().equals(TypeOfMaterial.ALBUM.toString())){
+        this.type = type;
+
+        if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
             daoPersist = daoAlbum;
         }
 
-        if (type.name().equals(TypeOfMaterial.ARTIST.toString())){
+        if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
             daoPersist = daoArtist;
         }
 
-        if (type.name().equals(TypeOfMaterial.CATEGORY.toString())){
+        if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
             daoPersist = daoCategory;
         }
     }
 
-    @Override
-    public List buildNewPage() {
 
-        return null;
+    @Override
+    public void buildNewPage(int currentPage, TypeOfMaterial type) {
+        setTypeOfMaterials(type);
+
+        previousPage = this.currentPage;
+        this.currentPage = currentPage;
+
+        setCountOfPages();
+
+        if(currentPage == 1) {
+            isFirstPage = true;
+        }
+        else{
+            isFirstPage = false;
+        }
+
+        if(currentPage == lastPage){
+            isLastPage = true;
+        }
+        else{
+            isLastPage = false;
+        }
+
+        if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
+            albums = daoPersist.getPartOfRecords(currentPage*materials_per_page, materials_per_page);
+        }
+
+        if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
+            artists = daoArtist.getPartOfRecords(currentPage*materials_per_page, materials_per_page);
+        }
+
+        if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
+            categories = daoPersist.getPartOfRecords(currentPage*materials_per_page, materials_per_page);
+        }
     }
 
     @Override
@@ -62,12 +104,14 @@ public class PaginationImpl implements Pagination{
         return null;
     }
 
-    public int getCountOfPages() {
-        return countOfPages;
+    public int getLastPage() {
+        return lastPage;
     }
 
-    public void setCountOfPages(int countOfPages) {
-        this.countOfPages = countOfPages;
+    public void setCountOfPages() {
+        setCountOfMaterials();
+        for (;countOfMaterials > 0;countOfMaterials -= materials_per_page)
+            lastPage++;
     }
 
     public int getCurrentPage() {
@@ -88,6 +132,10 @@ public class PaginationImpl implements Pagination{
 
     public long getCountOfMaterials() {
         return countOfMaterials;
+    }
+
+    public void setLastPage(int lastPage) {
+        this.lastPage = lastPage;
     }
 
     @Transactional

@@ -256,8 +256,9 @@
                             <li><a href="#">4</a></li>
                             <li><a href="#">5</a></li>
                         </ul>
-                        <%  int k =40;
-                            if (k < 30){
+                        <%  int k =10;
+
+                            if (k < 20){
                             %>
                                 <ul class="pagination visible-lg pull-right">
                                 <li><a href="#">«</a></li>

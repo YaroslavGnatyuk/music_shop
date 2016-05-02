@@ -13,6 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserMainPage {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView userMainPage(){
-        return new ModelAndView("/user/userMainPage");
+        return new ModelAndView("/user/userMainPage").addObject("myVariable",new Integer(10));
     }
 }
