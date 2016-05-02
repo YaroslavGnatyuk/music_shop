@@ -237,14 +237,41 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <h4><a href="#">Like this template?</a>
-                    </h4>
-                    <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-                    <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col col-xs-4">Page 1 of 5
+                    </div>
+                    <div class="col col-xs-8">
+                        <ul class="pagination visible-lg pull-right">
+                            <%--<li><a href="#">«</a></li>--%>
+                            <li><a href="#">»</a></li>
+                        </ul>
+
+                        <ul class="pagination hidden-xs pull-right">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                        <%  int k =40;
+                            if (k < 30){
+                            %>
+                                <ul class="pagination visible-lg pull-right">
+                                <li><a href="#">«</a></li>
+                            <%
+                             }else{
+                            %>
+                                <ul class="pagination visible-lg pull-right">
+                                <li><a href="#">»</a></li>
+                            <%
+                                }
+                        %>
+                        </ul>
+                    </div>
                 </div>
-
             </div>
         </div>
 

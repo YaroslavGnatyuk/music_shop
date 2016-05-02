@@ -1,8 +1,8 @@
-package ua.gnatyuk.yaroslav.music_shop.application.impl;
+package ua.gnatyuk.yaroslav.music_shop.services.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 

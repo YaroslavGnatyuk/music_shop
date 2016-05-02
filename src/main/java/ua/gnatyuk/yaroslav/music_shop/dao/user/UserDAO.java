@@ -54,5 +54,8 @@ public class UserDAO extends CrudOperations<User>{
         return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM User").uniqueResult();
     }
 
-
+    @Override
+    public List<User> getPartOfRecords(int begin, int sizeOfPart) {
+        return null;
+    }
 }

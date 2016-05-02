@@ -69,4 +69,13 @@ public class AlbumDao extends CrudOperations<Album> {
     public long getTotalRecords() {
         return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Album").uniqueResult();
     }
+
+    @Override
+    public List<Album> getPartOfRecords(int begin, int sizeOfPart) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Album ")
+                .setFirstResult(begin)
+                .setMaxResults(begin+sizeOfPart)
+                .list();
+    }
 }

@@ -1,21 +1,16 @@
 package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.application.AlbumService;
-import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.application.CategoryService;
-import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
+import ua.gnatyuk.yaroslav.music_shop.services.AlbumService;
+import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
+import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
+import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
-import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by yaroslav on 4/6/16.

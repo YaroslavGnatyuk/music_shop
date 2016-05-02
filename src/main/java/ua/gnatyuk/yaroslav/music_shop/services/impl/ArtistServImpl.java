@@ -1,10 +1,10 @@
-package ua.gnatyuk.yaroslav.music_shop.application.impl;
+package ua.gnatyuk.yaroslav.music_shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
+import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 

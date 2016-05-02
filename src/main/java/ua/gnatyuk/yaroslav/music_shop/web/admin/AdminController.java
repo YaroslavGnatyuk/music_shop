@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.application.AlbumService;
-import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.application.CategoryService;
-import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.services.AlbumService;
+import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
+import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
+import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 
 import javax.inject.Inject;
@@ -28,12 +28,6 @@ public class AdminController {
   CategoryService categoryService;
   @Inject
   ArtistService artistService;
-
-
-  @RequestMapping(path = "/admin-main-page",method = RequestMethod.GET)
-  public String showAdminMainPage(){
-    return "/admin/adminMainPage";
-  }
 
   @RequestMapping(path = "/category-main-page",method = RequestMethod.GET)
   public ModelAndView mainCategory(){
@@ -67,10 +61,5 @@ class LoginController {
   @RequestMapping( method = RequestMethod.GET)
   public String main (@ModelAttribute("user")User user) {
     return "admin/login_form";
-  }
-
-  @RequestMapping( method = RequestMethod.POST)
-  public ModelAndView checkLogin(@ModelAttribute("user")User user){
-    return new ModelAndView("admin/adminMainPage");
   }
 }

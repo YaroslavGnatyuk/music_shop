@@ -30,6 +30,7 @@
         <input id = "confirm_pass" type="password" class="form-control" onkeyup="checkPass(); return false;" placeholder="Password confirm" name="password" style="margin-bottom: 5px" />
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/">Back to main page</a>
     </form:form>
 
 </div> <!-- /container -->

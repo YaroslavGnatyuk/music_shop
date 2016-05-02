@@ -57,4 +57,13 @@ public class CategoryDAO extends CrudOperations<Category>{
     public long getTotalRecords() {
         return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Category").uniqueResult();
     }
+
+    @Override
+    public List<Category> getPartOfRecords(int begin, int sizeOfPart) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Category ")
+                .setFirstResult(begin)
+                .setMaxResults(begin+sizeOfPart)
+                .list();
+    }
 }

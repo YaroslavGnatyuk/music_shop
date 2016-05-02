@@ -76,5 +76,14 @@ public class ArtistDAO extends CrudOperations<Artist> {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Artist ").list();
     }
+
+    @Override
+    public List<Artist> getPartOfRecords(int begin, int sizeOfPart) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Artist ")
+                .setFirstResult(begin)
+                .setMaxResults(begin+sizeOfPart)
+                .list();
+    }
 }
 

@@ -20,13 +20,14 @@
 <div class="container">
 
     <form class="form-signin" action="/login" method="post" role="form">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading" align="center">Please sign in</h2>
         <input type="text" class="form-control" placeholder="Email address" name="j_username" cssStyle="margin-bottom: 5px"/>
         <input type="password" class="form-control" placeholder="Password" name="j_password"/>
         <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/">Back to main page</a>
     </form>
 
 </div> <!-- /container -->

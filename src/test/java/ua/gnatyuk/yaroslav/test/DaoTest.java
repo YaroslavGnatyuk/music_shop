@@ -7,12 +7,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.gnatyuk.yaroslav.music_shop.SpringConfig;
 import ua.gnatyuk.yaroslav.music_shop.SpringSequrityConfig;
-import ua.gnatyuk.yaroslav.music_shop.application.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.application.StudioService;
-import ua.gnatyuk.yaroslav.music_shop.application.UserService;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PaginationImpl;
 
 import javax.inject.Inject;
 
@@ -32,7 +31,11 @@ public class DaoTest {
     @Inject
     private ArtistService artistService;
     @Inject
+    private CategoryService categoryService;
+    @Inject
     private UserService userService;
+    @Inject
+    private Pagination pagination;
 
     @Ignore
     @Test
@@ -126,5 +129,13 @@ public class DaoTest {
         }
 
         System.out.println("We have " + pages + " pages in pagination");
+    }
+
+    @Test
+    public void paginationForCategory(){
+
+        pagination.setTypeOfMaterials(PaginationImpl.TypeOfMaterial.CATEGORY);
+        pagination.setCountOfMaterials();
+        System.out.println(pagination.getCountOfMaterials());
     }
 }

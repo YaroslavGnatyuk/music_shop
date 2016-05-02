@@ -19,5 +19,5 @@ public interface DaoPersist <T>{
     T findByName(String nameOfTheStudio);
 
     long getTotalRecords();
-
+    List<T> getPartOfRecords(int begin, int sizeOfPart);
 }

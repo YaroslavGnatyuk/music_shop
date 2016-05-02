@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ComponentScan(value = {"ua.gnatyuk.yaroslav.music_shop.dao","ua.gnatyuk.yaroslav.music_shop.domain",
-                        "ua.gnatyuk.yaroslav.music_shop.application.impl"})
+        "ua.gnatyuk.yaroslav.music_shop.services.impl"})
 @EnableTransactionManagement
 public class SpringConfig {
     private static final Logger log = LoggerFactory.getLogger(FillDataBase.class);

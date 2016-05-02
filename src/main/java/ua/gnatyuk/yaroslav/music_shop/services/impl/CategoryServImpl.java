@@ -1,8 +1,8 @@
-package ua.gnatyuk.yaroslav.music_shop.application.impl;
+package ua.gnatyuk.yaroslav.music_shop.services.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.gnatyuk.yaroslav.music_shop.application.CategoryService;
+import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 
@@ -65,5 +65,9 @@ public class CategoryServImpl implements CategoryService {
         }
 
         return pages;
+    }
+
+    public DaoPersist<Category> getDaoCategory() {
+        return daoCategory;
     }
 }

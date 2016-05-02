@@ -52,7 +52,7 @@
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>
             <li><a href="/admin/category-main-page">Category</a></li>
-            <li><a href="#">Store</a></li>
+            <li><a href="/login?logout">Exit</a></li>
         </ul>
     </div>
 </div>

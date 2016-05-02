@@ -1,4 +1,4 @@
-package ua.gnatyuk.yaroslav.music_shop.application.impl;
+package ua.gnatyuk.yaroslav.music_shop.services.impl;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.gnatyuk.yaroslav.music_shop.application.UserService;
+import ua.gnatyuk.yaroslav.music_shop.services.UserService;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;

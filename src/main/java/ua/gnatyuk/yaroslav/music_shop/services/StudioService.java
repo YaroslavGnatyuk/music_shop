@@ -1,4 +1,4 @@
-package ua.gnatyuk.yaroslav.music_shop.application;
+package ua.gnatyuk.yaroslav.music_shop.services;
 
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 
