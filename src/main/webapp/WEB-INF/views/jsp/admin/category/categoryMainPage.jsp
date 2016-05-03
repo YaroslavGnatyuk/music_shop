@@ -114,12 +114,12 @@
                 </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col col-xs-4">Page 1 of 5
+                    <div class="col col-xs-4">Page 1 of ${pagenation.lastPage}
                     </div>
                     <div class="col col-xs-8">
                         <ul class="pagination hidden-xs pull-right">
-                            <c:forEach var="i" begin="1" end="5">
-                                <li><a href="#"><c:out value="${i}"/></a></li>
+                            <c:forEach var="i" begin="1" end="${pagenation.lastPage}">
+                                <li><a href="#"><c:out value="${i+=1}"/></a></li>
                             </c:forEach>
                             <%--<li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>

@@ -104,10 +104,6 @@ public class PaginationImpl implements Pagination{
         return null;
     }
 
-    public int getLastPage() {
-        return lastPage;
-    }
-
     public void setCountOfPages() {
         setCountOfMaterials();
         for (;countOfMaterials > 0;countOfMaterials -= materials_per_page)
@@ -138,6 +134,10 @@ public class PaginationImpl implements Pagination{
         this.lastPage = lastPage;
     }
 
+    public int getLastPage() {
+        return lastPage;
+    }
+
     @Transactional
     public void setCountOfMaterials() {
         this.countOfMaterials = daoPersist.getTotalRecords();
@@ -145,5 +145,49 @@ public class PaginationImpl implements Pagination{
 
     public enum TypeOfMaterial {
         ARTIST,CATEGORY,ALBUM
+    }
+
+    public DaoPersist<Artist> getDaoArtist() {
+        return daoArtist;
+    }
+
+    public int getPreviousPage() {
+        return previousPage;
+    }
+
+    public boolean isFirstPage() {
+        return isFirstPage;
+    }
+
+    public boolean isLastPage() {
+        return isLastPage;
+    }
+
+    public DaoPersist getDaoPersist() {
+        return daoPersist;
+    }
+
+    public DaoPersist<Album> getDaoAlbum() {
+        return daoAlbum;
+    }
+
+    public DaoPersist<Category> getDaoCategory() {
+        return daoCategory;
+    }
+
+    public List<Album> getAlbums() {
+        return albums;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public List<Artist> getArtists() {
+        return artists;
+    }
+
+    public TypeOfMaterial getType() {
+        return type;
     }
 }

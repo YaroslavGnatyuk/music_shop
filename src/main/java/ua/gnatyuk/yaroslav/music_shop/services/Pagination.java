@@ -14,4 +14,5 @@ public interface Pagination<T> {
     void setCountOfMaterials();
     long getCountOfMaterials();
     void setTypeOfMaterials(PaginationImpl.TypeOfMaterial type);
+    int getLastPage();
 }
