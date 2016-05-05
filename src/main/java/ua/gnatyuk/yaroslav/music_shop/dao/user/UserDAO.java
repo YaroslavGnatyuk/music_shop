@@ -55,7 +55,7 @@ public class UserDAO extends CrudOperations<User>{
     }
 
     @Override
-    public List<User> getPartOfRecords(int begin, int sizeOfPart) {
+    public List<User> getMaterialsForOnePage(int begin, int sizeOfPart) {
         return null;
     }
 }

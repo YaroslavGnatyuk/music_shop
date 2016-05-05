@@ -78,7 +78,7 @@ public class ArtistDAO extends CrudOperations<Artist> {
     }
 
     @Override
-    public List<Artist> getPartOfRecords(int begin, int sizeOfPart) {
+    public List<Artist> getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Artist ")
                 .setFirstResult(begin)

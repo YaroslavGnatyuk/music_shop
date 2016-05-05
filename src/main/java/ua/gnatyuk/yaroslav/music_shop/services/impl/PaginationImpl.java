@@ -38,11 +38,11 @@ public class PaginationImpl implements Pagination{
 
     TypeOfMaterial type;
 
-    private long countOfMaterials;
+    private long quantityOfMaterials;
     private int lastPage;
     private int currentPage = 1;
-    private int previousPage = 0;
-    private int materials_per_page = 4;
+    private int previousPage = 1;
+    private int MATERIALS_PER_ONE_PAGE = 3;
     private boolean isFirstPage = true;
     private boolean isLastPage = false;
 
@@ -62,7 +62,7 @@ public class PaginationImpl implements Pagination{
         }
     }
 
-
+    @Transactional
     @Override
     public void buildNewPage(int currentPage, TypeOfMaterial type) {
         setTypeOfMaterials(type);
@@ -70,7 +70,8 @@ public class PaginationImpl implements Pagination{
         previousPage = this.currentPage;
         this.currentPage = currentPage;
 
-        setCountOfPages();
+        setQuantityOfMaterials();
+        setQuantityOfPages();
 
         if(currentPage == 1) {
             isFirstPage = true;
@@ -87,15 +88,18 @@ public class PaginationImpl implements Pagination{
         }
 
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
-            albums = daoPersist.getPartOfRecords(currentPage*materials_per_page, materials_per_page);
+            albums = daoPersist.getMaterialsForOnePage(currentPage* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            albums.forEach(System.out::println);
         }
 
         if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
-            artists = daoArtist.getPartOfRecords(currentPage*materials_per_page, materials_per_page);
+            artists = daoArtist.getMaterialsForOnePage(currentPage* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            artists.forEach(System.out::println);
         }
 
         if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
-            categories = daoPersist.getPartOfRecords(currentPage*materials_per_page, materials_per_page);
+            categories = daoPersist.getMaterialsForOnePage((currentPage - 1)* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            categories.forEach(System.out::println);
         }
     }
 
@@ -104,9 +108,9 @@ public class PaginationImpl implements Pagination{
         return null;
     }
 
-    public void setCountOfPages() {
-        setCountOfMaterials();
-        for (;countOfMaterials > 0;countOfMaterials -= materials_per_page)
+    public void setQuantityOfPages() {
+
+        for (; quantityOfMaterials > 0; quantityOfMaterials -= MATERIALS_PER_ONE_PAGE)
             lastPage++;
     }
 
@@ -118,16 +122,16 @@ public class PaginationImpl implements Pagination{
         this.currentPage = currentPage;
     }
 
-    public int getMaterials_per_page() {
-        return materials_per_page;
+    public int getMATERIALS_PER_ONE_PAGE() {
+        return MATERIALS_PER_ONE_PAGE;
     }
 
-    public void setMaterials_per_page(int materials_per_page) {
-        this.materials_per_page = materials_per_page;
+    public void setMATERIALS_PER_ONE_PAGE(int MATERIALS_PER_ONE_PAGE) {
+        this.MATERIALS_PER_ONE_PAGE = MATERIALS_PER_ONE_PAGE;
     }
 
-    public long getCountOfMaterials() {
-        return countOfMaterials;
+    public long getQuantityOfMaterials() {
+        return quantityOfMaterials;
     }
 
     public void setLastPage(int lastPage) {
@@ -139,8 +143,8 @@ public class PaginationImpl implements Pagination{
     }
 
     @Transactional
-    public void setCountOfMaterials() {
-        this.countOfMaterials = daoPersist.getTotalRecords();
+    public void setQuantityOfMaterials() {
+        this.quantityOfMaterials = daoPersist.getTotalRecords();
     }
 
     public enum TypeOfMaterial {
@@ -189,5 +193,20 @@ public class PaginationImpl implements Pagination{
 
     public TypeOfMaterial getType() {
         return type;
+    }
+
+
+    @Override
+    public String toString() {
+        return "PaginationImpl{" +
+                ", type=" + type +
+                ", quantityOfMaterials=" + quantityOfMaterials +
+                ", lastPage=" + lastPage +
+                ", currentPage=" + currentPage +
+                ", previousPage=" + previousPage +
+                ", MATERIALS_PER_ONE_PAGE=" + MATERIALS_PER_ONE_PAGE +
+                ", isFirstPage=" + isFirstPage +
+                ", isLastPage=" + isLastPage +
+                '}';
     }
 }

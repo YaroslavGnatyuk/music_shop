@@ -2,6 +2,7 @@ package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,7 +32,16 @@ public class AdminController {
 
   @RequestMapping(path = "/category-main-page",method = RequestMethod.GET)
   public ModelAndView mainCategory(){
-    pagination.buildNewPage(1,PaginationImpl.TypeOfMaterial.CATEGORY);
+
+    pagination.buildNewPage(Pagination.FIRST_PAGE,PaginationImpl.TypeOfMaterial.CATEGORY);
+    return new ModelAndView("/admin/category/categoryMainPage")
+            .addObject("pagenation",pagination);
+  }
+
+  @RequestMapping(path = "/category-page-{id}",method = RequestMethod.GET)
+  public ModelAndView categoryNavigate(@PathVariable("id") Integer id){
+
+    pagination.buildNewPage(id,PaginationImpl.TypeOfMaterial.CATEGORY);
     return new ModelAndView("/admin/category/categoryMainPage")
             .addObject("pagenation",pagination);
   }

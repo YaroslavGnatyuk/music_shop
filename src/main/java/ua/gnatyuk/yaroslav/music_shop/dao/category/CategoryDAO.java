@@ -59,11 +59,11 @@ public class CategoryDAO extends CrudOperations<Category>{
     }
 
     @Override
-    public List<Category> getPartOfRecords(int begin, int sizeOfPart) {
+    public List<Category> getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Category ")
                 .setFirstResult(begin)
-                .setMaxResults(begin+sizeOfPart)
+                .setMaxResults(sizeOfPart)
                 .list();
     }
 }

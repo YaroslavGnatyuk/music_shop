@@ -58,7 +58,7 @@ public class StudioDAO extends CrudOperations<Studio>{
     }
 
     @Override
-    public List<Studio> getPartOfRecords(int begin, int sizeOfPart) {
+    public List<Studio> getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Studio")
                 .setFirstResult(begin)

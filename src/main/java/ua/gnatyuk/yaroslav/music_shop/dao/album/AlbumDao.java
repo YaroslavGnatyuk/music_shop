@@ -71,7 +71,7 @@ public class AlbumDao extends CrudOperations<Album> {
     }
 
     @Override
-    public List<Album> getPartOfRecords(int begin, int sizeOfPart) {
+    public List<Album> getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Album ")
                 .setFirstResult(begin)

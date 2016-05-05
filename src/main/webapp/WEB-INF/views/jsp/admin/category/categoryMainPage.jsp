@@ -95,7 +95,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${categories}" var="category">
+                            <c:forEach items="${pagenation.categories}" var="category">
                                 <tr>
                                     <td align="center"  style="width: 150px">
                                         <a href="/admin/update-category/${category.id}" class="btn btn-default">
@@ -119,7 +119,7 @@
                     <div class="col col-xs-8">
                         <ul class="pagination hidden-xs pull-right">
                             <c:forEach var="i" begin="1" end="${pagenation.lastPage}">
-                                <li><a href="#"><c:out value="${i+=1}"/></a></li>
+                                <li><a href="/admin/category-page-${page}"><c:out value="${page}"/></a></li>
                             </c:forEach>
                             <%--<li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
