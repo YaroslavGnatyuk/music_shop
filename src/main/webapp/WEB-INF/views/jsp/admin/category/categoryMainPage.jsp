@@ -118,35 +118,14 @@
                     </div>
                     <div class="col col-xs-8">
                         <ul class="pagination hidden-xs pull-right">
-                            <c:if test="${pagenation.lastPage <= 10}">
-                                <c:set var="p" value="0" scope="session"/>
-                                    <c:if test="${p < pagenation.lastPage}">
-                                        <c:forEach var="p" begin="1" end="${pagenation.lastPage}">
-                                            <c:set var="p" value="${p + 1}" scope="session"/>
-
-                                            <c:if test="${p != pagenation.currentPage}">
-                                                <li><a href="/admin/category-page-${p}" ><c:out value="${p}"/></a></li>
-                                            </c:if>
-
-                                            <c:if test="${p == pagenation.currentPage}">
-                                                <li class="active"><a href="/admin/category-page-${p}" ><c:out value="${pagenation.currentPage}"/></a></li>
-                                            </c:if>
-
-                                        </c:forEach>
-                                    </c:if>
+                            <c:if test="${pagenation.currentPage!=1}">
+                                <li><a href="/admin/category-page-${pagenation.currentPage-1}" > << </a></li>
                             </c:if>
-
-                            <c:if test="${pagenation.lastPage > 10}">
-                                <ul class="pagination">
-                                    <li><a href="#"><<</a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li class="disabled"><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a class="disabled">..</a></li>
-                                    <li><a href="#">57</a></li>
-                                    <li><a href="#">>></a></li>
-                                </ul>
+                            <c:forEach items="${pagenation.valueButtonsInPagination}" var="page" >
+                                    <li><a href="/admin/category-page-${page}" ><c:out value="${page}"/></a></li>
+                            </c:forEach>
+                            <c:if test="${pagenation.currentPage!=pagenation.lastPage}">
+                                <li><a href="/admin/category-page-${pagenation.currentPage+1}" > >> </a></li>
                             </c:if>
                             <%--<li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>

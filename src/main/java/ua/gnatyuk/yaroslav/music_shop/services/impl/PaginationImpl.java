@@ -10,6 +10,7 @@ import ua.gnatyuk.yaroslav.music_shop.services.Pagination;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,29 +43,22 @@ public class PaginationImpl implements Pagination{
     private int lastPage = 0;
     private int currentPage = 1;
     private int previousPage = 1;
-    private int MATERIALS_PER_ONE_PAGE = 1;
     private boolean isFirstPage = true;
     private boolean isLastPage = false;
 
-    public void setTypeOfMaterials(TypeOfMaterial type){
-        this.type = type;
+    private static final int MATERIALS_PER_ONE_PAGE = 1;
+    private static final int SIZE_OF_PAGINATION = 9;
 
-        if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
-            daoPersist = daoAlbum;
-        }
-
-        if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
-            daoPersist = daoArtist;
-        }
-
-        if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
-            daoPersist = daoCategory;
-        }
-    }
+    List<String> valueButtonsInPagination;
 
     @Transactional
     @Override
     public void buildNewPage(int currentPage, TypeOfMaterial type) {
+        if(currentPage < 0)
+            currentPage = 1;
+        if(currentPage > lastPage)
+            currentPage = lastPage;
+
         setTypeOfMaterials(type);
 
         previousPage = this.currentPage;
@@ -98,6 +92,67 @@ public class PaginationImpl implements Pagination{
 
         setQuantityOfMaterials();
         setQuantityOfPages();
+        setValueButtonsInPagination();
+    }
+
+    public void setTypeOfMaterials(TypeOfMaterial type){
+        this.type = type;
+
+        if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
+            daoPersist = daoAlbum;
+        }
+
+        if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
+            daoPersist = daoArtist;
+        }
+
+        if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
+            daoPersist = daoCategory;
+        }
+    }
+
+    public void setValueButtonsInPagination(){
+        valueButtonsInPagination = new ArrayList<>();
+
+        if(lastPage<SIZE_OF_PAGINATION){
+            for (int i = 1; i <= lastPage; i++) {
+                valueButtonsInPagination.add(Integer.toString(i));
+            }
+            return;
+        }
+
+        if(currentPage == 1 || currentPage == 2){
+            for (int i = 1; i <= 7; i++) {
+                valueButtonsInPagination.add(Integer.toString(i));
+            }
+            valueButtonsInPagination.add("..");
+            valueButtonsInPagination.add(Integer.toString(lastPage));
+            return;
+        }
+
+        if(currentPage > 2 && currentPage < lastPage - 1){
+            valueButtonsInPagination.add("1");
+            valueButtonsInPagination.add("..");
+            for (int i = currentPage; i < currentPage + 5; i++) {
+                if(i >= lastPage)
+                    break;
+                valueButtonsInPagination.add(Integer.toString(i));
+            }
+            valueButtonsInPagination.add("..");
+            valueButtonsInPagination.add(Integer.toString(lastPage));
+            return;
+        }
+
+        if(currentPage == lastPage || currentPage == lastPage - 1){
+            valueButtonsInPagination.add("1");
+            valueButtonsInPagination.add("..");
+            for (int i = lastPage-7; i <= lastPage; i++) {
+                if(i > lastPage)
+                    break;
+                valueButtonsInPagination.add(Integer.toString(i));
+            }
+            return;
+        }
     }
 
     @Transactional
@@ -129,10 +184,6 @@ public class PaginationImpl implements Pagination{
 
     public int getMATERIALS_PER_ONE_PAGE() {
         return MATERIALS_PER_ONE_PAGE;
-    }
-
-    public void setMATERIALS_PER_ONE_PAGE(int MATERIALS_PER_ONE_PAGE) {
-        this.MATERIALS_PER_ONE_PAGE = MATERIALS_PER_ONE_PAGE;
     }
 
     public long getQuantityOfMaterials() {
@@ -195,7 +246,9 @@ public class PaginationImpl implements Pagination{
         return type;
     }
 
-
+    public List<String> getValueButtonsInPagination() {
+        return valueButtonsInPagination;
+    }
 
     @Override
     public String toString() {

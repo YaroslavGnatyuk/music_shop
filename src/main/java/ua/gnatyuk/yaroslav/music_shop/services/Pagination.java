@@ -23,6 +23,7 @@ public interface Pagination<T> {
     List<Album> getAlbums();
     List<Category> getCategories();
     List<Artist> getArtists();
+    List<String> getValueButtonsInPagination();
     int getCurrentPage();
     int getPreviousPage();
 }

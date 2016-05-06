@@ -131,6 +131,5 @@ public class DaoTest {
         int CURRENT_PAGE = 2;
         pagination.buildNewPage(CURRENT_PAGE,PaginationImpl.TypeOfMaterial.CATEGORY);
         System.out.println(pagination);
-        System.out.println(pagination.getQuantityOfMaterials());
     }
 }
