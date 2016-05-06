@@ -15,15 +15,12 @@ public interface Pagination<T> {
     int FIRST_PAGE = 1;
 
     List getPage(int number);
-
-    void setQuantityOfMaterials();
     long getQuantityOfMaterials();
-    void setTypeOfMaterials(PaginationImpl.TypeOfMaterial type);
     int getLastPage();
     List<Album> getAlbums();
     List<Category> getCategories();
     List<Artist> getArtists();
     List<String> getValueButtonsInPagination();
-    int getCurrentPage();
+    Integer getCurrentPage();
     int getPreviousPage();
 }

@@ -22,11 +22,9 @@ public class PaginationImpl implements Pagination{
     @Inject
     @Named(value = "artistDAO")
     private DaoPersist<Artist> daoArtist;
-
     @Inject
     @Named(value = "categoryDAO")
     private DaoPersist<Category> daoCategory;
-
     @Inject
     @Named(value = "albumDao")
     private DaoPersist<Album> daoAlbum;
@@ -40,11 +38,9 @@ public class PaginationImpl implements Pagination{
     TypeOfMaterial type;
 
     private long quantityOfMaterials;
-    private int lastPage = 0;
-    private int currentPage = 1;
+    private int lastPage = 1;
+    private Integer currentPage = 1;
     private int previousPage = 1;
-    private boolean isFirstPage = true;
-    private boolean isLastPage = false;
 
     private static final int MATERIALS_PER_ONE_PAGE = 1;
     private static final int SIZE_OF_PAGINATION = 9;
@@ -54,29 +50,15 @@ public class PaginationImpl implements Pagination{
     @Transactional
     @Override
     public void buildNewPage(int currentPage, TypeOfMaterial type) {
-        if(currentPage < 0)
+        if(currentPage < 1)
             currentPage = 1;
-        if(currentPage > lastPage)
+        if(currentPage > lastPage )
             currentPage = lastPage;
 
         setTypeOfMaterials(type);
 
         previousPage = this.currentPage;
         this.currentPage = currentPage;
-
-        if(currentPage == 1) {
-            isFirstPage = true;
-        }
-        else{
-            isFirstPage = false;
-        }
-
-        if(currentPage == lastPage){
-            isLastPage = true;
-        }
-        else{
-            isLastPage = false;
-        }
 
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
             albums = daoPersist.getMaterialsForOnePage(currentPage* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
@@ -95,7 +77,7 @@ public class PaginationImpl implements Pagination{
         setValueButtonsInPagination();
     }
 
-    public void setTypeOfMaterials(TypeOfMaterial type){
+    private void setTypeOfMaterials(TypeOfMaterial type){
         this.type = type;
 
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
@@ -111,7 +93,7 @@ public class PaginationImpl implements Pagination{
         }
     }
 
-    public void setValueButtonsInPagination(){
+    private void setValueButtonsInPagination(){
         valueButtonsInPagination = new ArrayList<>();
 
         if(lastPage<SIZE_OF_PAGINATION){
@@ -156,7 +138,7 @@ public class PaginationImpl implements Pagination{
     }
 
     @Transactional
-    public void setQuantityOfMaterials() {
+    private void setQuantityOfMaterials() {
         this.quantityOfMaterials = daoPersist.getTotalRecords();
     }
 
@@ -174,7 +156,7 @@ public class PaginationImpl implements Pagination{
         return null;
     }
 
-    public int getCurrentPage() {
+    public Integer getCurrentPage() {
         return currentPage;
     }
 
@@ -208,14 +190,6 @@ public class PaginationImpl implements Pagination{
 
     public int getPreviousPage() {
         return previousPage;
-    }
-
-    public boolean isFirstPage() {
-        return isFirstPage;
-    }
-
-    public boolean isLastPage() {
-        return isLastPage;
     }
 
     public DaoPersist getDaoPersist() {
@@ -259,8 +233,6 @@ public class PaginationImpl implements Pagination{
                 ", currentPage=" + currentPage +
                 ", previousPage=" + previousPage +
                 ", MATERIALS_PER_ONE_PAGE=" + MATERIALS_PER_ONE_PAGE +
-                ", isFirstPage=" + isFirstPage +
-                ", isLastPage=" + isLastPage +
                 '}';
     }
 }
