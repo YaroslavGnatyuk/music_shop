@@ -76,7 +76,7 @@
 
                         <div class="col-lg-3">
                              <span class="span12">
-                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-album-by-id">
+                                <form id="custom-search-form" method="post" class="form-search form-horizontal pull-right" action="/admin/find-category-by-id">
                                     <span class="input-append span12">
                                         <input type="text" placeholder="Search" name="id" />
                                         <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
@@ -118,9 +118,36 @@
                     </div>
                     <div class="col col-xs-8">
                         <ul class="pagination hidden-xs pull-right">
-                            <c:forEach var="i" begin="1" end="${pagenation.lastPage}">
-                                <li><a href="/admin/category-page-${page}"><c:out value="${page}"/></a></li>
-                            </c:forEach>
+                            <c:if test="${pagenation.lastPage <= 10}">
+                                <c:set var="p" value="0" scope="session"/>
+                                    <c:if test="${p < pagenation.lastPage}">
+                                        <c:forEach var="p" begin="1" end="${pagenation.lastPage}">
+                                            <c:set var="p" value="${p + 1}" scope="session"/>
+
+                                            <c:if test="${p != pagenation.currentPage}">
+                                                <li><a href="/admin/category-page-${p}" ><c:out value="${p}"/></a></li>
+                                            </c:if>
+
+                                            <c:if test="${p == pagenation.currentPage}">
+                                                <li class="active"><a href="/admin/category-page-${p}" ><c:out value="${pagenation.currentPage}"/></a></li>
+                                            </c:if>
+
+                                        </c:forEach>
+                                    </c:if>
+                            </c:if>
+
+                            <c:if test="${pagenation.lastPage > 10}">
+                                <ul class="pagination">
+                                    <li><a href="#"><<</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li class="disabled"><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a class="disabled">..</a></li>
+                                    <li><a href="#">57</a></li>
+                                    <li><a href="#">>></a></li>
+                                </ul>
+                            </c:if>
                             <%--<li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
                             <li><a href="#">3</a></li>

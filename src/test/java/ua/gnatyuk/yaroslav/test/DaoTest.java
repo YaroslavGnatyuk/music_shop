@@ -37,6 +37,7 @@ public class DaoTest {
     @Inject
     private Pagination pagination;
 
+
     @Ignore
     @Test
     public void deleteDB(){
@@ -118,23 +119,18 @@ public class DaoTest {
         System.out.println("We have: " + userService.getCountAllUsers() + " users");
     }
 
+//    @Ignore
     @Test
-    public void getTotalStudios(){
-        Long totalElements = studioService.getCountAllStudios();
-        System.out.println("We have: " + totalElements + " studios");
-        int pages=0;
-
-        for (   ; totalElements > 0 ; totalElements-=4) {
-            pages++;
-        }
-
-        System.out.println("We have " + pages + " pages in pagination");
+    public void getAllMaterialsForCategories(){
+        Long totalElements = categoryService.getCountAllCategories();
+        System.out.println("We have " + totalElements + " materials");
     }
 
     @Test
     public void paginationForCategory(){
-        int CURRENT_PAGE = 1;
+        int CURRENT_PAGE = 2;
         pagination.buildNewPage(CURRENT_PAGE,PaginationImpl.TypeOfMaterial.CATEGORY);
         System.out.println(pagination);
+        System.out.println(pagination.getQuantityOfMaterials());
     }
 }

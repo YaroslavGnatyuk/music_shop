@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.services.AlbumService;
-import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
-import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
@@ -34,6 +31,8 @@ public class FindController {
     ArtistService artistService;
     @Inject
     StudioService studioService;
+    @Inject
+    Pagination pagination;
     @Inject
     SessionFactory sessionFactory;
 

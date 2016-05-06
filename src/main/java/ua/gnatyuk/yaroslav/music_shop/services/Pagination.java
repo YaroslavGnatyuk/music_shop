@@ -24,4 +24,5 @@ public interface Pagination<T> {
     List<Category> getCategories();
     List<Artist> getArtists();
     int getCurrentPage();
+    int getPreviousPage();
 }

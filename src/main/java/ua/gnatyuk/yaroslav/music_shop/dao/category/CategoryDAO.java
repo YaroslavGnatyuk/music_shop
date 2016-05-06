@@ -1,5 +1,6 @@
 package ua.gnatyuk.yaroslav.music_shop.dao.category;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
@@ -10,6 +11,7 @@ import java.util.List;
  * Created by yaroslav on 4/11/16.
  */
 @Repository
+@Lazy(value = true)
 public class CategoryDAO extends CrudOperations<Category>{
     @Override
     public List<Category> getTop10ByRate() {

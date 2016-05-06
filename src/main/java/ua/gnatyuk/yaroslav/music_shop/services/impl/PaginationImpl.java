@@ -39,10 +39,10 @@ public class PaginationImpl implements Pagination{
     TypeOfMaterial type;
 
     private long quantityOfMaterials;
-    private int lastPage;
+    private int lastPage = 0;
     private int currentPage = 1;
     private int previousPage = 1;
-    private int MATERIALS_PER_ONE_PAGE = 3;
+    private int MATERIALS_PER_ONE_PAGE = 1;
     private boolean isFirstPage = true;
     private boolean isLastPage = false;
 
@@ -70,9 +70,6 @@ public class PaginationImpl implements Pagination{
         previousPage = this.currentPage;
         this.currentPage = currentPage;
 
-        setQuantityOfMaterials();
-        setQuantityOfPages();
-
         if(currentPage == 1) {
             isFirstPage = true;
         }
@@ -89,29 +86,37 @@ public class PaginationImpl implements Pagination{
 
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
             albums = daoPersist.getMaterialsForOnePage(currentPage* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
-            albums.forEach(System.out::println);
         }
 
         if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
             artists = daoArtist.getMaterialsForOnePage(currentPage* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
-            artists.forEach(System.out::println);
         }
 
         if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
             categories = daoPersist.getMaterialsForOnePage((currentPage - 1)* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
-            categories.forEach(System.out::println);
         }
+
+        setQuantityOfMaterials();
+        setQuantityOfPages();
+    }
+
+    @Transactional
+    public void setQuantityOfMaterials() {
+        this.quantityOfMaterials = daoPersist.getTotalRecords();
+    }
+
+    public void setQuantityOfPages() {
+            lastPage = 0;
+            long materials = quantityOfMaterials;
+
+            for (   ; materials > 0; materials -= MATERIALS_PER_ONE_PAGE) {
+                lastPage++;
+            }
     }
 
     @Override
     public List getPage(int number) {
         return null;
-    }
-
-    public void setQuantityOfPages() {
-
-        for (; quantityOfMaterials > 0; quantityOfMaterials -= MATERIALS_PER_ONE_PAGE)
-            lastPage++;
     }
 
     public int getCurrentPage() {
@@ -140,11 +145,6 @@ public class PaginationImpl implements Pagination{
 
     public int getLastPage() {
         return lastPage;
-    }
-
-    @Transactional
-    public void setQuantityOfMaterials() {
-        this.quantityOfMaterials = daoPersist.getTotalRecords();
     }
 
     public enum TypeOfMaterial {
@@ -196,10 +196,11 @@ public class PaginationImpl implements Pagination{
     }
 
 
+
     @Override
     public String toString() {
         return "PaginationImpl{" +
-                ", type=" + type +
+                "type=" + type +
                 ", quantityOfMaterials=" + quantityOfMaterials +
                 ", lastPage=" + lastPage +
                 ", currentPage=" + currentPage +
