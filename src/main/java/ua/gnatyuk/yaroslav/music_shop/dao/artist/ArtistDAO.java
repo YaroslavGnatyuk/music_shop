@@ -82,7 +82,7 @@ public class ArtistDAO extends CrudOperations<Artist> {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Artist ")
                 .setFirstResult(begin)
-                .setMaxResults(begin+sizeOfPart)
+                .setMaxResults(sizeOfPart)
                 .list();
     }
 }

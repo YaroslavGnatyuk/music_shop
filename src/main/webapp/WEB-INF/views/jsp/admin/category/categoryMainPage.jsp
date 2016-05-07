@@ -66,7 +66,9 @@
                             <a href="/admin/add-category" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
                         </div>
                         <div class="col-lg-1">
-                            <a href="/admin/category-main-page" type="button" class="btn btn-sm btn-primary btn-success" style="margin-left: 5px"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                            <a href="/admin/category-main-page" type="button"
+                                class="btn btn-sm btn-primary btn-success" style="margin-left: 5px">
+                                <span class="glyphicon glyphicon-arrow-up"></span></a>
                         </div>
 
 
@@ -95,7 +97,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${pagenation.categories}" var="category">
+                            <c:forEach items="${page.categories}" var="category">
                                 <tr>
                                     <td align="center"  style="width: 150px">
                                         <a href="/admin/update-category/${category.id}" class="btn btn-default">
@@ -114,29 +116,28 @@
                 </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col col-xs-4">Page ${pagenation.currentPage} of ${pagenation.lastPage}
-                    </div>
+                    <div class="col col-xs-4">Page ${page.currentPage} of ${page.lastPage}</div>
                        <div class="col col-xs-8">
                         <ul class="pagination hidden-xs pull-right">
 
-                            <c:if test="${pagenation.currentPage!=1}">
-                                <li><a href="/admin/category-page-${pagenation.currentPage-1}" > << </a></li>
+                            <c:if test="${page.currentPage!=1}">
+                                <li><a href="/admin/category-page-${page.currentPage-1}" > << </a></li>
                             </c:if>
-                            <c:forEach items="${pagenation.valueButtonsInPagination}" var="page" >
-                                <c:if test="${ !(page.equalsIgnoreCase('..')) && page.equalsIgnoreCase(pagenation.currentPage.toString())}">
-                                    <li class="active"><a href="/admin/category-page-${page}" ><c:out value="${page}"/></a></li>
+                            <c:forEach items="${page.valueButtonsInPagination}" var="p" >
+                                <c:if test="${ !(p.equalsIgnoreCase('..')) && p.equalsIgnoreCase(page.currentPage.toString())}">
+                                    <li class="active"><a href="/admin/category-page-${p}" ><c:out value="${p}"/></a></li>
                                 </c:if>
 
-                                <c:if test="${ !(page.equalsIgnoreCase('..')) && !(page.equalsIgnoreCase(pagenation.currentPage.toString()))}">
-                                    <li><a href="/admin/category-page-${page}" ><c:out value="${page}"/></a></li>
+                                <c:if test="${ !(p.equalsIgnoreCase('..')) && !(p.equalsIgnoreCase(page.currentPage.toString()))}">
+                                    <li><a href="/admin/category-page-${p}" ><c:out value="${p}"/></a></li>
                                 </c:if>
 
-                                <c:if test="${ page.equalsIgnoreCase('..')}">
-                                    <li><a ><c:out value="${page}"/></a></li>
+                                <c:if test="${ p.equalsIgnoreCase('..')}">
+                                    <li><a ><c:out value="${p}"/></a></li>
                                 </c:if>
                             </c:forEach>
-                            <c:if test="${pagenation.currentPage!=pagenation.lastPage}">
-                                <li><a href="/admin/category-page-${pagenation.currentPage+1}" > >> </a></li>
+                            <c:if test="${page.currentPage!=page.lastPage}">
+                                <li><a href="/admin/category-page-${page.currentPage+1}" > >> </a></li>
                             </c:if>
                         </ul>
                     </div>

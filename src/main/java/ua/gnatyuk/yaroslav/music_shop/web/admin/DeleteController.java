@@ -3,11 +3,12 @@ package ua.gnatyuk.yaroslav.music_shop.web.admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.services.AlbumService;
-import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
-import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -26,29 +27,42 @@ public class DeleteController {
     ArtistService artistService;
     @Inject
     StudioService studioService;
+    @Inject
+    Page page;
 
     @RequestMapping(path = "/delete-studio/{id}",method = RequestMethod.GET)
     public ModelAndView showStudios(@PathVariable("id") Long id){
-        studioService.deleteStudio(studioService.findById(id));
-        return new ModelAndView("admin/studio/studioMainPage").addObject("studios",studioService.getAll());
+        Studio studio = studioService.findById(id);
+        page.setResultOfAction(studio,PageImpl.TypeOfMaterial.STUDIO);
+        studioService.deleteStudio(studio);
+
+        return new ModelAndView("admin/studio/studioMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/delete-artist/{id}",method = RequestMethod.GET)
     public ModelAndView deleteArtists (@PathVariable("id") Long id){
-        artistService.deleteArtist(artistService.findById(id));
-        List<Artist> artists = artistService.getAll();
-        return new ModelAndView("admin/artist/artistMainPage").addObject("artists",artists);
+        Artist artist = artistService.findById(id);
+        page.setResultOfAction(artist, PageImpl.TypeOfMaterial.ARTIST);
+        artistService.deleteArtist(artist);
+
+        return new ModelAndView("admin/artist/artistMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/delete-category/{id}",method = RequestMethod.GET)
     public ModelAndView deleteCategory(@PathVariable("id") Long id){
-        categoryService.deleteCategory(categoryService.findById(id));
-        return new ModelAndView("admin/category/categoryMainPage").addObject("categories",categoryService.getAll());
+        Category category = categoryService.findById(id);
+        page.setResultOfAction(category, PageImpl.TypeOfMaterial.CATEGORY);
+        categoryService.deleteCategory(category);
+
+        return new ModelAndView("admin/category/categoryMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/delete-album/{id}", method = RequestMethod.GET)
     public ModelAndView showAlbum(@PathVariable("id") Long id){
-        albumService.deleteAlbum(albumService.findById(id));
-        return new ModelAndView("/admin/album/albumMainPage").addObject("albums",albumService.getAll());
+        Album album = albumService.findById(id);
+        page.setResultOfAction(album, PageImpl.TypeOfMaterial.ALBUM);
+        albumService.deleteAlbum(album);
+
+        return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
     }
 }

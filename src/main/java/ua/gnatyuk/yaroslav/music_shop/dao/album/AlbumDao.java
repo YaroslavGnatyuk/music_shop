@@ -75,7 +75,7 @@ public class AlbumDao extends CrudOperations<Album> {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Album ")
                 .setFirstResult(begin)
-                .setMaxResults(begin+sizeOfPart)
+                .setMaxResults(sizeOfPart)
                 .list();
     }
 }

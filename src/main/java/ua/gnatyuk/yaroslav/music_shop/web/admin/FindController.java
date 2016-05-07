@@ -11,6 +11,7 @@ import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -32,50 +33,40 @@ public class FindController {
     @Inject
     StudioService studioService;
     @Inject
-    Pagination pagination;
+    Page page;
     @Inject
     SessionFactory sessionFactory;
 
-
-
     @RequestMapping(path = "/find-studio-by-id",method = RequestMethod.POST)
     public ModelAndView findStudio(@RequestParam Map<String, String> map){
-
         Studio studio = studioService.findById(Long.parseLong(map.get("id")));
-        System.out.println(studio);
-        List<Studio> studios = new ArrayList<>();
-        studios.add(studio);
-        return new ModelAndView("admin/studio/studioMainPage").addObject("studios",studios);
+        page.setResultOfAction(studio, PageImpl.TypeOfMaterial.STUDIO);
+
+        return new ModelAndView("admin/studio/studioMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/find-album-by-id",method = RequestMethod.POST)
     public ModelAndView findAlbum(@RequestParam Map<String, String> map){
-
         Album album = albumService.findById(Long.parseLong(map.get("id")));
-        List<Album> albums = new ArrayList<>();
-        albums.add(album);
+        page.setResultOfAction(album, PageImpl.TypeOfMaterial.ALBUM);
 
-        return new ModelAndView("/admin/album/albumMainPage").addObject("albums",albums);
+        return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/find-category-by-id", method = RequestMethod.POST)
     public ModelAndView findCategory(@RequestParam Map<String,String> map){
 
         Category category = categoryService.findById(Long.parseLong(map.get("id")));
-        List<Category> categories = new ArrayList<Category>();
-        categories.add(category);
+        page.setResultOfAction(category, PageImpl.TypeOfMaterial.CATEGORY);
 
-        return new ModelAndView("/admin/category/categoryMainPage").addObject("categories",categories);
+        return new ModelAndView("/admin/category/categoryMainPage").addObject("page",page);
     }
 
     @RequestMapping(path="/find-artist-by-id", method = RequestMethod.POST)
     public ModelAndView findArtist(@RequestParam Map<String,String> request){
 
         Artist artist= artistService.findById(Long.parseLong(request.get("id")));
-
-        List<Artist> artists= new ArrayList<>();
-        artists.add(artist);
-        return new ModelAndView("admin/artist/artistMainPage")
-                .addObject("artists",artists);
+        page.setResultOfAction(artist, PageImpl.TypeOfMaterial.ARTIST);
+        return new ModelAndView("admin/artist/artistMainPage").addObject("page",page);
     }
 }

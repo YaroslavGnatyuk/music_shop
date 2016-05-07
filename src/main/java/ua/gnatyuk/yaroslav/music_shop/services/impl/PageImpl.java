@@ -6,18 +6,21 @@ import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
-import ua.gnatyuk.yaroslav.music_shop.services.Pagination;
+import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.services.Page;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by yaroslav on 5/2/16.
  */
 @Service
-public class PaginationImpl implements Pagination{
+public class PageImpl implements Page {
 
     @Inject
     @Named(value = "artistDAO")
@@ -28,12 +31,16 @@ public class PaginationImpl implements Pagination{
     @Inject
     @Named(value = "albumDao")
     private DaoPersist<Album> daoAlbum;
+    @Inject
+    @Named(value = "studioDAO")
+    private  DaoPersist<Studio> daoStudio;
 
     private DaoPersist daoPersist;
 
     List<Album> albums;
     List<Category> categories;
     List<Artist> artists;
+    List<Studio> studios;
 
     TypeOfMaterial type;
 
@@ -42,7 +49,7 @@ public class PaginationImpl implements Pagination{
     private Integer currentPage = 1;
     private int previousPage = 1;
 
-    private static final int MATERIALS_PER_ONE_PAGE = 1;
+    private static final int MATERIALS_PER_ONE_PAGE = 3;
     private static final int SIZE_OF_PAGINATION = 9;
 
     List<String> valueButtonsInPagination;
@@ -61,17 +68,20 @@ public class PaginationImpl implements Pagination{
         this.currentPage = currentPage;
 
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
-            albums = daoPersist.getMaterialsForOnePage(currentPage* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            albums = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
         }
 
         if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
-            artists = daoArtist.getMaterialsForOnePage(currentPage* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            artists = daoArtist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
         }
 
         if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
-            categories = daoPersist.getMaterialsForOnePage((currentPage - 1)* MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            categories = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
         }
 
+        if (this.type.name().equals(TypeOfMaterial.STUDIO.toString())){
+            studios = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+        }
         setQuantityOfMaterials();
         setQuantityOfPages();
         setValueButtonsInPagination();
@@ -91,6 +101,10 @@ public class PaginationImpl implements Pagination{
         if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
             daoPersist = daoCategory;
         }
+
+        if (this.type.name().equals(TypeOfMaterial.STUDIO.toString())){
+            daoPersist = daoStudio;
+        }
     }
 
     private void setValueButtonsInPagination(){
@@ -99,6 +113,7 @@ public class PaginationImpl implements Pagination{
         if(lastPage<SIZE_OF_PAGINATION){
             for (int i = 1; i <= lastPage; i++) {
                 valueButtonsInPagination.add(Integer.toString(i));
+                System.out.println(valueButtonsInPagination.size());
             }
             return;
         }
@@ -151,6 +166,33 @@ public class PaginationImpl implements Pagination{
             }
     }
 
+    public void setResultOfAction(Object element, PageImpl.TypeOfMaterial type){
+
+        if (type.name().equals(TypeOfMaterial.ALBUM.toString())){
+            albums.clear();
+            albums.add((Album) element);
+        }
+
+        if (type.name().equals(TypeOfMaterial.ARTIST.toString())){
+            artists.clear();
+            artists.add((Artist)element);
+        }
+
+        if (type.name().equals(TypeOfMaterial.CATEGORY.toString())){
+            categories.clear();
+            categories.add((Category) element);
+        }
+
+        if (type.name().equals(TypeOfMaterial.STUDIO.toString())){
+            studios.clear();
+            studios.add((Studio) element);
+        }
+    }
+
+    public List<Studio> getStudios() {
+        return studios;
+    }
+
     @Override
     public List getPage(int number) {
         return null;
@@ -181,7 +223,7 @@ public class PaginationImpl implements Pagination{
     }
 
     public enum TypeOfMaterial {
-        ARTIST,CATEGORY,ALBUM
+        ARTIST,CATEGORY,ALBUM,STUDIO
     }
 
     public DaoPersist<Artist> getDaoArtist() {

@@ -100,7 +100,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${artists}" var="artist">
+                    <c:forEach items="${page.artists}" var="artist">
                         <tr>
                             <td align="center"  style="width: 150px">
                                 <a href="/admin/update-artist/${artist.id}" class="btn btn-default">
@@ -124,19 +124,28 @@
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col col-xs-4">Page 1 of 5
-                    </div>
+                    <div class="col col-xs-4">Page ${page.currentPage} of ${page.lastPage}</div>
                     <div class="col col-xs-8">
                         <ul class="pagination hidden-xs pull-right">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                        <ul class="pagination visible-xs pull-right">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">»</a></li>
+                            <c:if test="${page.currentPage!=1}">
+                                <li><a href="/admin/artist-page-${page.currentPage-1}" > << </a></li>
+                            </c:if>
+                            <c:forEach items="${page.valueButtonsInPagination}" var="p" >
+                                <c:if test="${ !(p.equalsIgnoreCase('..')) && p.equalsIgnoreCase(page.currentPage.toString())}">
+                                    <li class="active"><a href="/admin/artist-page-${p}" ><c:out value="${p}"/></a></li>
+                                </c:if>
+
+                                <c:if test="${ !(p.equalsIgnoreCase('..')) && !(p.equalsIgnoreCase(page.currentPage.toString()))}">
+                                    <li><a href="/admin/artist-page-${p}" ><c:out value="${p}"/></a></li>
+                                </c:if>
+
+                                <c:if test="${ p.equalsIgnoreCase('..')}">
+                                    <li><a ><c:out value="${p}"/></a></li>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${page.currentPage!=page.lastPage}">
+                                <li><a href="/admin/artist-page-${page.currentPage+1}" > >> </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>

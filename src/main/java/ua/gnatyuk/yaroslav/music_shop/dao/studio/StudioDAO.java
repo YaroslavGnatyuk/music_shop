@@ -62,7 +62,7 @@ public class StudioDAO extends CrudOperations<Studio>{
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Studio")
                 .setFirstResult(begin)
-                .setMaxResults(begin+sizeOfPart)
+                .setMaxResults(sizeOfPart)
                 .list();
     }
 }

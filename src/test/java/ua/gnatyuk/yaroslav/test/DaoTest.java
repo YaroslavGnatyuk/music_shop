@@ -11,7 +11,7 @@ import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
-import ua.gnatyuk.yaroslav.music_shop.services.impl.PaginationImpl;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 
@@ -35,7 +35,7 @@ public class DaoTest {
     @Inject
     private UserService userService;
     @Inject
-    private Pagination pagination;
+    private Page page;
 
 
     @Ignore
@@ -126,10 +126,11 @@ public class DaoTest {
         System.out.println("We have " + totalElements + " materials");
     }
 
+   /* @Ignore*/
     @Test
     public void paginationForCategory(){
-        int CURRENT_PAGE = 2;
-        pagination.buildNewPage(CURRENT_PAGE,PaginationImpl.TypeOfMaterial.CATEGORY);
-        System.out.println(pagination);
+        int CURRENT_PAGE = 1;
+        page.buildNewPage(CURRENT_PAGE, PageImpl.TypeOfMaterial.ALBUM);
+        System.out.println(page);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
-import ua.gnatyuk.yaroslav.music_shop.services.impl.PaginationImpl;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 
@@ -28,40 +28,64 @@ public class AdminController {
   @Inject
   ArtistService artistService;
   @Inject
-  Pagination pagination;
+  Page page;
 
   @RequestMapping(path = "/category-main-page",method = RequestMethod.GET)
   public ModelAndView mainCategory(){
 
-    pagination.buildNewPage(Pagination.FIRST_PAGE,PaginationImpl.TypeOfMaterial.CATEGORY);
+    page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.CATEGORY);
     return new ModelAndView("/admin/category/categoryMainPage")
-            .addObject("pagenation",pagination);
+            .addObject("page", page);
   }
 
   @RequestMapping(path = "/category-page-{id}",method = RequestMethod.GET)
   public ModelAndView categoryNavigate(@PathVariable("id") Integer id){
 
-    pagination.buildNewPage(id,PaginationImpl.TypeOfMaterial.CATEGORY);
+    page.buildNewPage(id, PageImpl.TypeOfMaterial.CATEGORY);
     return new ModelAndView("/admin/category/categoryMainPage")
-            .addObject("pagenation",pagination);
+            .addObject("page", page);
   }
 
   @RequestMapping(path = "/artist-main-page", method = RequestMethod.GET)
   public ModelAndView mainArtist(){
+    page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTIST);
     return new ModelAndView("/admin/artist/artistMainPage")
-            .addObject("artists",artistService.getAll());
+            .addObject("page",page);
+  }
+
+  @RequestMapping(path = "/artist-page-{id}",method = RequestMethod.GET)
+  public ModelAndView artistNavigate(@PathVariable("id") Integer id){
+    page.buildNewPage(id, PageImpl.TypeOfMaterial.ARTIST);
+    return new ModelAndView("/admin/artist/artistMainPage")
+            .addObject("page", page);
   }
 
   @RequestMapping(path = "/album-main-page", method = RequestMethod.GET)
   public ModelAndView mainAlbum(){
+    page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ALBUM);
     return new ModelAndView("/admin/album/albumMainPage")
-            .addObject("albums",albumService.getAll());
+            .addObject("page",page);
+  }
+
+  @RequestMapping(path = "/album-page-{id}",method = RequestMethod.GET)
+  public ModelAndView albumNavigate(@PathVariable("id") Integer id){
+    page.buildNewPage(id, PageImpl.TypeOfMaterial.ALBUM);
+    return new ModelAndView("/admin/album/albumMainPage")
+            .addObject("page", page);
   }
 
   @RequestMapping(path = "/studio-main-page", method = RequestMethod.GET)
   public ModelAndView mainStudio(){
+    page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.STUDIO);
     return new ModelAndView("/admin/studio/studioMainPage")
-            .addObject("studios",studioService.getAll());
+            .addObject("page",page);
+  }
+
+  @RequestMapping(path = "/studio-page-{id}",method = RequestMethod.GET)
+  public ModelAndView studioNavigate(@PathVariable("id") Integer id){
+    page.buildNewPage(id, PageImpl.TypeOfMaterial.STUDIO);
+    return new ModelAndView("/admin/studio/studioMainPage")
+            .addObject("page", page);
   }
 }
 

@@ -3,14 +3,12 @@ package ua.gnatyuk.yaroslav.music_shop.web.admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.services.AlbumService;
-import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
-import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -31,6 +29,8 @@ public class UpdateController {
     StudioService studioService;
     @Inject
     CategoryService categoryService;
+    @Inject
+    Page page;
 
     @RequestMapping(path = "/update-studio/{id}",method = RequestMethod.GET)
     public ModelAndView toUpdateStudio(@PathVariable("id") Long id){
@@ -39,8 +39,9 @@ public class UpdateController {
 
     @RequestMapping(path = "/update-studio/{id}",method = RequestMethod.POST)
     public ModelAndView updateStudioCommit(@ModelAttribute Studio studio){
+        page.setResultOfAction(studio,PageImpl.TypeOfMaterial.STUDIO);
        studioService.updateStudio(studio);
-       return new ModelAndView("admin/studio/studioMainPage").addObject("studios",studioService.getAll());
+       return new ModelAndView("admin/studio/studioMainPage").addObject("page",page);
     }
 
 
@@ -72,9 +73,10 @@ public class UpdateController {
         album.setArtist(artist);
         album.setReleaseDate(date);
 
+        page.setResultOfAction(album, PageImpl.TypeOfMaterial.ALBUM);
         albumService.updateAlbum(album);
 
-        return new ModelAndView("/admin/album/albumMainPage").addObject("albums",albumService.getAll());
+        return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/update-category/{id}",method = RequestMethod.GET)
@@ -86,8 +88,9 @@ public class UpdateController {
     @RequestMapping(path = "/update-category/{id}",method = RequestMethod.POST)
     public ModelAndView updateCategoryCommit(@ModelAttribute Category category){
         categoryService.updateCategory(category);
+        page.setResultOfAction(category, PageImpl.TypeOfMaterial.CATEGORY);
         return new ModelAndView("/admin/category/categoryMainPage")
-                .addObject("categories", categoryService.getAll());
+                .addObject("page", page);
     }
 
     @RequestMapping(path = "/update-artist/{id}",method = RequestMethod.GET)
@@ -106,9 +109,10 @@ public class UpdateController {
         artist.setCategory(categoryService.findByName(request.get("category.name")));
         artist.setStudio(studioService.findByName(request.get("studio.name")));
 
+        page.setResultOfAction(artist, PageImpl.TypeOfMaterial.ARTIST);
         artistService.updateArtist(artist);
 
-        return new ModelAndView("/admin/artist/artistMainPage").addObject("artists",artistService.getAll());
+        return new ModelAndView("/admin/artist/artistMainPage").addObject("page",page);
     }
 
 }

@@ -7,14 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.services.AlbumService;
-import ua.gnatyuk.yaroslav.music_shop.services.ArtistService;
-import ua.gnatyuk.yaroslav.music_shop.services.CategoryService;
-import ua.gnatyuk.yaroslav.music_shop.services.StudioService;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -36,6 +34,8 @@ public class AddController {
     StudioService studioService;
     @Inject
     AlbumService albumService;
+    @Inject
+    Page page;
 
     @RequestMapping(path = "/add-studio",method = RequestMethod.GET)
     public ModelAndView addStudio(){
@@ -43,11 +43,11 @@ public class AddController {
     }
 
     @RequestMapping(path = "/add-studio",method = RequestMethod.POST)
-    public ModelAndView confirmAddStudio(@ModelAttribute Studio studio, ModelMap model){
+    public ModelAndView confirmAddStudio(@ModelAttribute Studio studio){
+        page.setResultOfAction(studio, PageImpl.TypeOfMaterial.STUDIO);
         studioService.createStudio(studio);
-        model.addAttribute("result",studio);
 
-        return new ModelAndView("/admin/studio/studioMainPage");
+        return new ModelAndView("/admin/studio/studioMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/add-artist",method = RequestMethod.GET)
@@ -72,9 +72,10 @@ public class AddController {
         artist.setCategory(category);
         artist.setStudio(studio);
 
+        page.setResultOfAction(artist, PageImpl.TypeOfMaterial.ARTIST);
         artistService.createArtist(artist);
 
-        return new ModelAndView("/admin/artist/artistMainPage").addObject("artists",artistService.getAll());
+        return new ModelAndView("/admin/artist/artistMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/add-album",method = RequestMethod.GET)
@@ -101,9 +102,10 @@ public class AddController {
         album.setArtist(artist);
         album.setCategory(category);
 
+        page.setResultOfAction(album, PageImpl.TypeOfMaterial.ALBUM);
         albumService.createAlbum(album);
 
-        return new ModelAndView("/admin/album/albumMainPage").addObject("albums",albumService.getAll());
+        return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
     }
 
     @RequestMapping(path = "/add-category",method = RequestMethod.GET)
@@ -114,7 +116,7 @@ public class AddController {
     @RequestMapping(path = "/add-category",method = RequestMethod.POST)
     public ModelAndView addCategoryConfirm(@ModelAttribute Category category){
         categoryService.createCategory(category);
-        List<Category> categories = categoryService.getAll();
-        return new ModelAndView("/admin/category/categoryMainPage").addObject("categories",categories);
+        page.setResultOfAction(category, PageImpl.TypeOfMaterial.CATEGORY);
+        return new ModelAndView("/admin/category/categoryMainPage").addObject("page",page);
     }
 }
