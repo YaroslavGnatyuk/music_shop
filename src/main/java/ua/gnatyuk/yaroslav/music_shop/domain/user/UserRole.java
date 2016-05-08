@@ -28,7 +28,7 @@ public class UserRole {
     }
 
     public enum UserType{
-        ROLE_ADMIN,ROLE_USER;
+        ROLE_ADMIN,ROLE_USER
     }
 
     public void setUser_id(User user) {
