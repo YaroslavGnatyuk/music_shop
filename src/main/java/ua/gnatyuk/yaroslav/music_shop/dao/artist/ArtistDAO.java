@@ -85,5 +85,10 @@ public class ArtistDAO extends CrudOperations<Artist> {
                 .setMaxResults(sizeOfPart)
                 .list();
     }
+
+    @Override
+    public boolean isUsingEmail(String email) {
+        return false;
+    }
 }
 

@@ -78,4 +78,9 @@ public class AlbumDao extends CrudOperations<Album> {
                 .setMaxResults(sizeOfPart)
                 .list();
     }
+
+    @Override
+    public boolean isUsingEmail(String email) {
+        return false;
+    }
 }

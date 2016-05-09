@@ -12,8 +12,6 @@ import ua.gnatyuk.yaroslav.music_shop.services.Page;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -113,7 +111,6 @@ public class PageImpl implements Page {
         if(lastPage<SIZE_OF_PAGINATION){
             for (int i = 1; i <= lastPage; i++) {
                 valueButtonsInPagination.add(Integer.toString(i));
-                System.out.println(valueButtonsInPagination.size());
             }
             return;
         }
@@ -166,26 +163,26 @@ public class PageImpl implements Page {
             }
     }
 
-    public void setResultOfAction(Object element, PageImpl.TypeOfMaterial type){
+    public void setResultOfAction(Object result, PageImpl.TypeOfMaterial type){
 
         if (type.name().equals(TypeOfMaterial.ALBUM.toString())){
             albums.clear();
-            albums.add((Album) element);
+            albums.add((Album) result);
         }
 
         if (type.name().equals(TypeOfMaterial.ARTIST.toString())){
             artists.clear();
-            artists.add((Artist)element);
+            artists.add((Artist) result);
         }
 
         if (type.name().equals(TypeOfMaterial.CATEGORY.toString())){
             categories.clear();
-            categories.add((Category) element);
+            categories.add((Category) result);
         }
 
         if (type.name().equals(TypeOfMaterial.STUDIO.toString())){
             studios.clear();
-            studios.add((Studio) element);
+            studios.add((Studio) result);
         }
     }
 

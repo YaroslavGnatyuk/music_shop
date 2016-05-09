@@ -65,4 +65,9 @@ public class StudioDAO extends CrudOperations<Studio>{
                 .setMaxResults(sizeOfPart)
                 .list();
     }
+
+    @Override
+    public boolean isUsingEmail(String email) {
+        return false;
+    }
 }

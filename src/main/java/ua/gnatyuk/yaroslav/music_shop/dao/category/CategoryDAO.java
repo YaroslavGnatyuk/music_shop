@@ -68,4 +68,9 @@ public class CategoryDAO extends CrudOperations<Category>{
                 .setMaxResults(sizeOfPart)
                 .list();
     }
+
+    @Override
+    public boolean isUsingEmail(String email) {
+        return false;
+    }
 }

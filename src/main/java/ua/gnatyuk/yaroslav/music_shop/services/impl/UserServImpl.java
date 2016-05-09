@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.gnatyuk.yaroslav.music_shop.dao.user.CreateUserByUserDto;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
 import ua.gnatyuk.yaroslav.music_shop.services.UserService;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
@@ -27,6 +29,9 @@ public class UserServImpl implements UserDetailsService, UserService {
     @Inject
     @Named(value = "userDAO")
     DaoPersist<User> daoUser;
+
+    @Inject
+    CreateUserByUserDto newUser;
 
     @Transactional
     @Override
@@ -52,5 +57,23 @@ public class UserServImpl implements UserDetailsService, UserService {
     @Override
     public long getCountAllUsers() {
         return daoUser.getTotalRecords();
+    }
+
+    @Transactional
+    @Override
+    public boolean isExistThisEmail(String email) {
+        return daoUser.isUsingEmail(email);
+    }
+
+    @Transactional
+    @Override
+    public boolean isExistThisUsername(String username) {
+        return daoUser.findByName(username) == null ? false : true;
+    }
+
+    @Transactional
+    @Override
+    public void createNewUser(UserDto userDto) {
+        newUser.createUserByUserDto(userDto);
     }
 }
