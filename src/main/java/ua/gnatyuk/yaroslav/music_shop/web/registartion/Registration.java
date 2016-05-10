@@ -10,8 +10,6 @@ import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
 import ua.gnatyuk.yaroslav.music_shop.services.UserService;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by yaroslav on 4/30/16.
@@ -19,10 +17,8 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/registration")
 public class Registration {
-    Boolean regSuccessful;
-    List<String> warnings = new ArrayList<>(2);
-    private static final String EMAIL_EXIST = new String("This email already exists");
-    private static final String NAME_EXIST = new String("This name already exists");
+    Boolean[] message; // [0] - email already exist, [1] - username already exist, [2] - registration complete successful
+
     @Inject
     UserService userService;
     @Inject
@@ -35,26 +31,30 @@ public class Registration {
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView registrationComplete(@ModelAttribute("user") UserDto user){
-        warnings.clear();
 
         String username = user.getUsername();
         String email = user.getEmail();
-        if(userService.isExistThisEmail(email) || userService.isExistThisUsername(username)) {
-            if (userService.isExistThisEmail(email))
-                warnings.add(EMAIL_EXIST);
-            if (userService.isExistThisUsername(username))
-                warnings.add(NAME_EXIST);
-            regSuccessful = false;
+
+        boolean existEmail = userService.existThisEmail(email);
+        boolean existName = userService.existThisUsername(username);
+
+        message = new Boolean[3];
+
+        if(existEmail || existName) {
+            if (existName) {
+                message[0] = true;
+            }
+            if (existEmail) {
+                message[1] = true;
+            }
+            message[2] = false;
             return new ModelAndView("/registration/registration_form","user", new UserDto())
-                    .addObject("emailExist", warnings.get(0))
-                    .addObject("nameExist", warnings.get(1))
-                    .addObject("registration",regSuccessful);
+                    .addObject("message", message);
         }
         else{
-            regSuccessful = true;
+            message[2] = true;
             newUser.createUserByUserDto(user);
-            return new ModelAndView("/registration/registration_form","user", new UserDto())
-                    .addObject("registration",regSuccessful);
+            return new ModelAndView("/registration/registration_form","user", new UserDto()).addObject("warnings", message);
         }
     }
 }

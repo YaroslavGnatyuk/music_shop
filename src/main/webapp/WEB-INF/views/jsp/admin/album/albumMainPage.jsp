@@ -20,24 +20,24 @@
 <body>
 
 <div class="raw">
-    <div div class="col-lg-12" >
+    <div class="col-lg-12">
         <div class="page-header">
-
-            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px"><img src="/resources/img/corso-musica.jpg"
-                 class="img-rounded" align="center" width="300" height="100" >
+            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px" >
+                <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-5">
                 <h1>Music for life
-                    <small>Administrator page</small>
+                    <small>A lot of music for you!</small>
                 </h1>
             </div>
 
+            <div class="col-lg-3">
+                <div class="btn-group btn-group-lg" style="margin-left: 75px">
+                    <a type="button" class="btn btn-default" href="/">Main page</a>
+                    <a type="button" class="btn btn-default" href="/login?logout">Logout</a>
+                </div>
+            </div>
         </div>
-        <p>
-            Here you can update, create, find and delete records from database!
-            Be careful!
-        </p>
-
     </div>
 </div>
 
@@ -48,7 +48,7 @@
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>
             <li><a href="/admin/category-main-page">Category</a></li>
-            <li><a href="/login?logout">Exit</a></li>
+            <li><a href="/admin/user-main-page">User</a></li>
         </ul>
     </div>
 </div>

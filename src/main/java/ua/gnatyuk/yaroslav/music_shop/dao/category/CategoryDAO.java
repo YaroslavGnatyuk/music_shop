@@ -70,7 +70,7 @@ public class CategoryDAO extends CrudOperations<Category>{
     }
 
     @Override
-    public boolean isUsingEmail(String email) {
+    public boolean existThisEmail(String email) {
         return false;
     }
 }

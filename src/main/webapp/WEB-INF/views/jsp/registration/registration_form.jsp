@@ -18,28 +18,28 @@
 </head>
 <body class="body">
 
-<div class="container">
-
-    <form:form class="form-signin " action="/registration" commandName="user" method="post" role="form">
-        <h2 class="form-signin-heading" align="center">Registration</h2>
-        <form:input type="text" class="form-control" placeholder="Username" name="username" style="margin-bottom: 5px" path="username"/>
-        <h1>${nameExist}</h1>
-        <form:input type="text" class="form-control" placeholder="First name" name="first_name" style="margin-bottom: 5px" path="firstName"/>
-        <form:input type="text" class="form-control" placeholder="Last name" name="last_name" style="margin-bottom: 5px" path="lastName"/>
-        <form:input type="text" class="form-control" placeholder="Email address" name="email" style="margin-bottom: 5px" path="email"/>
-        <h1>${emailExist}</h1>
-        <form:input id = "pass" type="password" class="form-control" placeholder="Password" name="password" style="margin-bottom: 5px" path="password"/>
-        <input id = "confirm_pass" type="password" class="form-control" onkeyup="checkPass(); return false;" placeholder="Password confirm" name="password" style="margin-bottom: 5px" />
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/">Back to main page</a>
-    </form:form>
-
-</div> <!-- /container -->
+    <div class="container">
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+
+        <form:form class="form-signin " action="/registration" commandName="user" method="post" role="form">
+            <h2 class="form-signin-heading" align="center">Registration</h2>
+            ${ message[2] ? "<div class='alert alert-success'>Congratulation! You joined to us.</div>" : null}
+
+            <form:input type="text" class="form-control" placeholder="Username" name="username" style="margin-bottom: 5px" path="username"/>
+            ${ message[0] ? "<div class='alert alert-danger'>User with this name already exist!</div> " : null}
+            <form:input type="text" class="form-control" placeholder="First name" name="first_name" style="margin-bottom: 5px" path="firstName"/>
+            <form:input type="text" class="form-control" placeholder="Last name" name="last_name" style="margin-bottom: 5px" path="lastName"/>
+            <form:input type="text" class="form-control" placeholder="Email address" name="email" style="margin-bottom: 5px" path="email"/>
+            ${ message[1] ? "<div class='alert alert-danger'>User with this email already exist!</div> " : null}
+            <form:input id = "pass" type="password" class="form-control" placeholder="Password" name="password" style="margin-bottom: 5px" path="password"/>
+            <input id = "confirm_pass" type="password" class="form-control" onkeyup="checkPass(); return false;"
+                   placeholder="Password confirm" name="password" style="margin-bottom: 5px" />
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            <a class="btn btn-lg btn-primary btn-block" type="submit" href="/">Back to main page</a>
+        </form:form>
+    </div>
+
 </body>
 </html>

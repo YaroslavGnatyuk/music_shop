@@ -67,7 +67,7 @@ public class StudioDAO extends CrudOperations<Studio>{
     }
 
     @Override
-    public boolean isUsingEmail(String email) {
+    public boolean existThisEmail(String email) {
         return false;
     }
 }

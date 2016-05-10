@@ -61,13 +61,13 @@ public class UserServImpl implements UserDetailsService, UserService {
 
     @Transactional
     @Override
-    public boolean isExistThisEmail(String email) {
-        return daoUser.isUsingEmail(email);
+    public boolean existThisEmail(String email) {
+        return daoUser.existThisEmail(email);
     }
 
     @Transactional
     @Override
-    public boolean isExistThisUsername(String username) {
+    public boolean existThisUsername(String username) {
         return daoUser.findByName(username) == null ? false : true;
     }
 

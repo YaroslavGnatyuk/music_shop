@@ -87,7 +87,7 @@ public class ArtistDAO extends CrudOperations<Artist> {
     }
 
     @Override
-    public boolean isUsingEmail(String email) {
+    public boolean existThisEmail(String email) {
         return false;
     }
 }

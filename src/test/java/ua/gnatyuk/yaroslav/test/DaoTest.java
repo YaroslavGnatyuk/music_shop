@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-
 import java.util.Iterator;
 import java.util.Set;
 
@@ -142,7 +141,7 @@ public class DaoTest {
     @Test
     public void paginationForCategory(){
         int CURRENT_PAGE = 1;
-        page.buildNewPage(CURRENT_PAGE, PageImpl.TypeOfMaterial.ALBUM);
+        page.buildNewPage(CURRENT_PAGE, PageImpl.TypeOfMaterial.USER);
         System.out.println(page);
     }
 
@@ -173,16 +172,16 @@ public class DaoTest {
 
     @Test
     public void userEmailExist(){
-        assertEquals(userService.isExistThisEmail("some#1@email.com"),true);
-        assertEquals(userService.isExistThisEmail("some#2@email.com"),true);
-        assertEquals(userService.isExistThisEmail("some#3@email.com"),false);
+        assertEquals(userService.existThisEmail("some#1@email.com"),true);
+        assertEquals(userService.existThisEmail("some#2@email.com"),true);
+        assertEquals(userService.existThisEmail("some#3@email.com"),false);
     }
 
     @Test
     public void usernameExist(){
-        assertEquals(userService.isExistThisUsername("admin"),true);
-        assertEquals(userService.isExistThisUsername("user"),true);
-        assertEquals(userService.isExistThisUsername("some_human"),false);
+        assertEquals(userService.existThisUsername("admin"),true);
+        assertEquals(userService.existThisUsername("user"),true);
+        assertEquals(userService.existThisUsername("some_human"),false);
     }
 
     @Ignore
@@ -191,5 +190,15 @@ public class DaoTest {
         UserDto userDto = new UserDto();
         UserDto userDto1 = new UserDto("Michel", "Galustyan", "Gadya", "111", "wewweweww@e");
         newUser.createUserByUserDto(userDto1);
+    }
+
+    @Test
+    public void testList(){
+        String[] list = new String[2];
+        list[1] =new String("second place");
+
+        for (int i = 0; i < list.length; i++) {
+            System.out.println(list[i]);
+        }
     }
 }

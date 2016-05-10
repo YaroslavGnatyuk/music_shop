@@ -20,21 +20,24 @@
 <body>
 
 <div class="raw">
-    <div div class="col-lg-12">
+    <div class="col-lg-12">
         <div class="page-header">
-            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px">
+            <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px" >
                 <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-5">
                 <h1>Music for life
-                    <small>Administrator page</small>
+                    <small>A lot of music for you!</small>
                 </h1>
             </div>
+
+            <div class="col-lg-3">
+                <div class="btn-group btn-group-lg" style="margin-left: 75px">
+                    <a type="button" class="btn btn-default" href="/">Main page</a>
+                    <a type="button" class="btn btn-default" href="/login?logout">Logout</a>
+                </div>
+            </div>
         </div>
-        <p>
-            Here you can update, create, find and delete records from database!
-            Be careful!
-        </p>
     </div>
 </div>
 
@@ -46,7 +49,7 @@
             <li><a href="/admin/studio-main-page">Studio</a></li>
             <li><a href="/admin/album-main-page">Album</a></li>
             <li><a href="/admin/category-main-page">Category</a></li>
-            <li><a href="/login?logout">Exit</a></li>
+            <li><a href="/admin/user-main-page">User</a></li>
         </ul>
     </div>
 </div>
@@ -99,23 +102,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.studios}" var="studio">
+                    <c:forEach items="${page.studios}" var="user">
                         <tr>
                             <td align="center"  style="width: 150px">
-                                <a href="/admin/update-studio/${studio.id}" class="btn btn-default">
+                                <a href="/admin/update-studio/${user.id}" class="btn btn-default">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
-                                <a href="/admin/delete-studio/${studio.id}" class="btn btn-danger">
+                                <a href="/admin/delete-studio/${user.id}" class="btn btn-danger">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
-                            <td><c:out value="${studio.id}" /></td>
-                            <td><c:out value="${studio.name}" /></td>
-                            <td><c:out value="${studio.address.country}" /></td>
-                            <td><c:out value="${studio.address.city}" /></td>
-                            <td><c:out value="${studio.address.street}" /></td>
-                            <td><c:out value="${studio.address.house}" /></td>
-                            <td><c:out value="${studio.address.flat}" /></td>
+                            <td><c:out value="${user.id}" /></td>
+                            <td><c:out value="${user.name}" /></td>
+                            <td><c:out value="${user.address.country}" /></td>
+                            <td><c:out value="${user.address.city}" /></td>
+                            <td><c:out value="${user.address.street}" /></td>
+                            <td><c:out value="${user.address.house}" /></td>
+                            <td><c:out value="${user.address.flat}" /></td>
                         </tr>
                     </c:forEach>
                     </tbody>

@@ -4,6 +4,7 @@ import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import java.util.List;
@@ -16,15 +17,20 @@ public interface Page<T> {
     int FIRST_PAGE = 1;
 
     List getPage(int number);
+
     long getQuantityOfMaterials();
     int getLastPage();
+
+    List<User> getUsers();
     List<Album> getAlbums();
     List<Category> getCategories();
     List<Artist> getArtists();
-    List<String> getValueButtonsInPagination();
     List<Studio> getStudios();
+    List<String> getValueButtonsInPagination();
+
     Integer getCurrentPage();
     int getPreviousPage();
+
 
     void setResultOfAction(Object element, PageImpl.TypeOfMaterial type);
 }

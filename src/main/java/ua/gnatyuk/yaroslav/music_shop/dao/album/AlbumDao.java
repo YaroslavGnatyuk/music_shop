@@ -80,7 +80,7 @@ public class AlbumDao extends CrudOperations<Album> {
     }
 
     @Override
-    public boolean isUsingEmail(String email) {
+    public boolean existThisEmail(String email) {
         return false;
     }
 }

@@ -7,6 +7,7 @@ import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.Page;
 
 import javax.inject.Inject;
@@ -32,6 +33,9 @@ public class PageImpl implements Page {
     @Inject
     @Named(value = "studioDAO")
     private  DaoPersist<Studio> daoStudio;
+    @Inject
+    @Named(value = "userDAO")
+    private DaoPersist<User> daoUser;
 
     private DaoPersist daoPersist;
 
@@ -39,6 +43,7 @@ public class PageImpl implements Page {
     List<Category> categories;
     List<Artist> artists;
     List<Studio> studios;
+    List<User> users;
 
     TypeOfMaterial type;
 
@@ -51,6 +56,10 @@ public class PageImpl implements Page {
     private static final int SIZE_OF_PAGINATION = 9;
 
     List<String> valueButtonsInPagination;
+
+    public enum TypeOfMaterial {
+        ARTIST,CATEGORY,ALBUM,STUDIO,USER
+    }
 
     @Transactional
     @Override
@@ -80,6 +89,10 @@ public class PageImpl implements Page {
         if (this.type.name().equals(TypeOfMaterial.STUDIO.toString())){
             studios = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
         }
+
+        if (this.type.name().equals(TypeOfMaterial.USER.toString())){
+            users = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+        }
         setQuantityOfMaterials();
         setQuantityOfPages();
         setValueButtonsInPagination();
@@ -102,6 +115,9 @@ public class PageImpl implements Page {
 
         if (this.type.name().equals(TypeOfMaterial.STUDIO.toString())){
             daoPersist = daoStudio;
+        }
+        if (this.type.name().equals(TypeOfMaterial.USER.toString())){
+            daoPersist = daoUser;
         }
     }
 
@@ -184,83 +200,70 @@ public class PageImpl implements Page {
             studios.clear();
             studios.add((Studio) result);
         }
+
+        if (type.name().equals(TypeOfMaterial.USER.toString())){
+            users.clear();
+            users.add((User) result);
+        }
     }
 
+    @Override
     public List<Studio> getStudios() {
         return studios;
     }
-
+    @Override
+    public List<User> getUsers() { return users; }
+    @Override
+    public List<Album> getAlbums() {
+        return albums;
+    }
+    @Override
+    public List<Category> getCategories() {
+        return categories;
+    }
+    @Override
+    public List<Artist> getArtists() {
+        return artists;
+    }
     @Override
     public List getPage(int number) {
         return null;
     }
-
+    @Override
     public Integer getCurrentPage() {
         return currentPage;
+    }
+    @Override
+    public long getQuantityOfMaterials() {
+        return quantityOfMaterials;
+    }
+    @Override
+    public int getLastPage() {
+        return lastPage;
+    }
+    @Override
+    public int getPreviousPage() {
+        return previousPage;
+    }
+    @Override
+    public List<String> getValueButtonsInPagination() {
+        return valueButtonsInPagination;
     }
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
-
-    public int getMATERIALS_PER_ONE_PAGE() {
+    public int getMaterialsPerOnePage() {
         return MATERIALS_PER_ONE_PAGE;
     }
-
-    public long getQuantityOfMaterials() {
-        return quantityOfMaterials;
-    }
-
-    public void setLastPage(int lastPage) {
-        this.lastPage = lastPage;
-    }
-
-    public int getLastPage() {
-        return lastPage;
-    }
-
-    public enum TypeOfMaterial {
-        ARTIST,CATEGORY,ALBUM,STUDIO
-    }
-
     public DaoPersist<Artist> getDaoArtist() {
         return daoArtist;
     }
-
-    public int getPreviousPage() {
-        return previousPage;
-    }
-
-    public DaoPersist getDaoPersist() {
-        return daoPersist;
-    }
-
-    public DaoPersist<Album> getDaoAlbum() {
-        return daoAlbum;
-    }
-
-    public DaoPersist<Category> getDaoCategory() {
-        return daoCategory;
-    }
-
-    public List<Album> getAlbums() {
-        return albums;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public List<Artist> getArtists() {
-        return artists;
-    }
-
     public TypeOfMaterial getType() {
         return type;
     }
-
-    public List<String> getValueButtonsInPagination() {
-        return valueButtonsInPagination;
+    public void setLastPage(int lastPage) {
+        this.lastPage = lastPage;
     }
 
     @Override

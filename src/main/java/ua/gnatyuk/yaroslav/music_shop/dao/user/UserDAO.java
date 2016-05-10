@@ -13,8 +13,6 @@ import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;
 import javax.inject.Inject;
 import java.util.List;
 
-import static ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole.UserType.ROLE_USER;
-
 /**
  * Created by asutp on 25.04.16.
  */
@@ -63,11 +61,15 @@ public class UserDAO extends CrudOperations<User> implements CreateUserByUserDto
 
     @Override
     public List<User> getMaterialsForOnePage(int begin, int sizeOfPart) {
-        return null;
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM User")
+                .setFirstResult(begin)
+                .setMaxResults(sizeOfPart)
+                .list();
     }
 
     @Override
-    public boolean isUsingEmail(String email) {
+    public boolean existThisEmail(String email) {
         User user = (User) sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE :email = email")
                 .setParameter("email", email).uniqueResult();

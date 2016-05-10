@@ -21,5 +21,5 @@ public interface DaoPersist <T>{
     long getTotalRecords();
     List<T> getMaterialsForOnePage(int begin, int sizeOfPart);
 
-    public boolean isUsingEmail(String email);
+    public boolean existThisEmail(String email);
 }

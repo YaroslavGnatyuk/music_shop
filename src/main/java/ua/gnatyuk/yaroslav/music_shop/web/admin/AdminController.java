@@ -30,6 +30,22 @@ public class AdminController {
   @Inject
   Page page;
 
+  @RequestMapping(path = "/user-main-page",method = RequestMethod.GET)
+  public ModelAndView mainUser(){
+
+    page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.USER);
+    return new ModelAndView("/admin/user/userMainPage")
+            .addObject("page", page);
+  }
+
+  @RequestMapping(path = "/user-page-{id}",method = RequestMethod.GET)
+  public ModelAndView userNavigate(@PathVariable("id") Integer id){
+
+    page.buildNewPage(id, PageImpl.TypeOfMaterial.USER);
+    return new ModelAndView("/admin/user/userMainPage")
+            .addObject("page", page);
+  }
+
   @RequestMapping(path = "/category-main-page",method = RequestMethod.GET)
   public ModelAndView mainCategory(){
 

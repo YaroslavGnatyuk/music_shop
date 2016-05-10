@@ -7,7 +7,7 @@ import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
  */
 public interface UserService {
     long getCountAllUsers();
-    boolean isExistThisEmail(String email);
-    boolean isExistThisUsername(String username);
+    boolean existThisEmail(String email);
+    boolean existThisUsername(String username);
     void createNewUser(UserDto userDto);
 }
