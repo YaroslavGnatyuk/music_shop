@@ -32,11 +32,8 @@ public class Registration {
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView registrationComplete(@ModelAttribute("user") UserDto user){
 
-        String username = user.getUsername();
-        String email = user.getEmail();
-
-        boolean existEmail = userService.existThisEmail(email);
-        boolean existName = userService.existThisUsername(username);
+        boolean existEmail = userService.existThisEmail(user.getEmail());
+        boolean existName = userService.existThisUsername(user.getUsername());
 
         message = new Boolean[3];
 
@@ -53,8 +50,8 @@ public class Registration {
         }
         else{
             message[2] = true;
-            newUser.createUserByUserDto(user);
-            return new ModelAndView("/registration/registration_form","user", new UserDto()).addObject("warnings", message);
+            newUser.createNewUser(user);
+            return new ModelAndView("/registration/registration_form","user", user).addObject("message", message);
         }
     }
 }

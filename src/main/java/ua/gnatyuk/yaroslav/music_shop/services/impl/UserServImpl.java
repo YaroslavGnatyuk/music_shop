@@ -74,6 +74,6 @@ public class UserServImpl implements UserDetailsService, UserService {
     @Transactional
     @Override
     public void createNewUser(UserDto userDto) {
-        newUser.createUserByUserDto(userDto);
+        newUser.createNewUser(userDto);
     }
 }

@@ -3,8 +3,6 @@ package ua.gnatyuk.yaroslav.test;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.gnatyuk.yaroslav.music_shop.SpringConfig;
@@ -18,11 +16,6 @@ import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import java.util.Iterator;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -126,7 +119,7 @@ public class DaoTest {
     }
 
     @Test
-    public void getTotalUser(){
+    public void getAllUser(){
         System.out.println("We have: " + userService.getCountAllUsers() + " users");
     }
 
@@ -146,31 +139,6 @@ public class DaoTest {
     }
 
     @Test
-    public void testEncoder(){
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(encoder.encode("123456"));
-        assertEquals(encoder.matches("123456","$2a$10$9zxzXsshc5xqdoJxZ5VmsulakDSL27OOCAcEl90Jhfm4jiRy2MSPm"),true);
-    }
-
-    @Test
-    public void testUserDto(){
-        UserDto userDto = new UserDto();
-        UserDto userDto1 = new UserDto("Michel","Galustyan","Gadya","1234567","wewweweww@e");
-
-        Validator v = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<UserDto>> violations =  v.validate( userDto1 );
-
-        System.out.println(violations.size());
-
-        Iterator<ConstraintViolation<UserDto>> iter = violations.iterator();
-        while(iter.hasNext()){
-            ConstraintViolation<UserDto> userDtoConstraintViolation = iter.next();
-            System.out.println(userDtoConstraintViolation.getPropertyPath().toString() + " "
-                    + userDtoConstraintViolation.getMessage());
-        }
-    }
-
-    @Test
     public void userEmailExist(){
         assertEquals(userService.existThisEmail("some#1@email.com"),true);
         assertEquals(userService.existThisEmail("some#2@email.com"),true);
@@ -184,21 +152,10 @@ public class DaoTest {
         assertEquals(userService.existThisUsername("some_human"),false);
     }
 
-    @Ignore
+//    @Ignore
     @Test
-    public void testNewUser() {
-        UserDto userDto = new UserDto();
+    public void testRegisterNewUser() {
         UserDto userDto1 = new UserDto("Michel", "Galustyan", "Gadya", "111", "wewweweww@e");
-        newUser.createUserByUserDto(userDto1);
-    }
-
-    @Test
-    public void testList(){
-        String[] list = new String[2];
-        list[1] =new String("second place");
-
-        for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i]);
-        }
+        newUser.createNewUser(userDto1);
     }
 }

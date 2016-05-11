@@ -8,7 +8,6 @@
   Time: 8:53 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%--todo: I must make pagination on all pages --%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -34,7 +34,8 @@
             ${ message[1] ? "<div class='alert alert-danger'>User with this email already exist!</div> " : null}
             <form:input id = "pass" type="password" class="form-control" placeholder="Password" name="password" style="margin-bottom: 5px" path="password"/>
             <input id = "confirm_pass" type="password" class="form-control" onkeyup="checkPass(); return false;"
-                   placeholder="Password confirm" name="password" style="margin-bottom: 5px" />
+                   placeholder="Password confirm" name="password_confirm" style="margin-bottom: 5px" />
+            <p>${user.password}</p>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
             <a class="btn btn-lg btn-primary btn-block" type="submit" href="/">Back to main page</a>

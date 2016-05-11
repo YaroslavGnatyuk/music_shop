@@ -1,34 +1,34 @@
 package ua.gnatyuk.yaroslav.music_shop.domain.user;
 
 
-import org.hibernate.validator.constraints.Email;
+/*import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Size;*/
 
 /**
  * Created by yaroslav on 5/8/16.
  */
 public class UserDto {
-    @NotNull
-    @Size(min = 3, max = 16)
+   /* @NotNull
+    @Size(min = 3, max = 16)*/
     String firstName;
 
-    @NotNull
-    @Size(min = 3, max = 16)
+    /*@NotNull
+    @Size(min = 3, max = 16)*/
     String lastName;
 
-    @NotNull
-    @Size(min = 3, max = 16)
+    /*@NotNull
+    @Size(min = 3, max = 16)*/
     String username;
 
-    @NotNull
-    @Size(min = 7, max = 32)
+    /*@NotNull
+    @Size(min = 7, max = 32)*/
     String password;
 
-    @NotNull
+  /*  @NotNull
     @Size(min = 6, max = 32)
-    @Email
+    @Email*/
     String email;
 
     public UserDto(String firstName, String lastName, String username, String password, String email) {

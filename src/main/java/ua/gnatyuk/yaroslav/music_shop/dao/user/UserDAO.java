@@ -61,6 +61,8 @@ public class UserDAO extends CrudOperations<User> implements CreateUserByUserDto
 
     @Override
     public List<User> getMaterialsForOnePage(int begin, int sizeOfPart) {
+        Boolean.valueOf(true);
+
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM User")
                 .setFirstResult(begin)
@@ -79,22 +81,20 @@ public class UserDAO extends CrudOperations<User> implements CreateUserByUserDto
 
     @Transactional
     @Override
-    public void createUserByUserDto(UserDto userDto) {
+    public void createNewUser(UserDto userDto) {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         User newUser = new User();
 
         newUser.setFirstName(userDto.getFirstName());
         newUser.setLastName(userDto.getLastName());
         newUser.setEmail(userDto.getEmail());
-        newUser.setEnable(false);
+        newUser.setEnable(true);
         newUser.setUsername(userDto.getUsername());
-
-        UserRole role = new UserRole();
-        role.setRole(UserRole.UserType.ROLE_USER.name());
-        newUser.addRole(role);
-
         newUser.setPassword(encoder.encode(userDto.getPassword()));
 
+        UserRole role = new UserRole(newUser, UserRole.UserType.ROLE_USER.name());
+
         sessionFactory.getCurrentSession().persist(newUser);
+        sessionFactory.getCurrentSession().persist(role);
     }
 }

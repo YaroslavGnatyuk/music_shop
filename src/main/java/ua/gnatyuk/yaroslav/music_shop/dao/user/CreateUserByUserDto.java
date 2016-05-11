@@ -7,5 +7,5 @@ import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
  * Created by asutp on 09.05.16.
  */
 public interface CreateUserByUserDto {
-    void createUserByUserDto(UserDto userDto);
+    void createNewUser(UserDto userDto);
 }
