@@ -101,7 +101,7 @@ public class DaoTest {
 
     @Test/*(expected = NullPointerException.class)*/
     public void findArtistById(){
-        Long id = new Long(1);
+        long id = 1;
         assertEquals(artistService.findById(id).getName(),"Wu-tang clan");
     }
 
@@ -152,7 +152,7 @@ public class DaoTest {
         assertEquals(userService.existThisUsername("some_human"),false);
     }
 
-//    @Ignore
+    @Ignore
     @Test
     public void testRegisterNewUser() {
         UserDto userDto1 = new UserDto("Michel", "Galustyan", "Gadya", "111", "wewweweww@e");

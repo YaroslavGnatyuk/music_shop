@@ -64,8 +64,8 @@ public class AddController {
     @RequestMapping(path = "/add-artist",method = RequestMethod.POST)
     public ModelAndView confirmAddArtist(@ModelAttribute Artist artist, @RequestParam Map<String, String> request){
 
-        Studio studio = studioService.findByName(request.get("studio.name"));
-        Category category = categoryService.findByName(request.get("category.name"));
+        Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
+        Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
         LocalDate date = LocalDate.parse(request.get("date"));
 
         artist.setBirthday(date);
@@ -92,9 +92,9 @@ public class AddController {
 
     @RequestMapping(path = "/add-album",method = RequestMethod.POST)
     public ModelAndView confirmAddAlbum(@ModelAttribute Album album, @RequestParam Map<String, String> request){
-        Studio studio = studioService.findByName(request.get("studio.name"));
-        Artist artist = artistService.findByName(request.get("artist.name"));
-        Category category = categoryService.findByName(request.get("category.name"));
+        Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
+        Artist artist = artistService.findById(Long.parseLong(request.get("artist.id")));
+        Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
         LocalDate date = LocalDate.parse(request.get("date"));
 
         album.setReleaseDate(date);

@@ -12,6 +12,7 @@ import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,9 +65,9 @@ public class UpdateController {
     public ModelAndView updateAlbumCommit(@ModelAttribute Album album, @RequestParam Map<String,String> request){
 
         LocalDate date = LocalDate.parse(request.get("date"));
-        Studio studio = studioService.findByName(album.getStudio().getName());
-        Category category = categoryService.findByName(album.getCategory().getName());
-        Artist artist = artistService.findByName(album.getArtist().getName());
+        Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
+        Artist artist = artistService.findById(Long.parseLong(request.get("artist.id")));
+        Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
 
         album.setStudio(studio);
         album.setCategory(category);
@@ -105,14 +106,23 @@ public class UpdateController {
 
     @RequestMapping(path = "/update-artist/{id}",method = RequestMethod.POST)
     public ModelAndView updateArtistCommit(@ModelAttribute Artist artist, @RequestParam Map<String,String> request){
-        artist.setBirthday(LocalDate.parse(request.get("date")));
-        artist.setCategory(categoryService.findByName(request.get("category.name")));
-        artist.setStudio(studioService.findByName(request.get("studio.name")));
+        List<String> strings = new ArrayList<>();
+        request.forEach((k,v)->strings.add(v));
+        strings.forEach(System.out::println);
+
+        System.out.println("result of request: " + request.get("studio.name"));
+
+        Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
+        Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
+        LocalDate date = LocalDate.parse(request.get("date"));
+
+        artist.setBirthday(date);
+        artist.setCategory(category);
+        artist.setStudio(studio);
 
         page.setResultOfAction(artist, PageImpl.TypeOfMaterial.ARTIST);
         artistService.updateArtist(artist);
 
         return new ModelAndView("/admin/artist/artistMainPage").addObject("page",page);
     }
-
 }

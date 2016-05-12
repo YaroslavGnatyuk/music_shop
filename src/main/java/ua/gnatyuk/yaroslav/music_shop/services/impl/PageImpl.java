@@ -132,7 +132,7 @@ public class PageImpl implements Page {
         }
 
         if(currentPage == 1 || currentPage == 2){
-            for (int i = 1; i <= 7; i++) {
+            for (int i = 1 ; i <= SIZE_OF_PAGINATION - 2 ; i++) {
                 valueButtonsInPagination.add(Integer.toString(i));
             }
             valueButtonsInPagination.add("..");
