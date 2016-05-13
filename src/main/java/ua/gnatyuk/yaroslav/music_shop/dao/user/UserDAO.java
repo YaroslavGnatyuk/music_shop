@@ -17,7 +17,7 @@ import java.util.List;
  * Created by asutp on 25.04.16.
  */
 @Repository
-public class UserDAO extends CrudOperations<User> implements CreateUserByUserDto{
+public class UserDAO extends CrudOperations<User> implements NewUser {
     @Inject
     SessionFactory sessionFactory;
 
@@ -60,9 +60,7 @@ public class UserDAO extends CrudOperations<User> implements CreateUserByUserDto
     }
 
     @Override
-    public List<User> getMaterialsForOnePage(int begin, int sizeOfPart) {
-        Boolean.valueOf(true);
-
+    public List getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM User")
                 .setFirstResult(begin)
@@ -76,7 +74,7 @@ public class UserDAO extends CrudOperations<User> implements CreateUserByUserDto
                 .createQuery("FROM User WHERE :email = email")
                 .setParameter("email", email).uniqueResult();
 
-        return (user == null) ? false : true;
+        return user != null;
     }
 
     @Transactional

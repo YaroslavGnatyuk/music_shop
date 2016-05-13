@@ -29,7 +29,7 @@ public class CategoryDAO extends CrudOperations<Category>{
     }
 
     @Override
-    public List<Category> getAll() {
+    public List getAll() {
         return sessionFactory
                 .getCurrentSession()
                 .createQuery("from Category")
@@ -38,30 +38,30 @@ public class CategoryDAO extends CrudOperations<Category>{
 
     @Override
     public Category findById(Long id) {
-        Category category = (Category) sessionFactory
+        return (Category) sessionFactory
                 .getCurrentSession()
                 .createQuery("from Category where :id = id")
                 .setParameter("id",id).uniqueResult();
-        return category;
     }
 
     @Override
     public Category findByName(String nameOfTheStudio) {
-
-        Category category = (Category) sessionFactory
+        return (Category) sessionFactory
                 .getCurrentSession()
                 .createQuery("from Category where :name = name")
                 .setParameter("name",nameOfTheStudio).uniqueResult();
-        return category;
     }
 
     @Override
     public long getTotalRecords() {
-        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Category").uniqueResult();
+        return (Long) sessionFactory
+                .getCurrentSession()
+                .createQuery("SELECT COUNT(*) FROM Category")
+                .uniqueResult();
     }
 
     @Override
-    public List<Category> getMaterialsForOnePage(int begin, int sizeOfPart) {
+    public List getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Category")
                 .setFirstResult(begin)

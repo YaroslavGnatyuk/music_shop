@@ -34,18 +34,21 @@ public class SpringSequrityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasRole("USER")
                 .and().formLogin()
                 .and().csrf().disable();*/
+
         http.authorizeRequests().antMatchers("/admin/**")
-                .access("hasRole('ROLE_ADMIN')")
+                .hasRole("ADMIN")
+                .antMatchers("/user/**")
+                .hasRole("USER")
                 .and()
                 .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/admin/artist-main-page")
+                    .defaultSuccessUrl("/admin/artist-main-page",true)
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")
-                .and().logout().logoutSuccessUrl("/login?logout")
+                .and().logout().logoutSuccessUrl("/login?logout").and().rememberMe().useSecureCookie(true)
 //                .and().exceptionHandling().accessDeniedPage("/403")
                 .and().csrf().disable();
-         }
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

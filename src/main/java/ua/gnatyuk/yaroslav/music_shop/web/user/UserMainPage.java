@@ -9,9 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by yaroslav on 4/24/16.
  */
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping(path = "/user")
 public class UserMainPage {
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(path = "/main-page",method = RequestMethod.GET)
     public ModelAndView userMainPage(){
         return new ModelAndView("/user/userMainPage").addObject("myVariable",new Integer(10));
     }

@@ -104,7 +104,7 @@ public class UpdateController {
                 .addObject("categories",categories);
     }
 
-    @RequestMapping(path = "/update-artist/{id}",method = RequestMethod.POST)
+    @RequestMapping(path = "/update-artist/{id_artist}",method = RequestMethod.POST)
     public ModelAndView updateArtistCommit(@ModelAttribute Artist artist, @RequestParam Map<String,String> request){
         List<String> strings = new ArrayList<>();
         request.forEach((k,v)->strings.add(v));

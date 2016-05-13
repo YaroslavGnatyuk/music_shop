@@ -16,20 +16,16 @@ public class ArtistDAO extends CrudOperations<Artist> {
 
     @Override
     public Artist findById(Long id) {
-        Artist artist = (Artist) sessionFactory.getCurrentSession()
+        return (Artist) sessionFactory.getCurrentSession()
                 .createQuery("from Artist where :id = id ")
                 .setParameter("id",id).uniqueResult();
-
-        return  artist;
     }
 
     @Override
     public Artist findByName(String nameOfArtist) {
-        Artist artist = (Artist) sessionFactory.getCurrentSession()
+        return (Artist) sessionFactory.getCurrentSession()
                 .createQuery("from Artist where :name = name")
                 .setParameter("name",nameOfArtist).uniqueResult();
-
-        return artist;
     }
 
     @Override
@@ -38,47 +34,37 @@ public class ArtistDAO extends CrudOperations<Artist> {
     }
 
     @Override
-    public List<Artist> getTop10ByRate() {
-
-        List<Artist> artists = sessionFactory.getCurrentSession()
+    public List getTop10ByRate() {
+        return  sessionFactory.getCurrentSession()
                 .createQuery("from Artist a order by a.rating desc")
                 .setMaxResults(10).list();
-
-        return artists;
-
     }
 
     @Transactional
     @Override
-    public List<Artist> getTop10BySales() {
-
-        List<Artist> artists = sessionFactory.getCurrentSession()
+    public List getTop10BySales() {
+        return sessionFactory.getCurrentSession()
                 .createQuery("from Artist a order by a.countOfSales desc")
                 .setMaxResults(10).list();
-
-        return artists;
     }
 
     @Transactional
     @Override
-    public List<Artist> getTheBest() {
-
-        List<Artist> artists = sessionFactory.getCurrentSession()
+    public List getTheBest() {
+        return sessionFactory.getCurrentSession()
                 .createQuery("from Artist a where a.rating > 6 order by a.countOfSales desc")
                 .setMaxResults(10).list();
-
-        return artists;
     }
 
     @Transactional
     @Override
-    public List<Artist> getAll() {
+    public List getAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Artist ").list();
     }
 
     @Override
-    public List<Artist> getMaterialsForOnePage(int begin, int sizeOfPart) {
+    public List getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Artist ")
                 .setFirstResult(begin)
@@ -91,4 +77,3 @@ public class ArtistDAO extends CrudOperations<Artist> {
         return false;
     }
 }
-

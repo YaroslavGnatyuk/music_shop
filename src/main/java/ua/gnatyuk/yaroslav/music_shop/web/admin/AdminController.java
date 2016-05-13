@@ -106,7 +106,7 @@ public class AdminController {
 }
 
 @Controller
-@RequestMapping(path = "/login")
+@RequestMapping(path = {"/login","/"})
 class LoginController {
   @RequestMapping( method = RequestMethod.GET)
   public String main (@ModelAttribute("user")User user) {

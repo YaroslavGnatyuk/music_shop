@@ -28,37 +28,36 @@ public class StudioDAO extends CrudOperations<Studio>{
     }
 
     @Override
-    public List<Studio> getAll() {
-        List<Studio> studios = sessionFactory.getCurrentSession().createQuery("from Studio").list();
-        return studios;
+    public List getAll() {
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("from Studio")
+                .list();
     }
 
     @Override
     public Studio findById(Long id) {
-
-        Studio studio = (Studio) sessionFactory.getCurrentSession()
+      return (Studio) sessionFactory.getCurrentSession()
                 .createQuery("from Studio where :id = id")
                 .setParameter("id",id).uniqueResult();
-
-        return studio;
     }
     @Override
     public Studio findByName(String nameOfTheStudio){
-
-        Studio studio = (Studio) sessionFactory.getCurrentSession()
+        return (Studio) sessionFactory.getCurrentSession()
                 .createQuery("from Studio where :name = name")
                 .setParameter("name",nameOfTheStudio).uniqueResult();
-
-        return studio;
     }
 
     @Override
     public long getTotalRecords() {
-        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Studio").uniqueResult();
+        return (Long) sessionFactory
+                .getCurrentSession()
+                .createQuery("SELECT COUNT(*) FROM Studio")
+                .uniqueResult();
     }
 
     @Override
-    public List<Studio> getMaterialsForOnePage(int begin, int sizeOfPart) {
+    public List getMaterialsForOnePage(int begin, int sizeOfPart) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Studio")
                 .setFirstResult(begin)

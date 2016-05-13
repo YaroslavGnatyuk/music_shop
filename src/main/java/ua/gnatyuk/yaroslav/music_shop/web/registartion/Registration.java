@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.dao.user.CreateUserByUserDto;
+import ua.gnatyuk.yaroslav.music_shop.dao.user.NewUser;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
-import ua.gnatyuk.yaroslav.music_shop.services.UserService;
+import ua.gnatyuk.yaroslav.music_shop.services.RegistrationService;
 
 import javax.inject.Inject;
 
@@ -20,9 +20,9 @@ public class Registration {
     Boolean[] message; // [0] - email already exist, [1] - username already exist, [2] - registration complete successful
 
     @Inject
-    UserService userService;
+    RegistrationService registrationService;
     @Inject
-    CreateUserByUserDto newUser;
+    NewUser newUser;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView registration(){
@@ -32,8 +32,8 @@ public class Registration {
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView registrationComplete(@ModelAttribute("user") UserDto user){
 
-        boolean existEmail = userService.existThisEmail(user.getEmail());
-        boolean existName = userService.existThisUsername(user.getUsername());
+        boolean existEmail = registrationService.existThisEmail(user.getEmail());
+        boolean existName = registrationService.existThisUsername(user.getUsername());
 
         message = new Boolean[3];
 

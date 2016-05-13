@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.gnatyuk.yaroslav.music_shop.SpringConfig;
 import ua.gnatyuk.yaroslav.music_shop.SpringSequrityConfig;
-import ua.gnatyuk.yaroslav.music_shop.dao.user.CreateUserByUserDto;
+import ua.gnatyuk.yaroslav.music_shop.dao.user.NewUser;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
@@ -35,11 +35,11 @@ public class DaoTest {
     @Inject
     private CategoryService categoryService;
     @Inject
-    private UserService userService;
+    private RegistrationService registrationService;
     @Inject
     private Page page;
     @Inject
-    private CreateUserByUserDto newUser;
+    private NewUser newUser;
 
 
     @Ignore
@@ -56,7 +56,7 @@ public class DaoTest {
 
     @Test
     public void findStudioById(){
-        Long id = new Long(1);
+        long id = 1;
         assertEquals(studioService.findById(id).getName(),"Студия Океана Эльзы");
     }
 
@@ -68,12 +68,13 @@ public class DaoTest {
 
     @Test
     public void updateStudio(){
-        Studio temp = studioService.findById(new Long(1));
+        long id = 1;
+        Studio temp = studioService.findById(id);
         temp.setName("Студия Новая для Океана Эльзы");
 
         studioService.updateStudio(temp);
 
-        assertEquals(studioService.findById(new Long(1)).getName(),"Студия Новая для Океана Эльзы");
+        assertEquals(studioService.findById(id).getName(),"Студия Новая для Океана Эльзы");
 
         temp.setName("Студия Океана Эльзы");
         studioService.updateStudio(temp);
@@ -120,7 +121,7 @@ public class DaoTest {
 
     @Test
     public void getAllUser(){
-        System.out.println("We have: " + userService.getCountAllUsers() + " users");
+        System.out.println("We have: " + registrationService.getCountAllUsers() + " users");
     }
 
 //    @Ignore
@@ -140,16 +141,16 @@ public class DaoTest {
 
     @Test
     public void userEmailExist(){
-        assertEquals(userService.existThisEmail("some#1@email.com"),true);
-        assertEquals(userService.existThisEmail("some#2@email.com"),true);
-        assertEquals(userService.existThisEmail("some#3@email.com"),false);
+        assertEquals(registrationService.existThisEmail("some#1@email.com"),true);
+        assertEquals(registrationService.existThisEmail("some#2@email.com"),true);
+        assertEquals(registrationService.existThisEmail("some#3@email.com"),false);
     }
 
     @Test
     public void usernameExist(){
-        assertEquals(userService.existThisUsername("admin"),true);
-        assertEquals(userService.existThisUsername("user"),true);
-        assertEquals(userService.existThisUsername("some_human"),false);
+        assertEquals(registrationService.existThisUsername("admin"),true);
+        assertEquals(registrationService.existThisUsername("user"),true);
+        assertEquals(registrationService.existThisUsername("some_human"),false);
     }
 
     @Ignore

@@ -38,7 +38,7 @@
             <p>${user.password}</p>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-            <a class="btn btn-lg btn-primary btn-block" type="submit" href="/">Back to main page</a>
+            <a class="btn btn-lg btn-primary btn-block" type="submit" href="/user/main-page">Back to main page</a>
         </form:form>
     </div>
 
