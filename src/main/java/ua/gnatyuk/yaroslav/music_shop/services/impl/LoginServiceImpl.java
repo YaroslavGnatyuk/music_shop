@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.user.CreateUserByUserDto;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
-import ua.gnatyuk.yaroslav.music_shop.services.UserService;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;
@@ -24,8 +23,9 @@ import java.util.Set;
 /**
  * Created by asutp on 25.04.16.
  */
+
 @Service
-public class UserServImpl implements UserDetailsService, UserService {
+public class LoginServiceImpl implements UserDetailsService, LoginServiceImpl {
     @Inject
     @Named(value = "userDAO")
     DaoPersist<User> daoUser;

@@ -5,7 +5,7 @@ import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
 /**
  * Created by asutp on 30.04.16.
  */
-public interface UserService {
+public interface RegistrationService {
     long getCountAllUsers();
     boolean existThisEmail(String email);
     boolean existThisUsername(String username);
