@@ -39,18 +39,17 @@ public class PageImpl implements Page {
 
     private DaoPersist daoPersist;
 
-    List<Album> albums;
-    List<Category> categories;
-    List<Artist> artists;
-    List<Studio> studios;
-    List<User> users;
+    List albums;
+    List categories;
+    List artists;
+    List studios;
+    List users;
 
     TypeOfMaterial type;
 
-    private long quantityOfMaterials;
+    private long totalOfMaterials;
     private int lastPage = 1;
     private Integer currentPage = 1;
-    private int previousPage = 1;
 
     private static final int MATERIALS_PER_ONE_PAGE = 3;
     private static final int SIZE_OF_PAGINATION = 9;
@@ -71,7 +70,6 @@ public class PageImpl implements Page {
 
         setTypeOfMaterials(type);
 
-        previousPage = this.currentPage;
         this.currentPage = currentPage;
 
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
@@ -161,18 +159,17 @@ public class PageImpl implements Page {
                     break;
                 valueButtonsInPagination.add(Integer.toString(i));
             }
-            return;
         }
     }
 
     @Transactional
     private void setQuantityOfMaterials() {
-        this.quantityOfMaterials = daoPersist.getTotalRecords();
+        this.totalOfMaterials = daoPersist.getTotalRecords();
     }
 
     public void setQuantityOfPages() {
             lastPage = 0;
-            long materials = quantityOfMaterials;
+            long materials = totalOfMaterials;
 
             for (   ; materials > 0; materials -= MATERIALS_PER_ONE_PAGE) {
                 lastPage++;
@@ -183,46 +180,46 @@ public class PageImpl implements Page {
 
         if (type.name().equals(TypeOfMaterial.ALBUM.toString())){
             albums.clear();
-            albums.add((Album) result);
+            albums.add(result);
         }
 
         if (type.name().equals(TypeOfMaterial.ARTIST.toString())){
             artists.clear();
-            artists.add((Artist) result);
+            artists.add(result);
         }
 
         if (type.name().equals(TypeOfMaterial.CATEGORY.toString())){
             categories.clear();
-            categories.add((Category) result);
+            categories.add(result);
         }
 
         if (type.name().equals(TypeOfMaterial.STUDIO.toString())){
             studios.clear();
-            studios.add((Studio) result);
+            studios.add(result);
         }
 
         if (type.name().equals(TypeOfMaterial.USER.toString())){
             users.clear();
-            users.add((User) result);
+            users.add(result);
         }
     }
 
     @Override
-    public List<Studio> getStudios() {
+    public List getStudios() {
         return studios;
     }
     @Override
-    public List<User> getUsers() { return users; }
+    public List getUsers() { return users; }
     @Override
-    public List<Album> getAlbums() {
+    public List getAlbums() {
         return albums;
     }
     @Override
-    public List<Category> getCategories() {
+    public List getCategories() {
         return categories;
     }
     @Override
-    public List<Artist> getArtists() {
+    public List getArtists() {
         return artists;
     }
     @Override
@@ -233,18 +230,14 @@ public class PageImpl implements Page {
     public Integer getCurrentPage() {
         return currentPage;
     }
-    @Override
-    public long getQuantityOfMaterials() {
-        return quantityOfMaterials;
+    public long getTotalOfMaterials() {
+        return totalOfMaterials;
     }
     @Override
     public int getLastPage() {
         return lastPage;
     }
-    @Override
-    public int getPreviousPage() {
-        return previousPage;
-    }
+
     @Override
     public List<String> getValueButtonsInPagination() {
         return valueButtonsInPagination;
@@ -270,10 +263,9 @@ public class PageImpl implements Page {
     public String toString() {
         return "PaginationImpl{" +
                 "type=" + type +
-                ", quantityOfMaterials=" + quantityOfMaterials +
+                ", totalOfMaterials=" + totalOfMaterials +
                 ", lastPage=" + lastPage +
                 ", currentPage=" + currentPage +
-                ", previousPage=" + previousPage +
                 ", MATERIALS_PER_ONE_PAGE=" + MATERIALS_PER_ONE_PAGE +
                 '}';
     }

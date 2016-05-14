@@ -32,8 +32,8 @@
 
             <div class="col-lg-3">
                 <div class="btn-group btn-group-lg" style="margin-left: 75px">
-                    <a type="button" class="btn btn-default" href="/">Main page</a>
-                    <a type="button" class="btn btn-default" href="/login?logout">Logout</a>
+                    <a type="button" class="btn btn-default" href="/user/main-page">Main page</a>
+                    <a type="button" class="btn btn-default" href="/logout">Logout</a>
                 </div>
             </div>
         </div>

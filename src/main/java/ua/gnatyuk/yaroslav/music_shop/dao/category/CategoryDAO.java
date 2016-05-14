@@ -62,7 +62,8 @@ public class CategoryDAO extends CrudOperations<Category>{
 
     @Override
     public List getMaterialsForOnePage(int begin, int sizeOfPart) {
-        return sessionFactory.getCurrentSession()
+        return sessionFactory
+                .getCurrentSession()
                 .createQuery("FROM Category")
                 .setFirstResult(begin)
                 .setMaxResults(sizeOfPart)

@@ -17,7 +17,6 @@ import javax.inject.Inject;
  */
 @Configuration
 @EnableWebSecurity
-
 public class SpringSequrityConfig extends WebSecurityConfigurerAdapter {
     @Inject
     UserDetailsService userDetailsService;
@@ -29,12 +28,6 @@ public class SpringSequrityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       /* http.authorizeRequests()
-                .antMatchers("/admin*").hasRole("ADMIN")
-                .anyRequest().hasRole("USER")
-                .and().formLogin()
-                .and().csrf().disable();*/
-
         http.authorizeRequests().antMatchers("/admin/**")
                 .hasRole("ADMIN")
                 .antMatchers("/user/**")
@@ -42,12 +35,13 @@ public class SpringSequrityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/admin/artist-main-page",true)
+                    .defaultSuccessUrl("/user/main-page",true)
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")
-                .and().logout().logoutSuccessUrl("/login?logout").and().rememberMe().useSecureCookie(true)
+                .and().logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies()
+                .and().rememberMe().disable()
+                .csrf().disable();
 //                .and().exceptionHandling().accessDeniedPage("/403")
-                .and().csrf().disable();
     }
 
     @Bean
@@ -55,5 +49,4 @@ public class SpringSequrityConfig extends WebSecurityConfigurerAdapter {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }
-
 }

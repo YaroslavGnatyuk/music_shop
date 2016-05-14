@@ -37,15 +37,19 @@ public class StudioDAO extends CrudOperations<Studio>{
 
     @Override
     public Studio findById(Long id) {
-      return (Studio) sessionFactory.getCurrentSession()
-                .createQuery("from Studio where :id = id")
-                .setParameter("id",id).uniqueResult();
+      return (Studio) sessionFactory
+              .getCurrentSession()
+              .createQuery("from Studio where :id = id")
+              .setParameter("id",id)
+              .uniqueResult();
     }
     @Override
     public Studio findByName(String nameOfTheStudio){
-        return (Studio) sessionFactory.getCurrentSession()
+        return (Studio) sessionFactory
+                .getCurrentSession()
                 .createQuery("from Studio where :name = name")
-                .setParameter("name",nameOfTheStudio).uniqueResult();
+                .setParameter("name",nameOfTheStudio)
+                .uniqueResult();
     }
 
     @Override
@@ -58,7 +62,8 @@ public class StudioDAO extends CrudOperations<Studio>{
 
     @Override
     public List getMaterialsForOnePage(int begin, int sizeOfPart) {
-        return sessionFactory.getCurrentSession()
+        return sessionFactory
+                .getCurrentSession()
                 .createQuery("FROM Studio")
                 .setFirstResult(begin)
                 .setMaxResults(sizeOfPart)

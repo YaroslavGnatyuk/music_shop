@@ -16,53 +16,69 @@ public class AlbumDao extends CrudOperations<Album> {
     @Transactional
     @Override
     public Album findById(Long id) {
-       return (Album) sessionFactory.getCurrentSession()
-                .createQuery("from Album where :id = id")
-                .setParameter("id",id).uniqueResult();
+       return (Album) sessionFactory
+               .getCurrentSession()
+               .createQuery("from Album where :id = id")
+               .setParameter("id",id)
+               .uniqueResult();
     }
 
     @Transactional
     @Override
     public Album findByName(String nameOfTheAlbum) {
-        return (Album) sessionFactory.getCurrentSession()
+        return (Album) sessionFactory
+                .getCurrentSession()
                 .createQuery("from Album where :name = name")
-                .setParameter("name",nameOfTheAlbum).uniqueResult();
+                .setParameter("name",nameOfTheAlbum)
+                .uniqueResult();
     }
 
     @Transactional
     @Override
     public List getTop10ByRate() {
-        return   sessionFactory.getCurrentSession()
+        return   sessionFactory
+                .getCurrentSession()
                 .createQuery("from Album a order by a.rating")
-                .setMaxResults(10).list();
+                .setMaxResults(10)
+                .list();
     }
 
     @Transactional
     @Override
     public List getTop10BySales() {
-        return sessionFactory.getCurrentSession()
+        return sessionFactory
+                .getCurrentSession()
                 .createQuery("from Album a order by a.countOfSales")
-                .setMaxResults(10).list();
+                .setMaxResults(10)
+                .list();
     }
 
     @Override
     @Transactional
     public List getTheBest() {
-        return  sessionFactory.getCurrentSession()
+        return  sessionFactory
+                .getCurrentSession()
                 .createQuery("from Album a where a.rating > 6 order by a.countOfSales")
-                .setMaxResults(10).list();
+                .setMaxResults(10)
+                .list();
     }
 
     @Transactional
     @Override
     public List getAll() {
-        return sessionFactory.getCurrentSession().createQuery("from Album").list();
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("from Album")
+                .list();
     }
 
 
     @Override
     public long getTotalRecords() {
-        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM Album").uniqueResult();
+        return (Long) sessionFactory
+                .getCurrentSession()
+                .createQuery("SELECT COUNT(*) FROM Album")
+                .uniqueResult();
     }
 
     @Override

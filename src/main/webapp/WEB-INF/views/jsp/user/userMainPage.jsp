@@ -7,6 +7,9 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="security"
+           uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0 Final//EN">
 <html>
 
@@ -21,7 +24,16 @@
     <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap-datetimepicker.min.js"></script>
 </head>
-<body>
+
+<%--style.html {
+background: url(images/bg.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}--%>
+
+<body background="/resources/img/music_shop_background_1.jpg">
 <!-- Navigation -->
 <div class="row">
     <div class="col-lg-12">
@@ -36,8 +48,11 @@
             </div>
 
             <div class="col-lg-3">
-                <div class="btn-group btn-group-lg" style="margin-left: 75px">
-                    <a type="button" class="btn btn-default" href="/login">Login</a>
+                <div class="btn-group btn-group-lg">
+                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                        <a type="button" class="btn btn-default" href="/admin/artist-main-page">Admin</a>
+                    </security:authorize>
+                    <a type="button" class="btn btn-default" href="/logout">Exit</a>
                     <a type="button" class="btn btn-default" href="/registration">Registration</a>
                 </div>
             </div>

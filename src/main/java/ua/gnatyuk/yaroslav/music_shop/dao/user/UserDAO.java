@@ -48,7 +48,8 @@ public class UserDAO extends CrudOperations<User> implements NewUser {
 
     @Override
     public User findByName(String username) {
-        return (User)sessionFactory.getCurrentSession()
+        return (User)sessionFactory
+                .getCurrentSession()
                 .createQuery("from User where :name = username")
                 .setParameter("name", username)
                 .uniqueResult();
@@ -56,12 +57,16 @@ public class UserDAO extends CrudOperations<User> implements NewUser {
 
     @Override
     public long getTotalRecords() {
-        return (Long) sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) FROM User").uniqueResult();
+        return (Long) sessionFactory
+                .getCurrentSession()
+                .createQuery("SELECT COUNT(*) FROM User")
+                .uniqueResult();
     }
 
     @Override
     public List getMaterialsForOnePage(int begin, int sizeOfPart) {
-        return sessionFactory.getCurrentSession()
+        return sessionFactory
+                .getCurrentSession()
                 .createQuery("FROM User")
                 .setFirstResult(begin)
                 .setMaxResults(sizeOfPart)
@@ -70,9 +75,11 @@ public class UserDAO extends CrudOperations<User> implements NewUser {
 
     @Override
     public boolean existThisEmail(String email) {
-        User user = (User) sessionFactory.getCurrentSession()
+        User user = (User) sessionFactory
+                .getCurrentSession()
                 .createQuery("FROM User WHERE :email = email")
-                .setParameter("email", email).uniqueResult();
+                .setParameter("email", email)
+                .uniqueResult();
 
         return user != null;
     }

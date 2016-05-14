@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
@@ -106,10 +106,9 @@ public class AdminController {
 }
 
 @Controller
-@RequestMapping(path = {"/login","/"})
 class LoginController {
-  @RequestMapping( method = RequestMethod.GET)
+  @RequestMapping(path = {"/login","/"}, method = RequestMethod.GET)
   public String main (@ModelAttribute("user")User user) {
     return "admin/login_form";
   }
-}
+ }

@@ -18,7 +18,7 @@ public interface Page<T> {
 
     List getPage(int number);
 
-    long getQuantityOfMaterials();
+    long getTotalOfMaterials();
     int getLastPage();
 
     List<User> getUsers();
@@ -29,8 +29,6 @@ public interface Page<T> {
     List<String> getValueButtonsInPagination();
 
     Integer getCurrentPage();
-    int getPreviousPage();
-
 
     void setResultOfAction(Object element, PageImpl.TypeOfMaterial type);
 }
