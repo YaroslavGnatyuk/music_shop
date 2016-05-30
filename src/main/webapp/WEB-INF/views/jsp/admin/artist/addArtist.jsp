@@ -21,7 +21,7 @@
     <div div class="col-lg-12">
         <div class="page-header">
             <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px">
-                <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
+                <img src="/resources/img/corso-musica2.jpg" class="img-rounded" align="center" width="300" height="100" >
             </div>
             <div class="col-lg-8">
                 <h1>Music for life

@@ -1,7 +1,6 @@
 package ua.gnatyuk.yaroslav.music_shop.dao.album;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 
@@ -13,7 +12,6 @@ import java.util.List;
 @Repository
 public class AlbumDao extends CrudOperations<Album> {
 
-    @Transactional
     @Override
     public Album findById(Long id) {
        return (Album) sessionFactory
@@ -23,7 +21,6 @@ public class AlbumDao extends CrudOperations<Album> {
                .uniqueResult();
     }
 
-    @Transactional
     @Override
     public Album findByName(String nameOfTheAlbum) {
         return (Album) sessionFactory
@@ -33,7 +30,6 @@ public class AlbumDao extends CrudOperations<Album> {
                 .uniqueResult();
     }
 
-    @Transactional
     @Override
     public List getTop10ByRate() {
         return   sessionFactory
@@ -43,7 +39,6 @@ public class AlbumDao extends CrudOperations<Album> {
                 .list();
     }
 
-    @Transactional
     @Override
     public List getTop10BySales() {
         return sessionFactory
@@ -54,7 +49,6 @@ public class AlbumDao extends CrudOperations<Album> {
     }
 
     @Override
-    @Transactional
     public List getTheBest() {
         return  sessionFactory
                 .getCurrentSession()
@@ -63,7 +57,6 @@ public class AlbumDao extends CrudOperations<Album> {
                 .list();
     }
 
-    @Transactional
     @Override
     public List getAll() {
         return sessionFactory

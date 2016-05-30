@@ -6,15 +6,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
-import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
+import ua.gnatyuk.yaroslav.music_shop.utils.Connection;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -26,16 +31,29 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class AddController {
+    private final static String pathToImgOnHttpServer = new String("178.219.93.93/img/album");
+    private final static String pathToImgOnFtpServer = new String("/img/album");
     @Inject
     CategoryService categoryService;
+
     @Inject
     ArtistService artistService;
+
     @Inject
     StudioService studioService;
+
     @Inject
     AlbumService albumService;
+
     @Inject
     Page page;
+
+    @Inject
+    CommonsMultipartResolver multipartResolver;
+
+    @Inject
+    @Named(value = "ftpUpload")
+    Connection connection;
 
     @RequestMapping(path = "/add-studio",method = RequestMethod.GET)
     public ModelAndView addStudio(){
@@ -91,7 +109,19 @@ public class AddController {
     }
 
     @RequestMapping(path = "/add-album",method = RequestMethod.POST)
-    public ModelAndView confirmAddAlbum(@ModelAttribute Album album, @RequestParam Map<String, String> request){
+    public ModelAndView confirmAddAlbum(@ModelAttribute Album album,
+                                        @RequestParam Map<String, String> request,
+                                        @RequestParam("file") MultipartFile file){
+        File pic= new File(file.getOriginalFilename());
+        try {
+            OutputStream outputStream = new FileOutputStream(pic);
+            outputStream.write(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        connection.uploadFile(pic,pathToImgOnFtpServer);
+
         Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
         Artist artist = artistService.findById(Long.parseLong(request.get("artist.id")));
         Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
@@ -104,6 +134,8 @@ public class AddController {
 
         page.setResultOfAction(album, PageImpl.TypeOfMaterial.ALBUM);
         albumService.createAlbum(album);
+
+        pic.delete();
 
         return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
     }

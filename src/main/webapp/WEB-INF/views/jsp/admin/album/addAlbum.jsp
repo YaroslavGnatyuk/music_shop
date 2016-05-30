@@ -21,7 +21,7 @@
     <div div class="col-lg-12">
         <div class="page-header">
             <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px">
-                <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
+                <img src="/resources/img/corso-musica2.jpg" class="img-rounded" align="center" width="300" height="100" >
             </div>
             <div class="col-lg-8">
                 <h1>Music for life
@@ -57,8 +57,13 @@
     <div class="raw">
 
         <div div class="col-lg-10" align="center" style="margin-top:10px">
-            <form:form method="post" cssStyle="margin-left: 150px" >
+            <form:form method="post" cssStyle="margin-left: 150px" enctype="multipart/form-data">
                 <table>
+                    <tr>
+                        <td>Photo to upload: </td>
+                        <td><input class = "form-control" type="file" name="file"></td>
+                    </tr>
+
                     <tr>
                         <td>Name:</td>
                         <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" cssStyle="width: 500px;margin-top: 3px"/></td>

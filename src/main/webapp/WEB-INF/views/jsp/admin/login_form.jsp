@@ -27,7 +27,7 @@
             <input type="checkbox" value="remember-me"> Remember me
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/user/main-page">Back to main page</a>
+        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/registration">Registration</a>
     </form>
 
 </div> <!-- /container -->

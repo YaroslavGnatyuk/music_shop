@@ -33,13 +33,15 @@ background: url(images/bg.jpg) no-repeat center center fixed;
 background-size: cover;
 }--%>
 
-<body background="/resources/img/music_shop_background_1.jpg">
+<div id="bg">
+    <img src="/resources/img/music_shop_background_1.jpg">
+</div>
 <!-- Navigation -->
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
             <div class="col-lg-4" style="margin-top: 15px; margin-bottom: 15px" >
-                <img src="/resources/img/corso-musica.jpg" class="img-rounded" align="center" width="300" height="100" >
+                <img src="/resources/img/corso-musica.png" class="img-rounded" align="center" width="300" height="100" >
             </div>
             <div class="col-lg-5">
                 <h1>Music for life
@@ -52,8 +54,7 @@ background-size: cover;
                     <security:authorize access="hasRole('ROLE_ADMIN')">
                         <a type="button" class="btn btn-default" href="/admin/artist-main-page">Admin</a>
                     </security:authorize>
-                    <a type="button" class="btn btn-default" href="/logout">Exit</a>
-                    <a type="button" class="btn btn-default" href="/registration">Registration</a>
+                    <a type="button" class="btn btn-default" href="/logout">Logout</a>
                 </div>
             </div>
         </div>

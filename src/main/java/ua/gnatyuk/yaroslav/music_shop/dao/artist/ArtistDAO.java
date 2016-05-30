@@ -1,7 +1,6 @@
 package ua.gnatyuk.yaroslav.music_shop.dao.artist;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 
@@ -49,7 +48,6 @@ public class ArtistDAO extends CrudOperations<Artist> {
                 .list();
     }
 
-    @Transactional
     @Override
     public List getTop10BySales() {
         return sessionFactory
@@ -59,7 +57,6 @@ public class ArtistDAO extends CrudOperations<Artist> {
                 .list();
     }
 
-    @Transactional
     @Override
     public List getTheBest() {
         return sessionFactory
@@ -69,7 +66,6 @@ public class ArtistDAO extends CrudOperations<Artist> {
                 .list();
     }
 
-    @Transactional
     @Override
     public List getAll() {
         return sessionFactory

@@ -16,6 +16,12 @@ import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Iterator;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -152,11 +158,26 @@ public class DaoTest {
         assertEquals(registrationService.existThisUsername("user"),true);
         assertEquals(registrationService.existThisUsername("some_human"),false);
     }
-
     @Ignore
     @Test
     public void testRegisterNewUser() {
-        UserDto userDto1 = new UserDto("Michel", "Galustyan", "Gadya", "111", "wewweweww@e");
-        newUser.createNewUser(userDto1);
+        UserDto userDto1 = new UserDto("Michel", "Galustyan", "", "11111", "wewweweww@e");
+
+        Validator userValidator;
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        userValidator = validatorFactory.getValidator();
+
+        Set<ConstraintViolation<UserDto>> violations = userValidator.validate(userDto1);
+        Iterator iterator = violations.iterator();
+
+        while (iterator.hasNext()){
+            ConstraintViolation<UserDto> user = (ConstraintViolation<UserDto>) iterator.next();
+            System.out.println(user.getPropertyPath());
+        }
+
+
+        violations.forEach(System.out::println);
+        assertEquals(violations.isEmpty(),true);
+
     }
 }
