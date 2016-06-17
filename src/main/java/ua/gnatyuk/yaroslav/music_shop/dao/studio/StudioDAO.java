@@ -44,11 +44,11 @@ public class StudioDAO extends CrudOperations<Studio>{
               .uniqueResult();
     }
     @Override
-    public Studio findByName(String nameOfTheStudio){
+    public Studio findByName(String name){
         return (Studio) sessionFactory
                 .getCurrentSession()
                 .createQuery("from Studio where :name = name")
-                .setParameter("name",nameOfTheStudio)
+                .setParameter("name", name)
                 .uniqueResult();
     }
 
@@ -68,10 +68,5 @@ public class StudioDAO extends CrudOperations<Studio>{
                 .setFirstResult(begin)
                 .setMaxResults(sizeOfPart)
                 .list();
-    }
-
-    @Override
-    public boolean existThisEmail(String email) {
-        return false;
     }
 }

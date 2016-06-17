@@ -2,7 +2,6 @@ package ua.gnatyuk.yaroslav.music_shop.dao;
 
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
-import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
 
 import javax.inject.Inject;
 

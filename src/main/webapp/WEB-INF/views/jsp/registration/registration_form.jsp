@@ -38,10 +38,9 @@
                 ${ validationMessage[3] ? "<div class='alert alert-danger'>Must not be empty. Input correct email address.</div> " : null}
 
             <form:input id = "pass" type="password" class="form-control" placeholder="Password" name="password" style="margin-bottom: 5px" path="password"/>
-                ${ validationMessage[4] ? "<div class='alert alert-danger'>Must not be empty and min 3 character</div> " : null}
+                ${ validationMessage[4] ? "<div class='alert alert-danger'>Must not be empty and min 8 character</div> " : null}
             <input id = "confirm_pass" type="password" class="form-control" onkeyup="checkPass(); return false;"
                    placeholder="Password confirm" name="password_confirm" style="margin-bottom: 5px" />
-            <p>${user.password}</p>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
             <a class="btn btn-lg btn-primary btn-block" type="submit" href="/login">Sign in</a>

@@ -12,7 +12,7 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     User user_id;
 
@@ -27,10 +27,6 @@ public class UserRole {
         this.role = new String(role);
     }
 
-    public enum UserType{
-        ROLE_ADMIN,ROLE_USER
-    }
-
     public void setUser_id(User user) {
         this.user_id = user;
     }
@@ -41,5 +37,9 @@ public class UserRole {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public enum UserType{
+        ROLE_ADMIN,ROLE_USER
     }
 }

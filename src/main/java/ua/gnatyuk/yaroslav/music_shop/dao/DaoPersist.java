@@ -13,13 +13,13 @@ public interface DaoPersist <T>{
 
     void create(T obj);
     void update(T obj);
-    T findById(Long id);
     void delete(T obj);
 
-    T findByName(String nameOfTheStudio);
+    T findByName(String name);
+    T findById(Long id);
 
     long getTotalRecords();
     List<T> getMaterialsForOnePage(int begin, int sizeOfPart);
 
-    public boolean existThisEmail(String email);
+
 }

@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
@@ -20,6 +21,8 @@ import java.util.List;
 @RequestMapping("/admin")
 public class DeleteController {
     @Inject
+    UserService userService;
+    @Inject
     CategoryService categoryService;
     @Inject
     AlbumService albumService;
@@ -30,8 +33,16 @@ public class DeleteController {
     @Inject
     Page page;
 
+    @RequestMapping(path = "/delete-user/{id}")
+    public ModelAndView deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(userService.findUserById(id));
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.USER);
+
+        return new ModelAndView("admin/user/userMainPage").addObject("page",page);
+    }
+
     @RequestMapping(path = "/delete-studio/{id}",method = RequestMethod.GET)
-    public ModelAndView showStudios(@PathVariable("id") Long id){
+    public ModelAndView deleteStudio(@PathVariable("id") Long id){
         Studio studio = studioService.findById(id);
         page.setResultOfAction(studio,PageImpl.TypeOfMaterial.STUDIO);
         studioService.deleteStudio(studio);

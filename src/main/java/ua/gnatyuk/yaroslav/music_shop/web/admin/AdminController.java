@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.UserRole;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
+import java.util.Set;
 
 /**
  * @author leopold
@@ -34,14 +36,18 @@ public class AdminController {
   public ModelAndView mainUser(){
 
     page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.USER);
-    return new ModelAndView("/admin/user/userMainPage")
-            .addObject("page", page);
+
+
+
+     return new ModelAndView("/admin/user/userMainPage")
+             .addObject("page", page);
   }
 
   @RequestMapping(path = "/user-page-{id}",method = RequestMethod.GET)
   public ModelAndView userNavigate(@PathVariable("id") Integer id){
 
     page.buildNewPage(id, PageImpl.TypeOfMaterial.USER);
+
     return new ModelAndView("/admin/user/userMainPage")
             .addObject("page", page);
   }
@@ -102,6 +108,24 @@ public class AdminController {
     page.buildNewPage(id, PageImpl.TypeOfMaterial.STUDIO);
     return new ModelAndView("/admin/studio/studioMainPage")
             .addObject("page", page);
+  }
+
+  private Boolean[] isAdmin() {
+    Boolean[] admin = null;
+
+    for (int i = 0; i < page.getUsers().size(); i++) {
+      User temp = (User) page.getUsers().get(i);
+      Set<UserRole> roles =  temp.getRole();
+      for (UserRole role: roles) {
+        if(role.getRole().equals(UserRole.UserType.ROLE_ADMIN.name())){
+          admin[i] = true;
+        }
+        else {
+          admin[i] = false;
+        }
+      }
+    }
+    return admin;
   }
 }
 

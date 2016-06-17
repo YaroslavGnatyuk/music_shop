@@ -37,17 +37,15 @@ public class PageImpl implements Page {
     @Named(value = "userDAO")
     private DaoPersist<User> daoUser;
 
-    private DaoPersist daoPersist;
-
-    List albums;
-    List categories;
-    List artists;
-    List studios;
-    List users;
+    List albums = null;
+    List categories = null;
+    List artists = null;
+    List studios = null;
+    List users = null;
 
     TypeOfMaterial type;
 
-    private long totalOfMaterials;
+    private long totalMaterials;
     private int lastPage = 1;
     private Integer currentPage = 1;
 
@@ -63,60 +61,47 @@ public class PageImpl implements Page {
     @Transactional
     @Override
     public void buildNewPage(int currentPage, TypeOfMaterial type) {
+        this.type = type;
+
         if(currentPage < 1)
             currentPage = 1;
         if(currentPage > lastPage )
             currentPage = lastPage;
 
-        setTypeOfMaterials(type);
-
         this.currentPage = currentPage;
 
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
-            albums = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            albums = daoAlbum.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            this.totalMaterials = daoAlbum.getTotalRecords();
         }
 
         if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
             artists = daoArtist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            this.totalMaterials = daoArtist.getTotalRecords();
         }
 
         if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
-            categories = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            categories = daoCategory.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            this.totalMaterials = daoCategory.getTotalRecords();
         }
 
         if (this.type.name().equals(TypeOfMaterial.STUDIO.toString())){
-            studios = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            studios = daoStudio.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            this.totalMaterials = daoStudio.getTotalRecords();
         }
 
         if (this.type.name().equals(TypeOfMaterial.USER.toString())){
-            users = daoPersist.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            List<User> temp = daoUser.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            users = new ArrayList<>(temp.size());
+
+            for (int i = 0; i < temp.size(); i++) {
+                users.add(temp.get(i));
+            }
+
+            this.totalMaterials = daoUser.getTotalRecords();
         }
-        setQuantityOfMaterials();
         setQuantityOfPages();
         setValueButtonsInPagination();
-    }
-
-    private void setTypeOfMaterials(TypeOfMaterial type){
-        this.type = type;
-
-        if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
-            daoPersist = daoAlbum;
-        }
-
-        if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
-            daoPersist = daoArtist;
-        }
-
-        if (this.type.name().equals(TypeOfMaterial.CATEGORY.toString())){
-            daoPersist = daoCategory;
-        }
-
-        if (this.type.name().equals(TypeOfMaterial.STUDIO.toString())){
-            daoPersist = daoStudio;
-        }
-        if (this.type.name().equals(TypeOfMaterial.USER.toString())){
-            daoPersist = daoUser;
-        }
     }
 
     private void setValueButtonsInPagination(){
@@ -162,14 +147,9 @@ public class PageImpl implements Page {
         }
     }
 
-    @Transactional
-    private void setQuantityOfMaterials() {
-        this.totalOfMaterials = daoPersist.getTotalRecords();
-    }
-
     public void setQuantityOfPages() {
             lastPage = 0;
-            long materials = totalOfMaterials;
+            long materials = totalMaterials;
 
             for (   ; materials > 0; materials -= MATERIALS_PER_ONE_PAGE) {
                 lastPage++;
@@ -230,24 +210,24 @@ public class PageImpl implements Page {
     public Integer getCurrentPage() {
         return currentPage;
     }
-    public long getTotalOfMaterials() {
-        return totalOfMaterials;
+    public long getTotalMaterials() {
+        return totalMaterials;
     }
     @Override
     public int getLastPage() {
         return lastPage;
+    }
+    @Override
+    public int getMaterialsPerOnePage() {
+        return MATERIALS_PER_ONE_PAGE;
     }
 
     @Override
     public List<String> getValueButtonsInPagination() {
         return valueButtonsInPagination;
     }
-
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
-    }
-    public int getMaterialsPerOnePage() {
-        return MATERIALS_PER_ONE_PAGE;
     }
     public DaoPersist<Artist> getDaoArtist() {
         return daoArtist;
@@ -263,7 +243,7 @@ public class PageImpl implements Page {
     public String toString() {
         return "PaginationImpl{" +
                 "type=" + type +
-                ", totalOfMaterials=" + totalOfMaterials +
+                ", totalMaterials=" + totalMaterials +
                 ", lastPage=" + lastPage +
                 ", currentPage=" + currentPage +
                 ", MATERIALS_PER_ONE_PAGE=" + MATERIALS_PER_ONE_PAGE +

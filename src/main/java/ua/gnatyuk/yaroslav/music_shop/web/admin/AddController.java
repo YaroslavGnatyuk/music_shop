@@ -1,5 +1,6 @@
 package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,8 +32,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class AddController {
-    private final static String pathToImgOnHttpServer = new String("178.219.93.93/img/album");
-    private final static String pathToImgOnFtpServer = new String("/img/album");
+    @Inject
+    Environment env;
     @Inject
     CategoryService categoryService;
 
@@ -112,7 +113,7 @@ public class AddController {
     public ModelAndView confirmAddAlbum(@ModelAttribute Album album,
                                         @RequestParam Map<String, String> request,
                                         @RequestParam("file") MultipartFile file){
-        File pic= new File(file.getOriginalFilename());
+        File pic= new File(getNameForImage(album.getName()));
         try {
             OutputStream outputStream = new FileOutputStream(pic);
             outputStream.write(file.getBytes());
@@ -120,7 +121,7 @@ public class AddController {
             e.printStackTrace();
         }
 
-        connection.uploadFile(pic,pathToImgOnFtpServer);
+        connection.uploadFile(pic,env.getProperty("path.img.album"));
 
         Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
         Artist artist = artistService.findById(Long.parseLong(request.get("artist.id")));
@@ -150,5 +151,9 @@ public class AddController {
         categoryService.createCategory(category);
         page.setResultOfAction(category, PageImpl.TypeOfMaterial.CATEGORY);
         return new ModelAndView("/admin/category/categoryMainPage").addObject("page",page);
+    }
+
+    private String getNameForImage(String name){
+        return name.replace(" ","_").toUpperCase();
     }
 }

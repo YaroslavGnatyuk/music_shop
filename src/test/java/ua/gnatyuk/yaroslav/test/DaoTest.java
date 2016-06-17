@@ -11,7 +11,7 @@ import ua.gnatyuk.yaroslav.music_shop.dao.user.NewUser;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
-import ua.gnatyuk.yaroslav.music_shop.domain.user.UserDto;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
@@ -20,7 +20,9 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -41,11 +43,9 @@ public class DaoTest {
     @Inject
     private CategoryService categoryService;
     @Inject
-    private RegistrationService registrationService;
+    private UserService userService;
     @Inject
     private Page page;
-    @Inject
-    private NewUser newUser;
 
 
     @Ignore
@@ -127,17 +127,17 @@ public class DaoTest {
 
     @Test
     public void getAllUser(){
-        System.out.println("We have: " + registrationService.getCountAllUsers() + " users");
+        System.out.println("We have: " + userService.getCountAllUsers() + " users");
     }
 
-//    @Ignore
+    @Ignore
     @Test
     public void getAllMaterialsForCategories(){
         Long totalElements = categoryService.getCountAllCategories();
         System.out.println("We have " + totalElements + " materials");
     }
 
-   /* @Ignore*/
+    @Ignore
     @Test
     public void paginationForCategory(){
         int CURRENT_PAGE = 1;
@@ -147,31 +147,31 @@ public class DaoTest {
 
     @Test
     public void userEmailExist(){
-        assertEquals(registrationService.existThisEmail("some#1@email.com"),true);
-        assertEquals(registrationService.existThisEmail("some#2@email.com"),true);
-        assertEquals(registrationService.existThisEmail("some#3@email.com"),false);
+        assertEquals(userService.existThisEmail("some#1@email.com"),true);
+        assertEquals(userService.existThisEmail("some#2@email.com"),true);
+        assertEquals(userService.existThisEmail("some#3@email.com"),false);
     }
 
     @Test
     public void usernameExist(){
-        assertEquals(registrationService.existThisUsername("admin"),true);
-        assertEquals(registrationService.existThisUsername("user"),true);
-        assertEquals(registrationService.existThisUsername("some_human"),false);
+        assertEquals(userService.existThisUsername("admin"),true);
+        assertEquals(userService.existThisUsername("user"),true);
+        assertEquals(userService.existThisUsername("some_human"),false);
     }
     @Ignore
     @Test
     public void testRegisterNewUser() {
-        UserDto userDto1 = new UserDto("Michel", "Galustyan", "", "11111", "wewweweww@e");
+        User userDto1 = new User("Michel", "Galustyan", "", "11111", "wewweweww@e", true);
 
         Validator userValidator;
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         userValidator = validatorFactory.getValidator();
 
-        Set<ConstraintViolation<UserDto>> violations = userValidator.validate(userDto1);
+        Set<ConstraintViolation<User>> violations = userValidator.validate(userDto1);
         Iterator iterator = violations.iterator();
 
         while (iterator.hasNext()){
-            ConstraintViolation<UserDto> user = (ConstraintViolation<UserDto>) iterator.next();
+            ConstraintViolation<User> user = (ConstraintViolation<User>) iterator.next();
             System.out.println(user.getPropertyPath());
         }
 
@@ -179,5 +179,20 @@ public class DaoTest {
         violations.forEach(System.out::println);
         assertEquals(violations.isEmpty(),true);
 
+    }
+
+    @Test
+    public void findUser(){
+        System.out.println(userService.findUserById(2L).getUserRole());
+    }
+
+    @Ignore
+    @Test
+    public void addRolesById(){
+        List<String> roles = new ArrayList<>(3);
+        roles.add("ROLE_USER");
+//        roles.add("ROLE_ADMIN");
+        userService.addRolesById(30L, roles);
+        System.out.println(userService.findUserById(30L).getUserRole());
     }
 }

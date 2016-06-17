@@ -21,7 +21,6 @@ import javax.sql.DataSource;
  * Created by yaroslav on 25.03.16.
  */
 @Configuration
-@PropertySource("classpath:config.properties")
 @ComponentScan(value = {
         "ua.gnatyuk.yaroslav.music_shop.dao",
         "ua.gnatyuk.yaroslav.music_shop.domain",
@@ -29,6 +28,7 @@ import javax.sql.DataSource;
         "ua.gnatyuk.yaroslav.music_shop.utils"
 })
 @EnableTransactionManagement
+@PropertySource("classpath:config.properties")
 public class SpringConfig {
     @Inject
     private Environment env;
@@ -37,7 +37,6 @@ public class SpringConfig {
     @Bean
     public DataSource dataSource() {
 
-        log.info("I'm in datasource");
         final HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(env.getProperty("sqldb.url"));
         hikariConfig.setUsername(env.getProperty("sqldb.username"));
@@ -50,7 +49,6 @@ public class SpringConfig {
 
     @Bean(name = "sessionFactory")
     public LocalSessionFactoryBean sessionFactory() {
-        log.info("I'm in sessionFactory");
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
@@ -63,7 +61,6 @@ public class SpringConfig {
 
     @Bean
     public PlatformTransactionManager txManager() {
-        log.info("I'm in txManager");
         return new HibernateTransactionManager(sessionFactory().getObject());
     }
 

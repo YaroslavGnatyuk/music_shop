@@ -1,8 +1,10 @@
 package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
@@ -12,9 +14,7 @@ import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yaroslav on 4/10/16.
@@ -22,6 +22,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class UpdateController {
+    @Inject
+    UserService userService;
     @Inject
     AlbumService albumService;
     @Inject
@@ -33,6 +35,29 @@ public class UpdateController {
     @Inject
     Page page;
 
+    @RequestMapping(path = "/update-user/{id}", method = RequestMethod.GET)
+    public ModelAndView updateUser(@PathVariable("id") Long id){
+        User user = userService.findUserById(id);
+
+        return new ModelAndView("/admin/user/updateUser","command",user);
+    }
+
+    @RequestMapping(path = "/update-user/{id}",method = RequestMethod.POST)
+    public ModelAndView updateUserCommit(@ModelAttribute User user,
+                                         @RequestParam MultiValueMap<String,String> request,
+                                         @PathVariable("id") Long id){
+
+        user.setPassword(userService.findUserById(id).getPassword()); //add user password, because i can't get it from jsp
+        List<String> roles = request.get("userRole");  //get roles from jsp
+        user = userService.addRolesById(user.getId(), roles); //userService return user with new roles
+
+        userService.updateUser(user);
+
+        page.buildNewPage(Page.FIRST_PAGE,PageImpl.TypeOfMaterial.USER);
+
+        return new ModelAndView("/admin/user/userMainPage").addObject("page", page);
+    }
+
     @RequestMapping(path = "/update-studio/{id}",method = RequestMethod.GET)
     public ModelAndView toUpdateStudio(@PathVariable("id") Long id){
         return new ModelAndView("admin/studio/updateStudio","command",studioService.findById(id));
@@ -40,9 +65,9 @@ public class UpdateController {
 
     @RequestMapping(path = "/update-studio/{id}",method = RequestMethod.POST)
     public ModelAndView updateStudioCommit(@ModelAttribute Studio studio){
-        page.setResultOfAction(studio,PageImpl.TypeOfMaterial.STUDIO);
-       studioService.updateStudio(studio);
-       return new ModelAndView("admin/studio/studioMainPage").addObject("page",page);
+        page.buildNewPage(Page.FIRST_PAGE,PageImpl.TypeOfMaterial.STUDIO);
+        studioService.updateStudio(studio);
+        return new ModelAndView("admin/studio/studioMainPage").addObject("page",page);
     }
 
 
@@ -74,7 +99,7 @@ public class UpdateController {
         album.setArtist(artist);
         album.setReleaseDate(date);
 
-        page.setResultOfAction(album, PageImpl.TypeOfMaterial.ALBUM);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ALBUM);
         albumService.updateAlbum(album);
 
         return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
@@ -89,7 +114,7 @@ public class UpdateController {
     @RequestMapping(path = "/update-category/{id}",method = RequestMethod.POST)
     public ModelAndView updateCategoryCommit(@ModelAttribute Category category){
         categoryService.updateCategory(category);
-        page.setResultOfAction(category, PageImpl.TypeOfMaterial.CATEGORY);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.CATEGORY);
         return new ModelAndView("/admin/category/categoryMainPage")
                 .addObject("page", page);
     }
@@ -120,7 +145,7 @@ public class UpdateController {
         artist.setCategory(category);
         artist.setStudio(studio);
 
-        page.setResultOfAction(artist, PageImpl.TypeOfMaterial.ARTIST);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTIST);
         artistService.updateArtist(artist);
 
         return new ModelAndView("/admin/artist/artistMainPage").addObject("page",page);

@@ -11,8 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(path = "/user")
 public class UserMainPage {
-    @RequestMapping(path = "/main-page",method = RequestMethod.GET)
+
+    @RequestMapping(path = "/main-page",method = RequestMethod.GET) //
     public ModelAndView userMainPage(){
-        return new ModelAndView("/user/userMainPage").addObject("myVariable",new Integer(10));
+        return new ModelAndView("/user/userMainPage");
     }
+
+
 }

@@ -94,12 +94,12 @@
                         <th>Username</th>
                         <th>First name</th>
                         <th>Last name</th>
-                        <th>Is enable</th>
                         <th>Email</th>
+                        <th>Roles</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.users}" var="user">
+                    <c:forEach items="${page.users}" var="user" >
                         <tr>
                             <td align="center"  style="width: 150px">
                                 <a href="/admin/update-user/${user.id}" class="btn btn-default">
@@ -112,8 +112,8 @@
                             <td><c:out value="${user.username}" /></td>
                             <td><c:out value="${user.firstName}" /></td>
                             <td><c:out value="${user.lastName}" /></td>
-                            <td><c:out value="${user.enable}" /></td>
                             <td><c:out value="${user.email}" /></td>
+                            <td><c:out value="${user.userRole}" /></td>
                         </tr>
                     </c:forEach>
                     </tbody>

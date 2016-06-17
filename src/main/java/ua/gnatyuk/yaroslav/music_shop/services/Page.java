@@ -12,13 +12,13 @@ import java.util.List;
 /**
  * Created by yaroslav on 5/2/16.
  */
-public interface Page<T> {
+public interface Page {
     void buildNewPage(int numberOfCurrentPage, PageImpl.TypeOfMaterial type);
     int FIRST_PAGE = 1;
 
     List getPage(int number);
 
-    long getTotalOfMaterials();
+    long getTotalMaterials();
     int getLastPage();
 
     List<User> getUsers();
@@ -29,6 +29,7 @@ public interface Page<T> {
     List<String> getValueButtonsInPagination();
 
     Integer getCurrentPage();
+    int getMaterialsPerOnePage();
 
     void setResultOfAction(Object element, PageImpl.TypeOfMaterial type);
 }

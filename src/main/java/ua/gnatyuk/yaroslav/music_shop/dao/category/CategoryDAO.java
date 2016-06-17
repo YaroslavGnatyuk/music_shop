@@ -45,11 +45,11 @@ public class CategoryDAO extends CrudOperations<Category>{
     }
 
     @Override
-    public Category findByName(String nameOfTheStudio) {
+    public Category findByName(String name) {
         return (Category) sessionFactory
                 .getCurrentSession()
                 .createQuery("from Category where :name = name")
-                .setParameter("name",nameOfTheStudio).uniqueResult();
+                .setParameter("name", name).uniqueResult();
     }
 
     @Override
@@ -68,10 +68,5 @@ public class CategoryDAO extends CrudOperations<Category>{
                 .setFirstResult(begin)
                 .setMaxResults(sizeOfPart)
                 .list();
-    }
-
-    @Override
-    public boolean existThisEmail(String email) {
-        return false;
     }
 }
