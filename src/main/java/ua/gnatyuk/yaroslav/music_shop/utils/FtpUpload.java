@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by yaroslav on 20/05/16.
@@ -15,8 +16,17 @@ import java.util.Set;
 public class FtpUpload implements Connection {
     private FTPClient client;
     private FTPConnector connector;
+    private String host;
+    private String port;
+    private String username;
+    private String password;
 
     public FtpUpload(String host,String port, String username, String password) {
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+
         client = new FTPClient();
         connector = new DirectConnector();
         try {
@@ -82,7 +92,7 @@ public class FtpUpload implements Connection {
 
     @Override
     public boolean isFileExist(String file) {
-        Set<String> fileSystem = new LinkedHashSet<>();
+        Set<String> fileSystem = new TreeSet<>();
         Collections.addAll(fileSystem,listOfDirectories());
 
         if (fileSystem.contains(file))
@@ -94,6 +104,11 @@ public class FtpUpload implements Connection {
     @Override
     public boolean uploadFile(File file, String path) {
         try {
+            if (!client.isConnected()) {
+                System.out.println("Trying connect...");
+                client.login(username, password);
+                client.connect(host);
+            }
             if(changeDirectory(path)){
                 if(!isFileExist(file.getName())){
                     client.upload(file);
@@ -101,13 +116,10 @@ public class FtpUpload implements Connection {
                     System.out.println("The file already exist");
                     return false;
                 }
-
             }else {
                 System.out.println("The directory doesn't exist or something else");
                 return false;
             }
-
-            client.disconnect(true);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -123,7 +135,35 @@ public class FtpUpload implements Connection {
         } catch (FTPAbortedException e) {
             e.printStackTrace();
             return false;
+        }finally {
+//            close(true);
         }
         return true;
+    }
+
+    @Override
+    public void close(boolean close) {
+        try {
+            client.disconnect(close);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FTPIllegalReplyException e) {
+            e.printStackTrace();
+        } catch (FTPException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteFile(String path) {
+        try {
+            client.deleteFile(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FTPIllegalReplyException e) {
+            e.printStackTrace();
+        } catch (FTPException e) {
+            e.printStackTrace();
+        }
     }
 }

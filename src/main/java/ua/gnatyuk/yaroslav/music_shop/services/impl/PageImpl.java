@@ -3,6 +3,7 @@ package ua.gnatyuk.yaroslav.music_shop.services.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.DaoPersist;
+import ua.gnatyuk.yaroslav.music_shop.domain.article.Article;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
@@ -36,12 +37,16 @@ public class PageImpl implements Page {
     @Inject
     @Named(value = "userDAO")
     private DaoPersist<User> daoUser;
+    @Inject
+    @Named(value = "articleDAO")
+    private DaoPersist<Article> daoArticle;
 
     List albums = null;
     List categories = null;
     List artists = null;
     List studios = null;
     List users = null;
+    List articles = null;
 
     TypeOfMaterial type;
 
@@ -49,7 +54,7 @@ public class PageImpl implements Page {
     private int lastPage = 1;
     private Integer currentPage = 1;
 
-    private static final int MATERIALS_PER_ONE_PAGE = 3;
+    private static final int MATERIALS_PER_ONE_PAGE = 12;
     private static final int SIZE_OF_PAGINATION = 9;
 
     List<String> valueButtonsInPagination;
@@ -73,6 +78,10 @@ public class PageImpl implements Page {
         if (this.type.name().equals(TypeOfMaterial.ALBUM.toString())){
             albums = daoAlbum.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
             this.totalMaterials = daoAlbum.getTotalRecords();
+
+            for (int i = 0; i < albums.size(); i++) {           //add short description for all albums on the page
+                ((Album)albums.get(i)).setShortDescription();
+            }
         }
 
         if (this.type.name().equals(TypeOfMaterial.ARTIST.toString())){
@@ -97,7 +106,6 @@ public class PageImpl implements Page {
             for (int i = 0; i < temp.size(); i++) {
                 users.add(temp.get(i));
             }
-
             this.totalMaterials = daoUser.getTotalRecords();
         }
         setQuantityOfPages();

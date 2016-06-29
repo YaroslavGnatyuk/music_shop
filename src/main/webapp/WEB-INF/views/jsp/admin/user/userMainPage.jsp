@@ -64,10 +64,11 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-lg-1">
-                            <a href="/admin/add-studio" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
+                            <a href="/admin/add-user" type="button" class="btn btn-sm btn-primary btn-create">Create New</a>
                         </div>
                         <div class="col-lg-1">
-                            <a href="/admin/studio-main-page" type="button" class="btn btn-sm btn-primary btn-success" style="margin-left: 5px"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                            <a href="/admin/user-main-page" type="button" class="btn btn-sm btn-primary btn-success"
+                               style="margin-left: 5px"><span class="glyphicon glyphicon-arrow-up"></span></a>
                         </div>
 
 

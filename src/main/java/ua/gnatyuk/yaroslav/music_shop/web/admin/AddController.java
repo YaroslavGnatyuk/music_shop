@@ -33,28 +33,20 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AddController {
     @Inject
-    Environment env;
+    private Environment env;
     @Inject
-    CategoryService categoryService;
-
+    private CategoryService categoryService;
     @Inject
-    ArtistService artistService;
-
+    private ArtistService artistService;
     @Inject
-    StudioService studioService;
-
+    private StudioService studioService;
     @Inject
-    AlbumService albumService;
-
+    private AlbumService albumService;
     @Inject
-    Page page;
-
-    @Inject
-    CommonsMultipartResolver multipartResolver;
-
+    private Page page;
     @Inject
     @Named(value = "ftpUpload")
-    Connection connection;
+    private Connection connection;
 
     @RequestMapping(path = "/add-studio",method = RequestMethod.GET)
     public ModelAndView addStudio(){
@@ -113,19 +105,20 @@ public class AddController {
     public ModelAndView confirmAddAlbum(@ModelAttribute Album album,
                                         @RequestParam Map<String, String> request,
                                         @RequestParam("file") MultipartFile file){
-        File pic= new File(getNameForImage(album.getName()));
-        try {
-            OutputStream outputStream = new FileOutputStream(pic);
-            outputStream.write(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if(file.isEmpty()){
+            album.setPathToAlbumsCover(env.getProperty("http.path.img.default"));
+        }
+        else {
+            File pic = createFileForUpload(album.getArtist().getName() + " " + album.getName(), file);
+            connection.uploadFile(pic, env.getProperty("ftp.path.img.album"));
+            album.setPathToAlbumsCover(env.getProperty("http.path.img.album") + pic.getName());
+            pic.delete();
         }
 
-        connection.uploadFile(pic,env.getProperty("path.img.album"));
-
-        Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
-        Artist artist = artistService.findById(Long.parseLong(request.get("artist.id")));
-        Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
+        Studio studio = studioService.findByName(request.get("studio.name"));
+        Artist artist = artistService.findByName(request.get("artist.name"));
+        Category category = categoryService.findByName(request.get("category.name"));
         LocalDate date = LocalDate.parse(request.get("date"));
 
         album.setReleaseDate(date);
@@ -133,12 +126,11 @@ public class AddController {
         album.setArtist(artist);
         album.setCategory(category);
 
-        page.setResultOfAction(album, PageImpl.TypeOfMaterial.ALBUM);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ALBUM);
         albumService.createAlbum(album);
 
-        pic.delete();
-
-        return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
+        return new ModelAndView("/admin/album/albumMainPage")
+                .addObject("page",page);
     }
 
     @RequestMapping(path = "/add-category",method = RequestMethod.GET)
@@ -154,6 +146,18 @@ public class AddController {
     }
 
     private String getNameForImage(String name){
-        return name.replace(" ","_").toUpperCase();
+        return name.replace(" ","_").toLowerCase();
+    }
+
+    private File createFileForUpload(String fileName, MultipartFile multipartFile){
+        File pic= new File(getNameForImage(getNameForImage(fileName)) + ".jpg");
+        try {
+            OutputStream outputStream = new FileOutputStream(pic);
+            outputStream.write(multipartFile.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return pic;
     }
 }

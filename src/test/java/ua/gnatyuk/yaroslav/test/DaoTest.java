@@ -9,10 +9,12 @@ import ua.gnatyuk.yaroslav.music_shop.SpringConfig;
 import ua.gnatyuk.yaroslav.music_shop.SpringSequrityConfig;
 import ua.gnatyuk.yaroslav.music_shop.dao.user.NewUser;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
+import ua.gnatyuk.yaroslav.music_shop.domain.article.Article;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Address;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
+import ua.gnatyuk.yaroslav.music_shop.services.impl.ArticleServImpl;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
 
 import javax.inject.Inject;
@@ -34,6 +36,8 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SpringConfig.class, SpringSequrityConfig.class})
 public class DaoTest {
+    @Inject
+    private ArticleService articleService;
     @Inject
     private FillDataBase fillDataBase;
     @Inject
@@ -70,6 +74,7 @@ public class DaoTest {
     public void findStudioByName(){
         String name = "Студия Океана Эльзы";
         assertEquals(studioService.findByName(name).getName(),"Студия Океана Эльзы");
+        System.out.println(studioService.findByName(name).getName());
     }
 
     @Test
@@ -195,4 +200,38 @@ public class DaoTest {
         userService.addRolesById(30L, roles);
         System.out.println(userService.findUserById(30L).getUserRole());
     }
+
+    @Ignore
+    @Test
+    public void createNewArticle(){
+        StringBuilder art = new StringBuilder("Taylor Swift has penned a touching note sending her love and sympathies to the families of those killed in the Orlando shooting massacre on Sunday (12Jun16).\n" +
+                "\n" +
+                "In what has become the deadliest mass shooting in American history, 49 people were killed and more than 50 others were injured after a gunman opened fire at a gay nightclub in Florida.\n" +
+                "\n" +
+                "On Friday (17Jun16), funerals for the victims began as their loved ones said their final goodbyes and the pop star took time to acknowledge the difficult process via a heartfelt message on Instagram.\n" +
+                "\n" +
+                "A snap posted on Friday featured a handwritten note which began with, \"To the families of...\", and finished with the 49 names of those who perished in the massacre.\n" +
+                "\n" +
+                "She added the caption, \"As you bury your loved ones this week, please know that there are millions of us sending you love and our deepest sympathy in the face of this unthinkable and devastating tragedy.\"\n" +
+                "\n" +
+                "Swift posted the same photo on Twitter, and also wrote, \"With heavy heart...\".\n" +
+                "\n" +
+                "The emotional post comes after the Style star had a different kind of heartbreak of her own, as she recently split with her boyfriend of over a year, DJ Calvin Harris.\n" +
+                "\n" +
+                "On Thursday (15Jun16), it was clear the 26 year old had moved on from Harris after she was photographed locking lips with actor Tom Hiddleston on a beach near her Rhode Island home.\n" +
+                "\n" +
+                "The two later enjoyed a date night and took off in Swift's private jet, and the Thor star was spotted going to a meeting in New York City on Friday.\n" +
+                "\n" +
+                "Meanwhile, Harris was on the other side of the country in Los Angeles, where he was approached by TMZ photographers about his ex-girlfriend.\n" +
+                "\n" +
+                "In a video posted on the site, the snapper asks the Scottish music star if he would ever consider taking Swift back, but Harris scoffed at the idea and simply laughed at the photographer.");
+
+        String author = new String("incognito");
+        String name = new String("Taylor Swift sends love to Orlando victims' families");
+
+        Article article = new Article(author, name, art.toString());
+        articleService.createNewArticle(article);
+    }
+
+//    @Test
 }

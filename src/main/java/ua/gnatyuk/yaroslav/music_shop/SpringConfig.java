@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
@@ -11,6 +12,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.context.WebApplicationContext;
 import ua.gnatyuk.yaroslav.music_shop.domain.FillDataBase;
 import ua.gnatyuk.yaroslav.music_shop.utils.FtpUpload;
 
@@ -53,7 +55,8 @@ public class SpringConfig {
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
                 "ua.gnatyuk.yaroslav.music_shop.domain.musicrecord"
-                ,"ua.gnatyuk.yaroslav.music_shop.domain.user");
+                ,"ua.gnatyuk.yaroslav.music_shop.domain.user"
+                ,"ua.gnatyuk.yaroslav.music_shop.domain.article");
         sessionFactory.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 
         return sessionFactory;
@@ -65,6 +68,7 @@ public class SpringConfig {
     }
 
     @Bean(name = "ftpUpload")
+    @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public FtpUpload ftpUpload(){
         FtpUpload  ftpUpload = new FtpUpload(
                     env.getProperty("ftp.ip"),

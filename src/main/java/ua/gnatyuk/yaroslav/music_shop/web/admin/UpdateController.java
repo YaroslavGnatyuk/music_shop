@@ -50,9 +50,7 @@ public class UpdateController {
         user.setPassword(userService.findUserById(id).getPassword()); //add user password, because i can't get it from jsp
         List<String> roles = request.get("userRole");  //get roles from jsp
         user = userService.addRolesById(user.getId(), roles); //userService return user with new roles
-
         userService.updateUser(user);
-
         page.buildNewPage(Page.FIRST_PAGE,PageImpl.TypeOfMaterial.USER);
 
         return new ModelAndView("/admin/user/userMainPage").addObject("page", page);
@@ -65,16 +63,18 @@ public class UpdateController {
 
     @RequestMapping(path = "/update-studio/{id}",method = RequestMethod.POST)
     public ModelAndView updateStudioCommit(@ModelAttribute Studio studio){
-        page.buildNewPage(Page.FIRST_PAGE,PageImpl.TypeOfMaterial.STUDIO);
         studioService.updateStudio(studio);
+        page.buildNewPage(Page.FIRST_PAGE,PageImpl.TypeOfMaterial.STUDIO);
         return new ModelAndView("admin/studio/studioMainPage").addObject("page",page);
     }
 
 
 
     @RequestMapping(path = "/update-album/{id}", method = RequestMethod.GET)
-    public ModelAndView inputAlbum(@PathVariable("id") Long id){
+    public ModelAndView updateAlbum(@PathVariable("id") Long id){
         Album album = albumService.findById(id);
+
+
 
         List<Studio> studios = studioService.getAll();
         List<Category> categories = categoryService.getAll();
@@ -87,22 +87,27 @@ public class UpdateController {
     }
 
     @RequestMapping(path = "/update-album/{id}", method = RequestMethod.POST)
-    public ModelAndView updateAlbumCommit(@ModelAttribute Album album, @RequestParam Map<String,String> request){
+    public ModelAndView updateAlbumCommit(@PathVariable("id") Long id,
+                                          @ModelAttribute Album album,
+                                          @RequestParam Map<String,String> request){
 
         LocalDate date = LocalDate.parse(request.get("date"));
-        Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
-        Artist artist = artistService.findById(Long.parseLong(request.get("artist.id")));
-        Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
+        Studio studio = studioService.findByName(request.get("studio.name"));
+        Artist artist = artistService.findByName(request.get("artist.name"));
+        Category category = categoryService.findByName(request.get("category.name"));
+
+        album.setPathToAlbumsCover(albumService.findById(id).getHttpPathToAlbumsCover());
 
         album.setStudio(studio);
         album.setCategory(category);
         album.setArtist(artist);
         album.setReleaseDate(date);
 
-        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ALBUM);
         albumService.updateAlbum(album);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ALBUM);
 
-        return new ModelAndView("/admin/album/albumMainPage").addObject("page",page);
+        return new ModelAndView("/admin/album/albumMainPage")
+                .addObject("page",page);
     }
 
     @RequestMapping(path = "/update-category/{id}",method = RequestMethod.GET)
@@ -131,12 +136,6 @@ public class UpdateController {
 
     @RequestMapping(path = "/update-artist/{id_artist}",method = RequestMethod.POST)
     public ModelAndView updateArtistCommit(@ModelAttribute Artist artist, @RequestParam Map<String,String> request){
-        List<String> strings = new ArrayList<>();
-        request.forEach((k,v)->strings.add(v));
-        strings.forEach(System.out::println);
-
-        System.out.println("result of request: " + request.get("studio.name"));
-
         Studio studio = studioService.findById(Long.parseLong(request.get("studio.id")));
         Category category = categoryService.findById(Long.parseLong(request.get("category.id")));
         LocalDate date = LocalDate.parse(request.get("date"));
@@ -145,8 +144,8 @@ public class UpdateController {
         artist.setCategory(category);
         artist.setStudio(studio);
 
-        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTIST);
         artistService.updateArtist(artist);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTIST);
 
         return new ModelAndView("/admin/artist/artistMainPage").addObject("page",page);
     }

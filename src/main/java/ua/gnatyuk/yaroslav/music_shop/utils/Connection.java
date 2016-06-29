@@ -11,4 +11,6 @@ public interface Connection {
      boolean changeDirectory(String name);
      boolean isFileExist(String file);
      boolean uploadFile(File file, String path);
+     void close(boolean close);
+     void deleteFile(String path);
 }

@@ -67,7 +67,7 @@
 
                     <tr>
                         <td>Name:</td>
-                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" cssStyle="width: 500px;margin-top: 3px"/></td>
+                        <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" cssStyle="width: 500px; margin-top: 3px"/></td>
                     </tr>
 
                     <tr>
@@ -97,8 +97,8 @@
                         <td>Studio:</td>
                         <td>
                             <form:select class="form-control" path="studio.name" id = "focusedInput" type = "text" cssStyle="margin-top: 3px">
-                                <c:forEach items="${studios}" var="user">
-                                    <option>${user.name}</option>
+                                <c:forEach items="${studios}" var="studio">
+                                    <option>${studio.name}</option>
                                 </c:forEach>
                             </form:select>
                         </td>
@@ -123,6 +123,11 @@
                     <tr>
                         <td>Sold albums:</td>
                         <td><form:input class = "form-control" id = "focusedInput" type = "text" path="countOfSales" cssStyle="margin-top: 3px"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Description:</td>
+                        <td><form:textarea class="form-control" rows="5" id="comment" path="description"  cssStyle="margin-top: 3px"></form:textarea></td>
                     </tr>
 
                     <tr>

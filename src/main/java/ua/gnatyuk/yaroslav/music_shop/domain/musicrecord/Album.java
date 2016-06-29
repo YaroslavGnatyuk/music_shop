@@ -1,7 +1,10 @@
 package ua.gnatyuk.yaroslav.music_shop.domain.musicrecord;
 
+import org.springframework.core.env.Environment;
+
 import java.time.LocalDate;
 
+import javax.inject.Inject;
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +14,9 @@ public class Album {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long id;
+
+	@Column(name = "path_to_albums_cover")
+	String pathToAlbumsCover;
 
 	@Column(nullable = false,unique = true)
 	private String name;
@@ -33,8 +39,25 @@ public class Album {
 	@Column(nullable = false)
 	private Integer countOfSales;
 
+	@Column(name = "description")
+	private String description;
+
+	@Transient
+	private String shortDescription;
+
 	public Album() {
 
+	}
+
+	public Album(String pathToAlbumsCover, String name, LocalDate releaseDate, Artist artist, Category category, Studio studio, Byte rating, Integer countOfSales) {
+		this.pathToAlbumsCover = pathToAlbumsCover;
+		this.name = name;
+		this.releaseDate = releaseDate;
+		this.artist = artist;
+		this.category = category;
+		this.studio = studio;
+		this.rating = rating;
+		this.countOfSales = countOfSales;
 	}
 
 	public Album(String name, LocalDate releaseDate, Artist artist, Category category, Studio studio, Byte rating, Integer countOfSales) {
@@ -109,5 +132,39 @@ public class Album {
 
 	public void setStudio(Studio studio) {
 		this.studio = studio;
+	}
+
+	public String getHttpPathToAlbumsCover() {
+		return pathToAlbumsCover;
+	}
+
+	public void setPathToAlbumsCover(String pathToAlbumsCover) {
+		this.pathToAlbumsCover = pathToAlbumsCover;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription() {
+		if (this.description == null) {
+			this.description = " ";
+			this.shortDescription = " ";
+		}
+
+		if(this.description.length()<100)
+		{
+			this.shortDescription = this.description;
+		}else {
+			this.shortDescription = this.description.substring(0, 100) + "...";
+		}
 	}
 }

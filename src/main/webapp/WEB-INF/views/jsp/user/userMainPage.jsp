@@ -74,22 +74,10 @@ background-size: cover;
             <div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">New's</a></li>
-                    <li><a href="#">Artist's</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Java
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">jmeter</a></li>
-                            <li><a href="#">EJB</a></li>
-                            <li><a href="#">Jasper Report</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="#">Studios</a></li>
+                    <li><a href="#">Artists</a></li>
+                    <li><a href="#">Albums</a></li>
+                    <li><a href="#">About us</a></li>
                 </ul>
             </div>
 
@@ -115,186 +103,71 @@ background-size: cover;
         <div class="col-lg-1">
         </div>
 
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <div class="row carousel-holder">
-
             </div>
-
             <div class="row">
-
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://178.219.93.93/img/album/wu_tang_the_w.jpg" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4><a href="#">First Product</a>
-                            </h4>
-                            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">15 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://178.219.93.93/img/album/wu-forever.jpg" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$64.99</h4>
-                            <h4><a href="#">Second Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">12 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
+<%--repeat this section for nine times--%>
+                <c:forEach items="${page.albums}" var="album">
+                    <div class="col-sm-3 col-lg-3 col-md-3">
+                        <div class="thumbnail">
+                            <img src="<c:out value="${album.httpPathToAlbumsCover}"/>" alt="<c:out value="${album.name}"/>">
+                            <div class="caption">
+                                <h4><a href="#"><c:out value="${album.artist.name}"/></a></h4>
+                                <h4><a href="#"><c:out value="${album.name}"/></a></h4>
+                                <p><c:out value="${album.shortDescription}"/></p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://178.219.93.93/img/album/wu-tang-36-chambers.jpg" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$74.99</h4>
-                            <h4><a href="#">Third Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">31 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$84.99</h4>
-                            <h4><a href="#">Fourth Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">6 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$94.99</h4>
-                            <h4><a href="#">Fifth Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">18 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$94.99</h4>
-                            <h4><a href="#">Fifth Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">18 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
+<%-------------------------------------%>
             </div>
 
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col col-xs-4">Page 1 of 5
-                    </div>
+                    <div class="col col-xs-4">Page ${page.currentPage} of ${page.lastPage}</div>
                     <div class="col col-xs-8">
-                        <ul class="pagination visible-lg pull-right">
-                            <%--<li><a href="#">«</a></li>--%>
-                            <li><a href="#">»</a></li>
-                        </ul>
-
                         <ul class="pagination hidden-xs pull-right">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                        <%  int k =10;
 
-                            if (k < 20){
-                            %>
-                                <ul class="pagination visible-lg pull-right">
-                                <li><a href="#">«</a></li>
-                            <%
-                             }else{
-                            %>
-                                <ul class="pagination visible-lg pull-right">
-                                <li><a href="#">»</a></li>
-                            <%
-                                }
-                        %>
+                            <c:if test="${page.currentPage!=1}">
+                                <li><a href="/user/album-page-${page.currentPage-1}" > << </a></li>
+                            </c:if>
+                            <c:forEach items="${page.valueButtonsInPagination}" var="p" >
+                                <c:if test="${ !(p.equalsIgnoreCase('..')) && p.equalsIgnoreCase(page.currentPage.toString())}">
+                                    <li class="active"><a href="/admin/album-page-${p}" ><c:out value="${p}"/></a></li>
+                                </c:if>
+
+                                <c:if test="${ !(p.equalsIgnoreCase('..')) && !(p.equalsIgnoreCase(page.currentPage.toString()))}">
+                                    <li><a href="/admin/album-page-${p}" ><c:out value="${p}"/></a></li>
+                                </c:if>
+
+                                <c:if test="${ p.equalsIgnoreCase('..')}">
+                                    <li><a ><c:out value="${p}"/></a></li>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${page.currentPage!=page.lastPage}">
+                                <li><a href="/admin/album-page-${page.currentPage+1}" > >> </a></li>
+                            </c:if>
+
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
 
         <div class="col-lg-1">
         </div>
     </div>
+</div>
 
 </div>
 <!-- /.container -->

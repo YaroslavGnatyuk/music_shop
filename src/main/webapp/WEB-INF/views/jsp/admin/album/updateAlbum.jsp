@@ -68,6 +68,11 @@
             <form:form method="post" cssStyle="margin-left: 150px" >
                 <table>
                     <tr>
+                        <td>Photo to upload: </td>
+                        <td><input class = "" type="file" name="file"></td>
+                    </tr>
+
+                    <tr>
                         <td>Name:</td>
                         <td><form:input class = "form-control" id = "focusedInput" type = "text" path="name" value="${command.name}" cssStyle="width: 500px;margin-top: 3px"/></td>
                     </tr>
@@ -125,6 +130,11 @@
                     <tr>
                         <td>Sold albums:</td>
                         <td><form:input class = "form-control" id = "focusedInput" type = "text" path="countOfSales" value="${command.countOfSales}" cssStyle="margin-top: 3px"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Description:</td>
+                        <td><form:textarea class="form-control" rows="5" id="comment" path="description"  cssStyle="margin-top: 3px"></form:textarea></td>
                     </tr>
 
                     <tr>

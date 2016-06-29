@@ -103,6 +103,7 @@
                     <tbody>
                     <c:forEach items="${page.albums}" var="album">
                         <tr>
+
                             <td align="center"  style="width: 150px">
                                 <a href="/admin/update-album/${album.id}" class="btn btn-default">
                                     <span class="glyphicon glyphicon-pencil"></span>
@@ -111,6 +112,7 @@
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
+
                             <td><c:out value="${album.id}" /></td>
                             <td><c:out value="${album.name}" /></td>
                             <td><c:out value="${album.artist.name}" /></td>
