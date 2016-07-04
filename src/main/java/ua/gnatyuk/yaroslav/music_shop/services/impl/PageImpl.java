@@ -41,14 +41,14 @@ public class PageImpl implements Page {
     @Named(value = "articleDAO")
     private DaoPersist<Article> daoArticle;
 
-    List albums = null;
-    List categories = null;
-    List artists = null;
-    List studios = null;
-    List users = null;
-    List articles = null;
+    private List albums = null;
+    private List categories = null;
+    private List artists = null;
+    private List studios = null;
+    private List users = null;
+    private List articles = null;
 
-    TypeOfMaterial type;
+    private TypeOfMaterial type;
 
     private long totalMaterials;
     private int lastPage = 1;
@@ -57,7 +57,7 @@ public class PageImpl implements Page {
     private static final int MATERIALS_PER_ONE_PAGE = 12;
     private static final int SIZE_OF_PAGINATION = 9;
 
-    List<String> valueButtonsInPagination;
+    private List<String> valueButtonsInPagination;
 
     public enum TypeOfMaterial {
         ARTIST,CATEGORY,ALBUM,STUDIO,USER

@@ -1,8 +1,11 @@
 package ua.gnatyuk.yaroslav.music_shop.web.admin;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
@@ -11,8 +14,11 @@ import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Studio;
 import ua.gnatyuk.yaroslav.music_shop.services.impl.PageImpl;
+import ua.gnatyuk.yaroslav.music_shop.utils.Connection;
 
 import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -23,17 +29,21 @@ import java.util.*;
 @RequestMapping("/admin")
 public class UpdateController {
     @Inject
-    UserService userService;
+    private UserService userService;
     @Inject
-    AlbumService albumService;
+    private AlbumService albumService;
     @Inject
-    ArtistService artistService;
+    private ArtistService artistService;
     @Inject
-    StudioService studioService;
+    private StudioService studioService;
     @Inject
-    CategoryService categoryService;
+    private CategoryService categoryService;
     @Inject
-    Page page;
+    private Page page;
+    @Inject
+    private Connection connection;
+    @Inject
+    Environment env;
 
     @RequestMapping(path = "/update-user/{id}", method = RequestMethod.GET)
     public ModelAndView updateUser(@PathVariable("id") Long id){
@@ -49,7 +59,7 @@ public class UpdateController {
 
         user.setPassword(userService.findUserById(id).getPassword()); //add user password, because i can't get it from jsp
         List<String> roles = request.get("userRole");  //get roles from jsp
-        user = userService.addRolesById(user.getId(), roles); //userService return user with new roles
+        userService.addRolesById(user.getId(), roles); //set user new roles
         userService.updateUser(user);
         page.buildNewPage(Page.FIRST_PAGE,PageImpl.TypeOfMaterial.USER);
 
@@ -67,8 +77,6 @@ public class UpdateController {
         page.buildNewPage(Page.FIRST_PAGE,PageImpl.TypeOfMaterial.STUDIO);
         return new ModelAndView("admin/studio/studioMainPage").addObject("page",page);
     }
-
-
 
     @RequestMapping(path = "/update-album/{id}", method = RequestMethod.GET)
     public ModelAndView updateAlbum(@PathVariable("id") Long id){
@@ -89,14 +97,25 @@ public class UpdateController {
     @RequestMapping(path = "/update-album/{id}", method = RequestMethod.POST)
     public ModelAndView updateAlbumCommit(@PathVariable("id") Long id,
                                           @ModelAttribute Album album,
-                                          @RequestParam Map<String,String> request){
+                                          @RequestParam Map<String,String> request,
+                                          @RequestParam("file") MultipartFile file){
 
         LocalDate date = LocalDate.parse(request.get("date"));
         Studio studio = studioService.findByName(request.get("studio.name"));
         Artist artist = artistService.findByName(request.get("artist.name"));
         Category category = categoryService.findByName(request.get("category.name"));
 
-        album.setPathToAlbumsCover(albumService.findById(id).getHttpPathToAlbumsCover());
+        if(!file.isEmpty()){
+            String []temp = albumService.findById(id).getHttpPathToAlbumsCover().split("/");
+            connection.changeDirectory(env.getProperty("ftp.path.img.album"));
+            connection.deleteFile(temp[temp.length-1]);
+
+            File pic = createFileForUpload(album.getArtist().getName() + " " + album.getName(), file);
+            connection.uploadFile(pic, env.getProperty("ftp.path.img.album"));
+            album.setPathToAlbumsCover(env.getProperty("http.path.img.album") + pic.getName());
+
+            pic.delete();
+        }
 
         album.setStudio(studio);
         album.setCategory(category);
@@ -148,5 +167,21 @@ public class UpdateController {
         page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTIST);
 
         return new ModelAndView("/admin/artist/artistMainPage").addObject("page",page);
+    }
+
+    private String getNameForImage(String name){
+        return name.replace(" ","_").toLowerCase();
+    }
+
+    private File createFileForUpload(String fileName, MultipartFile multipartFile){
+        File pic= new File(getNameForImage(getNameForImage(fileName)) + ".jpg");
+
+        try {
+            FileUtils.writeByteArrayToFile(pic, multipartFile.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return pic;
     }
 }

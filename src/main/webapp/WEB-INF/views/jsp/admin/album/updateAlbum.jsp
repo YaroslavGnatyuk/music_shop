@@ -65,7 +65,7 @@
     <div class="raw">
 
         <div div class="col-lg-8" style="margin-top:10px" align="center">
-            <form:form method="post" cssStyle="margin-left: 150px" >
+            <form:form method="post" cssStyle="margin-left: 150px" enctype="multipart/form-data">
                 <table>
                     <tr>
                         <td>Photo to upload: </td>

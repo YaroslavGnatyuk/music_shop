@@ -55,8 +55,8 @@ public class AddController {
 
     @RequestMapping(path = "/add-studio",method = RequestMethod.POST)
     public ModelAndView confirmAddStudio(@ModelAttribute Studio studio){
-        page.setResultOfAction(studio, PageImpl.TypeOfMaterial.STUDIO);
         studioService.createStudio(studio);
+        page.setResultOfAction(studio, PageImpl.TypeOfMaterial.STUDIO);
 
         return new ModelAndView("/admin/studio/studioMainPage").addObject("page",page);
     }
@@ -126,8 +126,8 @@ public class AddController {
         album.setArtist(artist);
         album.setCategory(category);
 
-        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ALBUM);
         albumService.createAlbum(album);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ALBUM);
 
         return new ModelAndView("/admin/album/albumMainPage")
                 .addObject("page",page);

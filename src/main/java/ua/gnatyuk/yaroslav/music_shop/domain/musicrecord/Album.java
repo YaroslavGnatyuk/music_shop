@@ -14,34 +14,24 @@ public class Album {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long id;
-
 	@Column(name = "path_to_albums_cover")
-	String pathToAlbumsCover;
-
+	private String pathToAlbumsCover;
 	@Column(nullable = false,unique = true)
 	private String name;
-
 	@Column(nullable = false)
 	private LocalDate releaseDate;
-
 	@ManyToOne
 	private Artist artist;
-
 	@OneToOne
 	private Category category;
-
 	@OneToOne
 	private Studio studio;
-
 	@Column(nullable = false)
 	private Byte rating;
-
 	@Column(nullable = false)
 	private Integer countOfSales;
-
 	@Column(name = "description")
 	private String description;
-
 	@Transient
 	private String shortDescription;
 
