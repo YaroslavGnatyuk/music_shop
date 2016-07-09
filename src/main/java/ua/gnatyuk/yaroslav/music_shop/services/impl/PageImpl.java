@@ -60,7 +60,7 @@ public class PageImpl implements Page {
     private List<String> valueButtonsInPagination;
 
     public enum TypeOfMaterial {
-        ARTIST,CATEGORY,ALBUM,STUDIO,USER
+        ARTIST,CATEGORY,ALBUM,STUDIO,USER,ARTICLE
     }
 
     @Transactional
@@ -107,6 +107,11 @@ public class PageImpl implements Page {
                 users.add(temp.get(i));
             }
             this.totalMaterials = daoUser.getTotalRecords();
+        }
+
+        if(this.type.name().equals(TypeOfMaterial.ARTICLE.toString())){
+            articles = daoArticle.getMaterialsForOnePage((currentPage - 1) * MATERIALS_PER_ONE_PAGE, MATERIALS_PER_ONE_PAGE);
+            this.totalMaterials = daoArticle.getTotalRecords();
         }
         setQuantityOfPages();
         setValueButtonsInPagination();
@@ -190,8 +195,17 @@ public class PageImpl implements Page {
             users.clear();
             users.add(result);
         }
+
+        if (type.name().equals(TypeOfMaterial.ARTICLE.toString())){
+            articles.clear();
+            articles.add(result);
+        }
     }
 
+    @Override
+    public List<Article> getArticles() {
+        return articles;
+    }
     @Override
     public List getStudios() {
         return studios;

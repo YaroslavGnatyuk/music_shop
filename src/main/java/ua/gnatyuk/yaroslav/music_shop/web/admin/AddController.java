@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
+import ua.gnatyuk.yaroslav.music_shop.domain.article.Article;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
@@ -33,8 +34,6 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AddController {
     @Inject
-    private Environment env;
-    @Inject
     private CategoryService categoryService;
     @Inject
     private ArtistService artistService;
@@ -43,10 +42,32 @@ public class AddController {
     @Inject
     private AlbumService albumService;
     @Inject
+    private ArticleService articleService;
+
+    @Inject
     private Page page;
     @Inject
     @Named(value = "ftpUpload")
     private Connection connection;
+    @Inject
+    private Environment env;
+
+    @RequestMapping(path = "/add-article", method = RequestMethod.GET)
+    public ModelAndView addArticle(){
+        return new ModelAndView("/admin/article/addArticle", "command", new Article());
+    }
+
+    @RequestMapping(path = "/add-article", method = RequestMethod.POST)
+    public ModelAndView confirmAddArticle(@ModelAttribute Article article, @RequestParam Map<String, String> request){
+        article.setShortDesription();
+        article.setDate(LocalDate.parse(request.get("dateField")));
+
+        articleService.createNewArticle(article);
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTICLE);
+
+        return new ModelAndView("/admin/article/articleMainPage")
+                .addObject("page",page);
+    }
 
     @RequestMapping(path = "/add-studio",method = RequestMethod.GET)
     public ModelAndView addStudio(){

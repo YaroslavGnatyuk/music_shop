@@ -7,6 +7,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ua.gnatyuk.yaroslav.music_shop.domain.article.Article;
 import ua.gnatyuk.yaroslav.music_shop.domain.user.User;
 import ua.gnatyuk.yaroslav.music_shop.services.*;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
@@ -29,6 +30,8 @@ import java.util.*;
 @RequestMapping("/admin")
 public class UpdateController {
     @Inject
+    private ArticleService articleService;
+    @Inject
     private UserService userService;
     @Inject
     private AlbumService albumService;
@@ -38,12 +41,33 @@ public class UpdateController {
     private StudioService studioService;
     @Inject
     private CategoryService categoryService;
+
     @Inject
     private Page page;
     @Inject
     private Connection connection;
     @Inject
-    Environment env;
+    private Environment env;
+
+    @RequestMapping(path = "/update-article/{id}",method = RequestMethod.GET)
+    public ModelAndView updateArticle(@PathVariable("id") Long id){
+        Article article = articleService.findById(id);
+        return new ModelAndView("/admin/article/updateArticle","command",article);
+    }
+
+    @RequestMapping(path = "/update-article/{id}",method = RequestMethod.POST)
+    public ModelAndView updateArticleComit(@PathVariable("id") Long id,
+                                           @ModelAttribute Article article,
+                                           @RequestParam Map<String, String> request){
+        article.setDate(LocalDate.parse(request.get("dateField")));
+        article.setShortDesription();
+        articleService.updateArticle(article);
+
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTICLE);
+        return new ModelAndView("/admin/article/articleMainPage").addObject("page",page);
+    }
+
+
 
     @RequestMapping(path = "/update-user/{id}", method = RequestMethod.GET)
     public ModelAndView updateUser(@PathVariable("id") Long id){

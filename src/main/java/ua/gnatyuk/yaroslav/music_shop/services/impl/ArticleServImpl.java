@@ -8,6 +8,7 @@ import ua.gnatyuk.yaroslav.music_shop.services.ArticleService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 /**
  * Created by yaroslav on 6/19/16.
@@ -17,11 +18,39 @@ import javax.inject.Named;
 public class ArticleServImpl implements ArticleService{
     @Inject
     @Named(value = "articleDAO")
-    DaoPersist<Article> daoPersist;
+    DaoPersist<Article> daoArticle;
 
     @Override
     @Transactional
     public void createNewArticle(Article article) {
-        daoPersist.create(article);
+        daoArticle.create(article);
+    }
+
+    @Override
+    public long getTotalRecords() {
+        return daoArticle.getTotalRecords();
+    }
+
+    @Override
+    public List getMaterialsForOnePage(int begin, int sizeOfPart) {
+        return daoArticle.getMaterialsForOnePage(begin, sizeOfPart);
+    }
+
+    @Override
+    @Transactional
+    public void deleteArticle(Article article) {
+        daoArticle.delete(article);
+    }
+
+    @Override
+    @Transactional
+    public Article findById(Long id) {
+        return daoArticle.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateArticle(Article article) {
+        daoArticle.update(article);
     }
 }

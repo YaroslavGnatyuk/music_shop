@@ -1,5 +1,6 @@
 package ua.gnatyuk.yaroslav.music_shop.services;
 
+import ua.gnatyuk.yaroslav.music_shop.domain.article.Article;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Album;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Artist;
 import ua.gnatyuk.yaroslav.music_shop.domain.musicrecord.Category;
@@ -27,6 +28,7 @@ public interface Page {
     List<Artist> getArtists();
     List<Studio> getStudios();
     List<String> getValueButtonsInPagination();
+    List<Article> getArticles();
 
     Integer getCurrentPage();
     int getMaterialsPerOnePage();

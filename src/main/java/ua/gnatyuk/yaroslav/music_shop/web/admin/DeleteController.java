@@ -22,6 +22,8 @@ import javax.inject.Named;
 @RequestMapping("/admin")
 public class DeleteController {
     @Inject
+    private ArticleService articleService;
+    @Inject
     private UserService userService;
     @Inject
     private CategoryService categoryService;
@@ -37,7 +39,15 @@ public class DeleteController {
     @Inject
     private Page page;
     @Inject
-    Environment env;
+    private Environment env;
+
+    @RequestMapping(path = "/delete-article/{id}")
+    public ModelAndView deleteArticle(@PathVariable("id") Long id){
+        articleService.deleteArticle(articleService.findById(id));
+        page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTICLE);
+        return new ModelAndView("admin/article/articleMainPage")
+                .addObject("page",page);
+    }
 
     @RequestMapping(path = "/delete-user/{id}")
     public ModelAndView deleteUser(@PathVariable("id") Long id){

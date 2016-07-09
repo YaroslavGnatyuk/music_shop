@@ -22,24 +22,19 @@ import java.util.Set;
 @RequestMapping(path = "/admin")
 public class AdminController {
   @Inject
-  StudioService studioService;
-  @Inject
-  AlbumService albumService;
-  @Inject
-  CategoryService categoryService;
-  @Inject
-  ArtistService artistService;
-  @Inject
-  Page page;
+  private Page page;
+
+  @RequestMapping(path = "/article-main-page")
+  public ModelAndView mainArticle(){
+    page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.ARTICLE);
+    return new ModelAndView("/admin/article/articleMainPage")
+            .addObject("page",page);
+  }
 
   @RequestMapping(path = "/user-main-page",method = RequestMethod.GET)
   public ModelAndView mainUser(){
-
     page.buildNewPage(Page.FIRST_PAGE, PageImpl.TypeOfMaterial.USER);
-
-
-
-     return new ModelAndView("/admin/user/userMainPage")
+    return new ModelAndView("/admin/user/userMainPage")
              .addObject("page", page);
   }
 
@@ -110,23 +105,6 @@ public class AdminController {
             .addObject("page", page);
   }
 
-  private Boolean[] isAdmin() {
-    Boolean[] admin = null;
-
-    for (int i = 0; i < page.getUsers().size(); i++) {
-      User temp = (User) page.getUsers().get(i);
-      Set<UserRole> roles =  temp.getRole();
-      for (UserRole role: roles) {
-        if(role.getRole().equals(UserRole.UserType.ROLE_ADMIN.name())){
-          admin[i] = true;
-        }
-        else {
-          admin[i] = false;
-        }
-      }
-    }
-    return admin;
-  }
 }
 
 @Controller

@@ -2,6 +2,7 @@ package ua.gnatyuk.yaroslav.music_shop.dao.article;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.yaroslav.music_shop.dao.CrudOperations;
 
 import javax.inject.Inject;
@@ -43,16 +44,27 @@ public class ArticleDAO extends CrudOperations{
 
     @Override
     public Object findById(Long id) {
-        return null;
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Article WHERE :id=id")
+                .setParameter("id",id)
+                .uniqueResult();
     }
 
     @Override
     public long getTotalRecords() {
-        return 0;
+        return (long) sessionFactory
+                .getCurrentSession()
+                .createQuery("SELECT COUNT (*) FROM Article")
+                .uniqueResult();
     }
 
     @Override
     public List getMaterialsForOnePage(int begin, int sizeOfPart) {
-        return null;
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("FROM Article")
+                .setFirstResult(begin)
+                .setMaxResults(sizeOfPart)
+                .list();
     }
 }

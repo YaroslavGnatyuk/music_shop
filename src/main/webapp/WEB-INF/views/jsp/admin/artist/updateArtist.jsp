@@ -54,6 +54,7 @@
             <li><a href="/admin/album-main-page">Album</a></li>
             <li><a href="/admin/category-main-page">Category</a></li>
             <li><a href="/admin/user-main-page">User</a></li>
+            <li><a href="/admin/article-main-page">Article</a></li>
         </ul>
     </div>
 </div>
